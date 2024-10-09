@@ -1,0 +1,49 @@
+'begin' # 8.21 Sieve #
+    'int'mm=180;   # must be at least 7 #
+    'int'm=mm*35;'int'n=m*bitswidth;'int'sqrn='round'((1+sqrt(6*n+1))/6);
+    print(("Computing primes up to ",6*n,newline));
+    [m]'bits'a,b;# a[i]<->6i-1; b[i]<->6i+1 #
+    'for'i'to'm'do'a[i]:=(i%*5=1'or'i%*7=6|'not'2r0|2r0);
+		   b[i]:=(i%*5=4'or'i%*7=1|'not'2r0|2r0)'od';
+    'bits'mask; 'int'j,ja;
+    'op''sieve'=('ref''bits'a)'ref''bits':(a:=a'or'mask);
+    'for'i'to'sqrn'do'
+	'if'(a[i]'and'2r1)=2r0'then' 'co' sieve multiplies of 6i-1 'co'
+	   'int'i6=6*i-1; print(("shifting prime ",i6,newline));
+	   j:=ja:=i; mask:=2r1;
+	   'while'(j+:=i6)<=n'do'
+		'if'(ja+:=i6)>m'then'ja-:=m; mask:=mask**1'fi';
+		'sieve'a[ja]
+	   'od';
+	   j:=ja:=-i; mask:=2r1;
+	   'while'(j+:=i6)<=n'do'
+		'if'(ja+:=i6)>m'then'ja-:=m; mask:=mask**1'fi';
+		'sieve'b[ja]
+	   'od'
+	'fi';
+	'if'(b[i]'and'2r1)=2r0'then' 'co' sieve multiplies of 6i+1 'co'
+	   'int'i6=6*i+1; print(("shifting prime ",i6,newline));
+	   j:=ja:=i; mask:=2r1;
+	   'while'(j+:=i6)<=n'do'
+		'if'(ja+:=i6)>m'then'ja-:=m; mask:=mask**1'fi';
+		'sieve'b[ja]
+	   'od';
+	   j:=ja:=-i; mask:=2r1;
+	   'while'(j+:=i6)<=n'do'
+		'if'(ja+:=i6)>m'then'ja-:=m; mask:=mask**1'fi';
+		'sieve'a[ja]
+	   'od'
+	'fi'
+    'od';
+    print(("Computation done...",newline));
+    'while'print((newline,"print primes from (0 for exit): "));read(j);j>0'do'
+	j:=(j-1)%6;(j<1|print((2,3,5,7));j:=1);
+	'for'i'to'50'while'j<=n'do'
+	    'while' mask:=2r1**(j%m); ja:=j%*m+1;
+		(a[ja]'and'mask)/=2r0 'and' (b[ja]'and'mask)/=2r0'do'j+:=1'od';
+	    ((a[ja]'and'mask)=2r0|print(6*j+5));
+	    ((b[ja]'and'mask)=2r0|print(6*j+7));
+	    j+:=1
+	'od'
+    'od'
+'end'

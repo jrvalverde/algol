@@ -1,0 +1,85 @@
+'begin' # sort-tree merging,
+   L. Allison 7/4/86 Dept. Computer Science, Monash University, Australia
+   see: L. Allison. Some Applications of Continuations.
+                    Computer Journal 31(1) 9-11 1988 #
+  'int'max int = 1000000000;
+
+   'mode' 'tree' = 'ref' 'node';
+   'mode' 'node' = 'struct'('int' e, 'tree' l, r);
+
+   'proc' insert = ('int' e, 'ref' 'tree' t)'void':
+      # NB inserts in t as a side effect #
+      'if' 'tree'(t) :=: 'nil' 'then' 
+             t := 'heap''node' := (e,'tree'('nil'),'tree'('nil'))
+      'elif' e < e 'of' t 'then' insert(e, l 'of' t)
+      'elif' e > e 'of' t 'then' insert(e, r 'of' t)
+      'fi';
+
+   'proc' show = ('tree' t)'void':
+      'if' t :/=: 'nil''then' print("("); show(l 'of' t); print(e 'of' t);
+			 show(r 'of' t); print(")")
+      'fi';
+
+   'proc' merge = ('tree' s, t)'void':
+   'begin'
+      'mode' 'scanner' = 'proc'('int', 'scanner')'void';
+
+      'proc' traverse = ('int' switch,'tree' t,'scanner'continue,alternative)'void':
+	 'if' t :=: 'nil' 'then' continue(switch, alternative)
+	 'else' 'proc' goright = ('int' sw, 'scanner' alt)'void':
+		    trav(sw, t, continue, alt);
+
+	      traverse(switch, l 'of' t, goright, alternative)
+	 'fi';
+
+      'proc' trav = ('int' switch, 'tree' t, 'scanner' continue, alternative)'void':
+	 # traverse the root node and right sub-tree of t  only. #
+	 'if' t :=: 'nil' 'then' continue(switch, alternative)
+	 'elif' e 'of' t  <=  switch 'then'
+	       print(e 'of' t);
+	       traverse( switch, r 'of' t, continue, alternative)
+	 'else'  # e 'of' t > switch #
+	       'proc' defer = ('int' sw, 'scanner' alt)'void':
+		     trav(sw, t, continue, alt);
+
+	       alternative(e 'of' t, defer)
+	 'fi';
+
+      'proc' m =  ('tree' s, t, 'scanner' scans, scant)'void':
+	 'if' 'tree'(l 'of' s) :/=: 'nil' 'then'
+	    'proc' travright = ('int' sw, 'scanner' alt)'void':
+		  trav(sw, s, scans, alt);
+
+	    m(l 'of' s, t, travright, scant)
+         'elif' 'tree'(l 'of' t) :/=: 'nil' 'then'
+	    m(t, s, scant, scans)
+	 'else' # l 'of' s  :=:  l 'of' t  :=:  'nil', so now have their smallest elts  #
+            'proc' scanstree = ('int' sw, 'scanner' alt)'void':
+	          trav( sw, s, scans, alt);
+	    'proc' scanttree = ('int' sw, 'scanner' alt)'void':
+	          trav( sw, t, scant, alt);
+
+	    'if' (e 'of' s) <= (e 'of' t) 'then' scanstree( e 'of' t, scanttree)
+				    'else' scanttree( e 'of' s, scanstree)
+	 'fi' 'fi';
+
+      'scanner' halt = ('int' sw, 'scanner' a)'void': print((" the end", newline));
+      'scanner' fin  = ('int' sw, 'scanner' a)'void':
+	 (print( " finish: "); a(max int, halt));
+
+      'if'   s :=: 'nil' 'then' traverse( max int, t, halt, halt)
+      'elif' t :=: 'nil' 'then' traverse( max int, s, halt, halt)
+      'else' m(s, t, fin, fin)
+      'fi'
+   'end' #merge#;
+
+   'loc' 'tree' s:='tree'('nil'), t:='tree'('nil');
+   'loc' 'int' n;
+
+   'while' read(n); n>=0 'do' insert(n, s) 'od';
+   show(s); print(newline);
+   'while' read(n); n>=0 'do' insert(n, t) 'od';
+   show(t); print(newline);
+
+   merge(s, t)
+'end'

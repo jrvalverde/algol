@@ -1,0 +1,43 @@
+( # Fixed-Pt Operator, Y, in Algol-68
+    L. Allison UWA 15/7/85;
+    Dept. Computer Science, Monash University, Australia #
+
+ 'mode'  'intfn' = 'proc'( 'int' )'int';
+
+ 'mode'  'recff' = 'proc'( 'recff', 'int' ) 'int';
+
+ 'mode'  'fform' = 'proc'( 'intfn', 'int' ) 'int';
+
+#------------------------------------------------------------------------#
+ 'proc' y = ( 'fform' f, 'int' n ) 'int':
+  ( 'recff' h = ( 'recff' g, 'int' n ) 'int':
+     ( 'intfn' b = ( 'int' n ) 'int':
+	  g( g, n );
+
+       f( b, n )
+     );
+
+    h( h, n )
+ );
+
+
+ 'fform' big f = ( 'intfn' little f, 'int' n ) 'int':
+    'if' n=0 'then' 1 'else' n * little f(n-1) 'fi';
+
+
+ 'intfn' usual factorial = ('int' n) 'int':
+    'if' n=0 'then' 1 'else' n * usual factorial(n-1) 'fi';
+
+ 'intfn' unusual factorial = ('int' n) 'int':
+    big f( usual factorial, n);
+
+ 'intfn' odd factorial = ('int' n) 'int':
+    y( big f, n );
+
+#-----------------------------------------------------------------------#
+
+ 'for' i 'to' 5 'do'
+    print(( usual factorial(i), unusual factorial(i),
+	    odd factorial(i), newline ))
+ 'od'
+)

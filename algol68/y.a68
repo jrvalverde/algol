@@ -1,0 +1,43 @@
+( # Fixed-Pt Operator, Y, in Algol-68
+    L. Allison UWA 15/7/85;
+    Dept. Computer Science, Monash University, Australia #
+
+ MODE  INTFN = PROC( INT ) INT;
+
+ MODE  RECFF = PROC( RECFF, INT ) INT;
+
+ MODE  FFORM = PROC( INTFN, INT ) INT;
+
+#------------------------------------------------------------------------#
+ PROC y = ( FFORM f, INT n ) INT:
+  ( RECFF h = ( RECFF g, INT n ) INT:
+     ( INTFN b = ( INT n ) INT:
+	  g( g, n );
+
+       f( b, n )
+     );
+
+    h( h, n )
+ );
+
+
+ FFORM big f = ( INTFN little f, INT n ) INT:
+    IF n=0 THEN 1 ELSE n * little f(n-1) FI;
+
+
+ INTFN usual factorial = (INT n) INT:
+    IF n=0 THEN 1 ELSE n * usual factorial(n-1) FI;
+
+ INTFN unusual factorial = (INT n) INT:
+    big f( usual factorial, n);
+
+ INTFN odd factorial = (INT n) INT:
+    y( big f, n );
+
+#-----------------------------------------------------------------------#
+
+ FOR i TO 5 DO
+    print(( usual factorial(i), unusual factorial(i),
+	    odd factorial(i), newline ))
+ OD
+)

@@ -1,0 +1,28 @@
+'begin' # 8.14. Runge-Kutta method #
+    'proc'RK=('real'x0,y0,'proc'('real','real')'real'f,'real'x1,eps)'real':
+       ('proc'RK1=('real'x,y,h)'real':
+	   ('real'z:=h*f(x,y);'real'res:=z;
+	    z:=h*f(x+h/2,y+z/2);res+:=2*z;
+	    z:=h*f(x+h/2,y+z/2);res+:=2*z;
+	    y+(res+h*f(x+h,y+z))/6
+	   );
+	'real'h:=(x1-x0)/2,x:=x0,y:=y0;'real'y1,y2,y3;
+	'bool'out:='true';'int'c:=0;
+L1:	y1:=RK1(x,y,2*h);
+L2:	y2:=RK1(x,y,h);y3:=RK1(x+h,y2,h);
+	'if''abs'(y3-y1)>eps'then'y1:=y2;h/:=2;c:=0;out:='false';L2'fi';
+	'if'out'then'y3
+	'else'
+	    x+:=2*h;y:=y3;'if'(c+:=1)>5'then'c:=0;h*:=2'fi';
+	    'if''abs'(x1-x)<2.01*'abs'h'then'
+		out:='true';h:=(x1-x)/2
+	    'fi';
+	    L1
+	'fi'
+       );
+    print(RK(0,1,('real'x,y)'real':y,3,.00001));
+    print((exp(3),newline));
+    print(RK(0,0,('real'x,y)'real':x+y,3,.00001));
+    print((exp(3)-4,newline))
+'end'
+

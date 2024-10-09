@@ -1,0 +1,591 @@
+
+
+         EEEEE  L      L        A          222     00     00     00
+         E      L      L       A A        2   2   0  0   0  0   0  0
+         EEE    L      L      AAAAA          2    0  0   0  0   0  0
+         E      L      L      A   A        2      0  0   0  0   0  0
+         EEEEE  LLLLL  LLLLL  A   A       22222    00     00     00
+
+
+
+           The ELLA 2000 Hardware Design Language Support Software
+
+                            from DRA Malvern
+
+                 Software version:  34.4,  Public release:  2
+
+                             31 March 1995
+
+
+
+                         R E A D M E   F I L E
+
+
+
+
+        Author:  D.J.Snell for D C Taylour,  ELLA Development Manager
+
+        Authorisation:  Dr C O Newton,  High Level Design Section Leader
+
+        Reference:   DRA/CIS(SE2)/PROJ/F04AH/PDELLA/95004
+
+
+
+Source of the public release of the ELLA software:
+
+  1. First release Nov 1993.
+
+        the internet ftp server at Imperial College, London University -
+
+        directory:  src.doc.ic.ac.uk:packages/ELLA
+
+  2. Second release Mar 1995.
+
+        the internet server at DRA Malvern -
+
+        directory:  ftp.dra.hmg.gb:ella
+
+
+A full description of the ELLA language may be found in:
+
+        ELLA 2000; a Language for Electronic System Design
+
+        by J D Morison and A S Clarke
+
+        McGraw-Hill Book Company, 1993
+
+        ISBN 0-07-707821-7  price 19.95 pounds sterling
+
+
+
+                     (c) UK Crown Copyright, 1993
+
+                        Defence Research Agency
+                  Farnborough, Hampshire, GU14 6TD, UK
+
+
+ELLA and ELLA 2000 are trade marks of the UK Secretary of State for Defence.
+ELLA is a winner of the 1989 Queen's Award for Technological Achievement.
+
+
+
+
+                    Public Domain ELLA - README Contents
+                    ____________________________________
+
+
+            0)  README document changes
+            1)  What is ELLA ?
+            2)  Availability
+            3)  Construction of an ELLA System
+            4)  Support
+            5)  Summary of past and future Releases
+            6)  Contact addresses
+
+
+
+
+
+
+
+
+0  README document changes
+   _______________________
+
+   0.1  21:09:93   DCT  First draft
+   1.0  04:11:93   First public release of the ELLA system
+   2.0  30:03:95   Second release of the ELLA system, including
+                   sources, schema mapping system and prover.
+
+
+
+
+1  What is ELLA ?
+   ______________
+
+1.1 Introduction
+
+ELLA is a hardware design language and supporting software system
+comprising a compiler, design library manager, transformational system,
+public interface and simulator.  ELLA was developed at DRA Malvern
+(formerly the Royal Signals and Radar Establishment) over a fourteen
+year period up to 1993.  The ELLA language was developed specifically to
+support the *design* of digital hardware (unlike VHDL, the US VHSIC
+Hardware Design Language, which was primarily designed for *modelling*
+hardware).   The aim of the ELLA project was to apply some of the
+lessons learnt from software languages to hardware, especially to
+support higher levels of abstraction.  The ELLA system is capable of
+modelling a wide range of levels of abstraction from systems level down
+to gate level.  Formal semantics for the ELLA language are being
+developed at the Universities of Manchester, Cambridge and Edinburgh,
+and algebraic laws for ELLA at DRA Malvern.
+
+The ELLA language has been designed to be simple to learn - its
+underlying model is that of a fully concurrent (data-flow) network - so
+it has intuitive appeal to hardware engineers used to thinking in
+parallel.  The language is strongly typed with user defined types.  All
+expressions are implicitly typed allowing an easy to read and reasonably
+compact notation.  The primary building blocks in the language are CASE
+expressions (a generalised multiplexor), DELAYs which introduce timing,
+and functions to define hierarchy and to permit reusability.  The design
+library manager, or "EASE" - the ELLA Application Support Environment,
+supports modular compilation and multi-level simulation. Its system of
+"contexts" allows easy partitioning and configuration of circuit
+designs.
+
+Work at the Defence Research Agency on developing ELLA as a hardware
+design lanaguage has now finished with the definition of the "ELLA 2000"
+version of the language and an implementation of the supporting
+software.  ELLA 2000 has a number of powerful extentions to the earlier
+ELLA language.  References to "ELLA" in the rest of this document refer
+to the ELLA 2000 version.  A commercialised version of the earlier ELLA
+system, developed by Praxis Systems (Bath, UK) and now supported by
+R-cube Systems (Bath, UK), has been in wide spread use within major UK
+electronics companies.  ELLA has been used mainly for VLSI circuit
+design, often in conjunction with the LOCAM synthesis tools developed by
+Philips.  Use of the ELLA product by industry has been affected by the
+adoption of VHDL as an IEEE standard and by the improved support for
+VHDL by commercial tools vendors. There is now the prospect of the ELLA
+2000 book and the public domain software generating fresh interest in
+ELLA as a non-proprietary system.
+
+1.2 Public Domain ELLA
+
+There are many features in the ELLA language that make it very well
+suited to hardware design.  The UK Ministry of Defence has given
+permission for the definition of the ELLA language and the DRA ELLA
+System software to be made available for study purposes.  It is expected
+that, by giving ready access to the ELLA System, the ideas contained in
+it will influence the future development of hardware description
+languages.  The ELLA transformation system in particular has been shown
+to be an effective front-end for circuit synthesis allowing high-level
+ELLA designs to be worked through to gate level.  ELLA is suited to
+applications in formal methods because of its simple well defined
+semantics.  The release of a public domain version of the ELLA software
+was timed to coincide with the publication of the ELLA book.  The
+software is supplied as Sun binaries and includes a simulator that supports
+the full ELLA 2000 language.  This simulator does not include all the
+diagnostic and support commands available in the commercial version.
+
+Public domain ELLA software is offered as a binary image for Sun SPARC 2,
+SPARC 5 and Sun SPARC 10 workstations running the SunOS 4.1.3 version of the
+operating system (ELLA will also work under Solaris but there may be
+some compatibility problems).  The latest release of the ELLA software may
+be obtained by using the internet ftp server at DRA Malvern, UK from the
+directory ftp.dra.hmg.gb:ella.
+
+No commitment can be made by the DRA as to whether or not further releases
+will take place.  Enquiries about support for ELLA System software or about
+the commercial versions of ELLA should be made to R-cube Systems Limited
+whose address is given below.
+
+
+2  Availability
+   ____________
+
+This section describes the terms under which Version 34.4 of the Public
+Domain version of the ELLA 2000 software, otherwise known as "PD ELLA
+software", is made avaialable.
+
+2.1  Licence
+
+PD ELLA software is made available for study purposes only.  It may be
+used for teaching, to learn about the ELLA language and for
+experimentation subject to the disclaimer below.  It is to be understood
+that any use whatever of PD ELLA software for the commercial design of
+any kind of product is outside the terms of this release.  PD ELLA
+software may be copied and passed to third parties subject to the
+disclaimer and copyright conditions given below.
+
+2.2  Disclaimer
+
+    The Secretary of State for Defence (United Kingdom) acting through his
+    Defence Research Agency (DRA) gives no warranty that any element of the
+    Software is suitable for any purpose and he shall not be liable for any
+    loss or damage including loss or damage resulting in injury or death
+    howsoever caused which results from the use of the Software, or any
+    developments adaptions modifications translations and enhancements
+    thereof.
+
+
+2.3  Copyright Notice
+
+PD ELLA software has United Kingdom Crown Copyright (c) 1993.  All
+rights are reserved.  Permission is granted for this version of PD ELLA
+software to be copied for personal use, or given to third parties
+provided that:
+
+a)  the text of this notice (full contents of this README file) is
+    included and its contents brought to the specific attention of
+    the recipient;
+b)  the ELLA and ELLA 2000 trade marks of the UK Secretary of State for
+    Defence are acknowledged;
+c)  that the UK Defence Research Agency is identified as the source
+    of the ELLA language and the public domain version of the ELLA
+    System software in any work, whether software or a report, derived
+    from, or about, PD ELLA software.
+
+
+3  Construction of an ELLA System
+   ______________________________
+
+This release contains an update of the release made in November 1993, a
+language mapping system (schema mapping), a definition of the ELLA open
+interface, the sources and build tools used to construct the ELLA images
+and an ELLA prover, (no sources with this).
+
+3.1  Release directory
+
+The release directory on the ftp server at DRA Malvern contains the following:
+
+
+_____________________ An update on the original release _______________________
+
+
+README          - this file
+Release-notes   - notes about this release, and known bug descriptions.
+ella.gz         - a compressed binary of the ELLA system
+                  (without simulator)
+ellasim.gz      - a compressed binary of the ELLA simulator
+install.tar.gz  - a compressed tar file containing
+                     a directory of ELLA examples called examples,
+                     a directory for verifying the system called verify,
+                     a directory containing the documentation including
+                         user documentation
+                           and others.
+                     a setup script file,
+                     a usage logging file.
+
+The directory of examples also contains the standard ELLA numerical
+library and ELLA source and input files for the verification process.
+
+Additional image file:-
+
+ellatransform.gz - A demonstration of external transformations.
+
+______________________ The schema mapping environment _________________________
+
+generator.gz     - The schema generator program.
+schemamenu.gz    - The schema mapping environment.
+
+The schema mapping system is a system for doing mappings within a language
+or between languages.  A schema is a notation for describing the internal
+structure of a language.
+
+generator
+---------
+
+The generator program takes a schema describing a language and generates
+the files needed to write mapping utilities.
+
+For more information see documents in directory doc
+
+schemagen.usm       --  The Schema Generator User Manual.
+ella_schema.txt     --  A description of the ELLA schema. This defines
+                        the ELLA open interface.
+layout_schema.txt   --  A description of the layout schema.
+ella_vhdl.txt:      --  A description of the mappings of ELLA onto VHDL.
+
+
+schemamenu 
+----------
+
+The schemamenu program gives access to some of the mappings which have been
+written using the schema mapping system.  This includes the ELLA-VHDL
+translator.
+
+For more information see documents in directory doc
+
+schemamap.usm   -- The Schema Mapping user manual.  Helps you write new
+                   mapping utilities.
+ella_vhdl.txt   -- A description of the mappings to translate ELLA to VHDL
+
+____________________________ The build tool images ____________________________
+
+a68toc.gz        - The ALGOL68 to C translator.
+mm.gz            - The ALGOL68 compilation environment.
+
+The program a68toc is used to generate C source files from the ALGOL68
+source files (.a68).  There are several relevant documentation files in
+directory doc:-
+
+   a68toc.1        A manual file for use with the man facility.
+   ctrans.texi     A Latex macro format file describing the translator.
+   rscompiler.texi A description of the syntax parser of the ALGOL68 RS
+                   compiler.  This is common to several implementations
+                   of ALGOL68 systems.
+   texinfo.tex     This is meant to be the macro definitions needed for the
+                   .texi files.
+
+*** NOTE ***
+
+I am having difficulty running these latex files on our system, perhaps
+someone with more knowledge of Latex than me can manage to sort them out.
+In case these Latex files cannot be sorted out I have also included the
+relevant PostScript (.ps) files which I believe correspond to the Latex.
+However I have modified the ctrans.texi file, which means that the ctrans.ps
+is out of date. The modifications occur in the Appendix A.1 and apply to
+options -noline (-n) which should read:-
+
+   Causes the generation of C pre-processor #line directives. In its absence
+   the option -verbose causes comments containing Algol 68 line number and
+   source file to be generated.
+
+and -return_structs (-r) which should read:-
+
+    Prevents generated C functions from returning structure results directly,
+    it uses an extra pointer parameter instead.
+
+there is also an additional option:-
+
+-f <num>
+
+   Truncates module names to <num> characters long when searching for USE
+   and library modules. eg. -f 8 for DOS FAT files.
+
+The man file a68toc.1 has been updated to reflect these changes.
+
+*** End of NOTE ***
+
+The program  mm  is an environment for compiling and linking ALGOL68
+programs.  There is documentation about it in the directory doc.
+
+   mmuserdoc.txt   This is documentation about the program mm.  It is
+                   aimed very much on enabling anyone brave enough to have
+                   a go, to make changes to the ELLA system.  It has a wider
+                   scope and can be used for building any program using
+                   multiple ALGOL68 modules.  Not all features of the
+                   environment are documented due to lack of time. However
+                   there is a simple help system supplied.
+
+_____________ The following tar files contain the sources for: _______________
+                                The ELLA system.
+
+manage.tar       - Initialisation files for the the ALGOL68 build tools.
+library.tar      - Host independant header files.
+i386emx.tar      - Header and source files for i386 PC systems.
+sunos.tar        - Header and source files for SUN sparc.
+library.tar      - Host independant header and source files.
+a68library.tar   - A low level ALGOL68 module for configuration management.
+osif.tar         - A the low level ALGOL68 interface to the operating system.
+oslib.tar        - Some low level ALGOL68 library routines, including I/O.
+ostools.tar      - The ELLA interface kernel, also used by other parts of the
+                   system, including the ALGOL68 compilation environment.
+transform.tar    - The ELLA transformation environment, called from ELLA.
+ella.tar         - The ELLA compilation and library interface.
+biops.tar        - Built in operators for the ELLA simulator, these are in C.
+sim.tar          - The ELLA sparc simulator.
+external.tar     - The external transformation environment.
+
+__________________________ The schema mapping system. _________________________
+
+cmodes.tar       - The schema mapping system, including the ELLA to VHDL
+                   translator, and schema generator. It is called cmodes for
+                   historical reasons.
+
+_____________________________ The build tools. ________________________________
+
+ctrans.tar       - The ALGOL68 to C translator.
+mm.tar           - The ALGOL68 compilation environment.
+
+_________________ We are also releasing the binaries of and ___________________
+                       documentation for an ELLA prover.
+
+The ELLA prover has been developed to aid the verification of hardware designs
+and it is being made available to the public for study purposes. It takes a 
+subset of the hardware design language ELLA as the design input and contains 
+additional syntax for inputting statements about how the design is thought to behave. These statements can be manipulated in an effort to prove them correct.
+
+Furthur details can be obtained from the documentation in the release file.
+
+prover.tar       - An ELLA prover.
+
+_______________________________________________________________________________
+
+
+3.2  Installation of images and documentation etc.
+
+1)  Create a suitable directory to hold the ELLA system files and copy
+    the README, Release-notes and *.gz files into this directory, set
+    binary mode in "ftp" for the .gz files.  You can omit a68toc.gz and
+    mm.gz if you do not expect to be using the build tools.
+
+2)  Unpack the release using the GNU compression utility "gzip" with -d
+    option followed by "tar" on the install.tar file, this will create the
+    directories examples, verify and doc. The ELLA user documentation,
+    userdoc.txt, and other documentation is in the directory doc. Also in
+    the tar file are a script file setup-ella and the ELLA logging file
+    usage.log.
+
+3)  Tailor the setup script to suit your working environment and arrange
+    for the setup script to be obeyed for each user who requires access
+    to the ELLA system.  Further details are contained in the script
+    file.  Ensure that the image files ella and ellasim etc. have execute
+    access.
+
+4)  Run the tests to verify that the ELLA System works, to see how to do
+    this read the script file verify/testella.  As well as the resources
+    indicated below you will need about 600Kbytes of disk space for
+    running the tests.  The directories verify and examples and the file
+    usage.log must reside in the same directory. The image files, ella
+    ellasim and schemamenu must be in the directory specified by the
+    environment variable ELLASYSDIR which is defined in setup-ella.
+
+5)  Buy a copy of the ELLA book and read the Release-notes file.
+
+You are invited to E-mail to the ELLA Office (address below), giving
+your name and address, so that you can be notified of any subsequent
+developments.  However resources for maintaining the ELLA office are now
+very limited and we can give no commitment to respond to enquiries.
+
+
+3.3  Environment
+
+The ELLA System has been built using the GNU C compiler, version 2.6.3,
+to run on Sun SPARC 2, sun SPARC 5 and Sun SPARC 10 workstations running
+the SunOS 4.1.3 version of the operating system, (there have been problems
+running on Sparc 10 machines with any level of optimisation so the images
+are compiled without optimisation).
+
+ELLA will run under Solaris but there are some compatibility problems
+relating to signal handling.  The release directory contains approximately
+17 Mbytes in total.  However the files necessary for running the ELLA
+system come to about 2.6 Mbytes.
+ 
+The ELLA binary decompresses to 4.4 Mbytes (compiled without debug) and the
+simulator to about 3.0 Mbytes. The ELLA System makes use of a statistical
+garbage collector to manage heap memory resources.  The amount of memory
+required to run ELLA depends on the size of ELLA description being processed.
+The performance of the ELLA System will degrade if insufficient real memory
+is available - 8 Mbytes is a minimum practical requirement.  Extremely
+large commercial circuit descriptions have been known to require in excess
+of 100 Mbytes of virtual memory when simulating.
+
+3.4  Sources etc.
+
+The ELLA system is divided up into a number of areas with a directory tree
+for each area.  The release directory contains one tar (.tar) file for each
+area. Except for the prover, which is an entity on its own, the list given
+above is in order of precidence. Unless you wish to have a go at developing
+on a PC you will not need to use i386emx.  Each area contains a README file
+which details the files expected, dependancies and the rebuild teqhnique.
+
+To unpack the tar files create a working directory and go into it. Copy the
+required tar files into the working directory and unpack them with
+
+    tar -xvf <filename.tar>
+
+This will create a directory with the same basename as the tar file, and
+within this the necessary directories and files for that particular area.
+The tar file can now be deleted.
+
+Each directory will need recursive un-zipping using gzip -d :-
+
+   gzip -dvr *
+
+To save space it may be better to do each tar file individually.
+
+eg. if you have are in a directory /home/mydir and have a file osif.tar
+    This will unpack to a directory osif which contains a number of 
+    control files and the sub directories a68files bin cfiles mfiles,
+    which contain the necessary source files.  See the document mmuserdoc.txt
+    to find out how to compile and link ALGOL68 programs.
+
+4  Support
+   _______
+
+The DRA is not empowered to offer a support service for ELLA.  It is
+recommended that users make maximum use of the ELLA book and the
+documentation supplied with the ELLA System.  Where bugs are suspected,
+or deficiencies in the documentation are found, users are invited to send
+an Email message to the ELLA office - address below.  However resources for
+maintaining the ELLA office are now very limited and we can give no
+commitment to respond to bug reports.
+
+R-cube Systems Limited have a licence to support a commercial version of
+the ELLA System.  Depending upon demand and the level of service
+required, R-cube may be able to offer a support service for PD ELLA
+software for an appropriate fee.  This may range from telephone help and
+the supply or installation of a version of PD ELLA software on tape
+through to a full support service and access to the full commercial
+simulator.  Users are invited to contact R-cube Systems for further
+information.
+
+
+5  Summary of past and future releases
+   ___________________________________
+
+This section is intended to give the reader a rough indication of the
+contents of releases of PD ELLA software.  It is not intended to be a
+detailed agenda - reference should be made to the user documentation for
+further information.  The section aims to help people decide whether or
+not they wish to down-load the latest version of the ELLA System.
+
+5.1  Release history
+
+Release 1:  4 November 1993
+
+First release of the PD ELLA software as Sun binaries
+
+Release 2: March 1995.
+
+Second release of PD ELLA SUN binaries. ELLA sources and build tools. Also
+includes an ELLA to VHDL translator and schema mapping environment, and 
+an ELLA prover.
+
+
+5.2  Current plans for future Releases (without commitment).
+
+Due to lack of resources we do not expect to make any more releases.
+
+
+6  Contact addresses
+   _________________
+
+For further information about the commercially supported version of ELLA
+please contact:
+
+                  R-Cube Systems Ltd
+                  Refuge House
+                  2-4 Henry Street
+                  Bath  BA1 1TW  UK
+
+                  Telephone / FAX:  +44 1225 334436
+                  Email:            par@r-cube.demon.co.uk
+
+For further information about the ELLA language please contact:
+
+                  The ELLA Office
+                  DRA Malvern
+                  St Andrews Road
+                  Great Malvern
+                  Worcestershire
+                  WR14 3PS   UK
+
+                  FAX:        +44 1684 894303
+                  Email:      ella@dra.hmg.gb
+alternative addresses:
+                  Janet:      ella@uk.mod.hermes
+                  Internet:   ella%hermes.mod.uk@relay.mod.uk
+
+
+
+ELLA and ELLA 2000 are trade marks of the UK Secretary of State for Defence.
+LOCAM is a registered trade mark of Philips Electronic Design and Test.
+SPARC is a registered trade mark of SPARC International, Inc.
+Sun, SunOS and Solaris are registered trade marks of Sun Microsystems, Inc.
+GNU refers to software from the Free Software Foundation, Inc.,
+Cambridge MA USA.
+
+
+D.J.Snell for
+
+Dave Taylour
+ELLA Development Manager
+The ELLA Office
+DRA Malvern                ella@dra.hmg.gb
+
+End of README
+
+
+Doc. Ref. No:    DRA/CIS(SE2)/PROJ/F04AH/PDELLA/95004

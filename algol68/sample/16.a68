@@ -1,0 +1,30 @@
+
+'begin' # 8.16. linear algebra #
+    'op'*=([]'real'A,B)'real': #inner product#
+	('real'p:=0;'for'i'to''upb'A'do'p+:=A[i]*B[i]'od';p);
+    'op'*=([]'real'A,[,]'real'B)[]'real': # matrix product #
+	([1:'upb'A]'real'P;'for'i'to''upb'A'do'P[i]:=A*B[,i]'od';P);
+    'op'/=([]'real'A,[,]'real'B)[]'real': # linear equation #
+      'begin'
+	 'int'n='upb'A;'int'n1=n+1;[1:n,1:n1]'real'P;
+	 P[,1:n]:=B;P[,n1]:=A;
+	 'for'i'to'n'do'
+	    'int'i1=i+1,'real'm=1/P[i,i];
+	    'for'j'from'i1'to'n1'do'P[i,j]*:=m'od';
+	    'for'j'to'n'do'
+		'if'i/=j'then''real'm=P[j,i];
+		    'for'k'from'i1'to'n1'do'P[j,k]-:=m*P[i,k]'od'
+		'fi'
+	    'od'
+	 'od';
+	 P[,n+1]
+      'end';
+    [,]'real'A=((2,1,0),(1,2,1),(0,1,2));
+    []'real'B=(3,4,3),C=(3,1,-3);
+    print(("A[1,]   ",A[1,],newline,"A[2,]   ",A[2,],newline));
+    print(("A[3,]   ",A[3,],newline,newline));
+    print(("B =  ",B,"    C =  ",C,"    B*C =  ",B*C,newline,newline));
+    print(("B/A =  ",B/A,blank*5,"B/A*A =  ",B/A*A,newline));
+    print(("C/A =  ",C/A,blank*4,"C/A*A =  ",C/A*A,newline))
+'end'
+

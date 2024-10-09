@@ -1,0 +1,1716 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils 0.6: http://docutils.sourceforge.net/" />
+<title>aw2c Manual</title>
+<link rel="stylesheet" href="aw2c.css" type="text/css" />
+</head>
+<body>
+<div class="document">
+
+
+<img align="right" alt="aw2c-fish.png" class="align-right" src="aw2c-fish.png" />
+<div class="section" id="the-aw2c-manual">
+<h1><a class="toc-backref" href="#id7">The <strong>aw2c</strong> Manual</a></h1>
+<p><strong>aw2c</strong> is a new compiler for the Algol W language. It is intended to
+be a correct and complete implementation of the language described in
+the <em>Algol W Language Description</em>, June 1972.</p>
+<p><strong>aw2c</strong> should be able to compile code intended for the OS/360 Algol W
+compilers and earlier versions of the MTS W compiler with little or no
+modification. There may be some incompatibilities: <strong>aw2c</strong> appears
+generates stricter run-time type-checks than previous compilers;
+<strong>aw2c</strong> does not provide the MTS Algol's large collection of
+MTS-specific I/O procedures; the more cunning methods of splitting
+Algol W into separately compiled units will no longer work (but are no
+longer necessary.)</p>
+<p><strong>aw2c</strong> uses <a class="reference external" href="http://gcc.gnu.org/">Gnu C</a> (with its <a class="reference external" href="http://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html">extensions</a>) as an intermediate
+language.  aw2c| is responsible for all parsing and compile-time and
+run-time error checking, but it passes on the difficult task of
+generating object code to <em>GCC</em>. <em>GCC</em> should be completely invisible
+to the <strong>aw2c</strong> user, any messages from it whatsoever should be
+considered to be bugs in <strong>aw2c</strong>.  This approach has the happy
+side-effect of allowing Algol W programs to contain <a class="reference internal" href="#inline-c-code">inline C code</a>
+and to be linked with <em>GCC</em> object code.</p>
+<p>Programs compiled by <strong>aw2c</strong> should be able to produce Algol W specific
+error messages for all possible runtime errors.  A program created by
+<strong>aw2c</strong> should never output C assertion errors or a core-dump.
+See <a class="reference internal" href="#error-messages">ERROR MESSAGES</a>.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#the-aw2c-manual" id="id7">The <strong>aw2c</strong> Manual</a><ul>
+<li><a class="reference internal" href="#man-page" id="id8">MAN PAGE</a><ul>
+<li><a class="reference internal" href="#name" id="id9">NAME</a></li>
+<li><a class="reference internal" href="#synopsis" id="id10">SYNOPSIS</a></li>
+<li><a class="reference internal" href="#description" id="id11">DESCRIPTION</a></li>
+<li><a class="reference internal" href="#commands" id="id12">COMMANDS</a></li>
+<li><a class="reference internal" href="#aw2c-and-gcc" id="id13">AW2C and GCC</a></li>
+<li><a class="reference internal" href="#prerequisites" id="id14">PREREQUISITES</a></li>
+<li><a class="reference internal" href="#copyrights" id="id15">COPYRIGHTS</a></li>
+<li><a class="reference internal" href="#files" id="id16">FILES</a></li>
+<li><a class="reference internal" href="#see-also" id="id17">SEE ALSO</a></li>
+<li><a class="reference internal" href="#author" id="id18">AUTHOR</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#language-implementation" id="id19">LANGUAGE IMPLEMENTATION</a><ul>
+<li><a class="reference internal" href="#incompatibilities" id="id20">Incompatibilities</a></li>
+<li><a class="reference internal" href="#big-differences" id="id21">Big Differences</a></li>
+<li><a class="reference internal" href="#little-differences" id="id22">Little Differences</a></li>
+<li><a class="reference internal" href="#extensions" id="id23">Extensions</a></li>
+<li><a class="reference internal" href="#backward-compatibilities" id="id24">Backward compatibilities</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#language-extensions" id="id25">LANGUAGE EXTENSIONS</a><ul>
+<li><a class="reference internal" href="#formal-parameter-declarations-for-procedure-parameters" id="id26">Formal parameter declarations for procedure parameters</a><ul>
+<li><a class="reference internal" href="#syntax" id="id27">Syntax</a></li>
+<li><a class="reference internal" href="#semantics" id="id28">Semantics</a></li>
+<li><a class="reference internal" href="#examples" id="id29">Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1" id="id30">Empty arrays</a><ul>
+<li><a class="reference internal" href="#id2" id="id31">Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#latin-1-ibm1047-character-encoding" id="id32">Latin-1/IBM1047 Character Encoding</a></li>
+<li><a class="reference internal" href="#block-comment-directives" id="id33">Block comment directives</a><ul>
+<li><a class="reference internal" href="#example" id="id34">Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#standard-procedures" id="id35">STANDARD PROCEDURES</a><ul>
+<li><a class="reference internal" href="#input-output-system" id="id36">Input/Output System</a><ul>
+<li><a class="reference internal" href="#iocontrol-control-codes" id="id37">IOCONTROL control codes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id3" id="id38">ERROR MESSAGES</a><ul>
+<li><a class="reference internal" href="#compile-time-errors" id="id39">Compile-time errors</a></li>
+<li><a class="reference internal" href="#run-time-error-messages" id="id40">Run-time error messages</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#interfacing-algol-w-with-c" id="id41">INTERFACING ALGOL W WITH C</a><ul>
+<li><a class="reference internal" href="#identifiers" id="id42">Identifiers</a><ul>
+<li><a class="reference internal" href="#id4" id="id43">Examples</a></li>
+<li><a class="reference internal" href="#sacred-identifiers" id="id44">Sacred identifiers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#source-code-locations" id="id45">Source code locations</a></li>
+<li><a class="reference internal" href="#simple-types" id="id46">Simple Types</a></li>
+<li><a class="reference internal" href="#strings" id="id47">Strings</a><ul>
+<li><a class="reference internal" href="#allocating-copying-and-returning-strings" id="id48">Allocating, copying and returning strings</a></li>
+<li><a class="reference internal" href="#substrings" id="id49">Substrings</a></li>
+<li><a class="reference internal" href="#character-codes-and-string-order" id="id50">Character codes and string order</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#arrays" id="id51">Arrays</a></li>
+<li><a class="reference internal" href="#records" id="id52">Records</a></li>
+<li><a class="reference internal" href="#formal-parameters-to-procedures" id="id53">Formal parameters to procedures</a></li>
+<li><a class="reference internal" href="#inline-c-code" id="id54">Inline C code</a></li>
+<li><a class="reference internal" href="#external-procedures" id="id55">External procedures</a></li>
+<li><a class="reference internal" href="#procedure-call-tracing-code" id="id56">Procedure call tracing code</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-test-suite" id="id57">THE TEST SUITE</a></li>
+<li><a class="reference internal" href="#id5" id="id58">Copyrights</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="man-page">
+<h2><a class="toc-backref" href="#id8">MAN PAGE</a></h2>
+<div class="section" id="name">
+<h3><a class="toc-backref" href="#id9">NAME</a></h3>
+<p>aw2c - compiler for the Algol W language</p>
+</div>
+<div class="section" id="synopsis">
+<h3><a class="toc-backref" href="#id10">SYNOPSIS</a></h3>
+<p><strong>algolw</strong> <em>source.alw</em> <em>program</em></p>
+<p><strong>aw2c</strong> [<em>source.alw</em>] [<strong>-trace</strong>] [<strong>-o</strong> <em>object.c</em>]</p>
+</div>
+<div class="section" id="description">
+<h3><a class="toc-backref" href="#id11">DESCRIPTION</a></h3>
+<p><strong>aw2c</strong> implements the language described in <em>Algol W Language
+Description, June 1972</em> very closely. <strong>aw2c</strong> allows Algol W programs
+to contain <a class="reference internal" href="#inline-c-code">inline C code</a> and to be linked with <strong>gcc</strong> object code.  Read
+the details in the <strong>aw2c</strong> manual: <tt class="docutils literal">aw2c.html</tt> [this document].</p>
+</div>
+<div class="section" id="commands">
+<h3><a class="toc-backref" href="#id12">COMMANDS</a></h3>
+<p><strong>algolw</strong> is the script for compiling single-source Algol W programs:</p>
+<blockquote>
+<strong>algolw</strong> <em>source.alw</em> <em>program</em></blockquote>
+<p><em>source.alw</em> is Algol W program's source, <em>program</em> is the name for
+the executable.  A <em>source.c</em> will be produces as a side-effect.</p>
+<p><strong>aw2c</strong> compiles Algol W programs into Gnu C (with its extensions):</p>
+<blockquote>
+<strong>aw2c</strong> [<em>source.alw</em>] [<strong>-trace</strong>] [<strong>-o</strong> <em>object.c</em>]</blockquote>
+<p>If <em>source.alw</em> is left out the Algol W source is read from the standard input.
+If <strong>-o</strong> <em>object.c</em> is left out the C source is written to the standard output.</p>
+<p><strong>-trace</strong> asks <strong>aw2c</strong> to insert <a class="reference internal" href="#procedure-call-tracing-code">procedure call tracing code</a>.</p>
+<p><strong>aw2c</strong> C code must be compiled with <em>gcc</em> and linked to the math,
+<em>Boehm GC</em> and aw2c run-time libraries: <tt class="docutils literal"><span class="pre">-lm</span></tt> <tt class="docutils literal"><span class="pre">-lgc</span></tt> and <tt class="docutils literal"><span class="pre">-lalw</span></tt>. [The
+<tt class="docutils literal"><span class="pre">-lalw</span></tt> flag has to appear after the object code files. I don’t know
+why.]:</p>
+<pre class="literal-block">
+aw2c main-program.alw -o main.c
+aw2c separate-procedure.alw -o procedure.c
+gcc main.c procedure.c other-stuff.o -lm -lgc -lalw -o program
+</pre>
+</div>
+<div class="section" id="aw2c-and-gcc">
+<h3><a class="toc-backref" href="#id13">AW2C and GCC</a></h3>
+<p><strong>aw2c</strong> uses <a class="reference external" href="http://gcc.gnu.org/">Gnu C</a> (with its <a class="reference external" href="http://gcc.gnu.org/onlinedocs/gcc/C-Extensions.html">extensions</a>) as an intermediate
+language.  <strong>aw2c</strong> is responsible for all parsing, type checking and
+compile-time error messages, but it passes on the difficult task of
+generating object code to <strong>gcc</strong>. <strong>gcc</strong> should stay completely
+invisible when you run algolw, any messages from <strong>gcc</strong> whatsoever
+should be considered to be bugs in <strong>aw2c</strong>.</p>
+<p>Programs compiled by <strong>aw2c</strong> should be able to produce Algol W specific
+error messages for all possible runtime errors.  A program created by
+<strong>aw2c</strong> should never output C assertion errors or a core-dump.
+(However, if you include inline C code you are back on your own.)</p>
+</div>
+<div class="section" id="prerequisites">
+<h3><a class="toc-backref" href="#id14">PREREQUISITES</a></h3>
+<p>The <em>gcc</em> C compiler and <tt class="docutils literal">libgc</tt>, the Boehm GC library.</p>
+</div>
+<div class="section" id="copyrights">
+<h3><a class="toc-backref" href="#id15">COPYRIGHTS</a></h3>
+<p>The <strong>aw2c</strong> test suite contains <em>parser.alw</em>, a parser generator by
+Hendrik Boom.  Otherwise, copyright 2008 by Glyn Webster.</p>
+<p><strong>aw2c</strong> is free software: you can redistribute it and/or modify it under
+the terms of the GNU General Public Lesser GNU General Public licenses
+as published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.</p>
+</div>
+<div class="section" id="files">
+<h3><a class="toc-backref" href="#id16">FILES</a></h3>
+<pre class="literal-block">
+/usr/local/bin/aw2c
+/usr/local/bin/algolw
+/usr/local/lib/libalw.a
+/usr/local/include/alw.h
+</pre>
+</div>
+<div class="section" id="see-also">
+<h3><a class="toc-backref" href="#id17">SEE ALSO</a></h3>
+<pre class="literal-block">
+gcc(1)
+/usr/local/share/doc/aw2c/aw2c.html
+/usr/share/doc/libgc-dev or &lt;http://www.hpl.hp.com/personal/Hans_Boehm/gc/&gt;
+</pre>
+</div>
+<div class="section" id="author">
+<h3><a class="toc-backref" href="#id18">AUTHOR</a></h3>
+<p>Glyn Webster</p>
+</div>
+</div>
+<div class="section" id="language-implementation">
+<h2><a class="toc-backref" href="#id19">LANGUAGE IMPLEMENTATION</a></h2>
+<p>The following describes <strong>aw2c</strong>'s implementation of Algol W, compared to
+'The Algol W Language Description', June 1972, and what I know of the
+original ALGOLW or XALGOLW compilers.</p>
+<div class="section" id="incompatibilities">
+<h3><a class="toc-backref" href="#id20">Incompatibilities</a></h3>
+<p>(These will certainly break some existing programs.)</p>
+<ul class="simple">
+<li><strong>aw2c</strong> cannot infer a procedure parameter's formal parameter list;
+it requires explicit <a class="reference internal" href="#formal-parameter-declarations-for-procedure-parameters">formal parameter declarations for procedure parameters</a>.</li>
+<li>The transfer functions <a class="reference internal" href="#base16-and-longbase16">BASE16 and LONGBASE16</a> return strings in a
+different format.</li>
+<li><tt class="docutils literal">NOT</tt> is a reserved word. This is a feature of <strong>MTS Algol W</strong> syntax.</li>
+</ul>
+</div>
+<div class="section" id="big-differences">
+<h3><a class="toc-backref" href="#id21">Big Differences</a></h3>
+<p>(These might break existing programs.)</p>
+<ul class="simple">
+<li><a class="reference internal" href="#latin-1-ibm1047-character-encoding">Latin-1/IBM1047 Character Encoding</a>. Strings are stored in the
+computer's native character set, typically Latin-1, but Algol W
+string operations still happen in EBCDIC. The EBCDIC character set
+is IBM1047.</li>
+<li>Arithmetic is performed to the computer's native processor rules,
+typically IEEE 754, not System/360 rules. In particular, the
+domains of the standard functions of analysis will have changed.</li>
+<li>The UNFL and OVFL exceptional conditions are not fully implemented.</li>
+<li>The run-time type tests for reference values seem to be stronger than those
+generated by the original ALGOLW and XALGOLW compilers.  Some
+reference declarations may have to be made more inclusive.</li>
+<li>The <a class="reference internal" href="#input-output-system">Input/Output System</a> uses the Unix standard input and output
+streams as its card reader and printer, its default configuration has
+been changed sightly to suit stream I/O better. Run-time error
+messages are printed on the standard error stream.</li>
+<li>All <strong>ALGOLW</strong> &quot;compiler directive&quot; lines are silently ignored.</li>
+<li><a class="reference internal" href="#external-procedures">External procedures</a> are linked according to <em>gcc</em>'s rules,
+regardless of language, and must use <strong>aw2c</strong>'s calling conventions</li>
+</ul>
+</div>
+<div class="section" id="little-differences">
+<h3><a class="toc-backref" href="#id22">Little Differences</a></h3>
+<p>(These should not break existing programs.)</p>
+<ul class="simple">
+<li>Short and long numeric types are identical, both are equivalent to
+C's <em>double</em> type.</li>
+<li><em>Name</em> parameters can always be assigned to, even if their actual
+parameters are expressions. There is no run-time error.</li>
+<li><a class="reference internal" href="#run-time-error-messages">Run-time error messages</a> are formatted differently.</li>
+<li>All variable quantities are initialized to <tt class="docutils literal">0</tt>, <tt class="docutils literal">#0</tt>, <tt class="docutils literal">NULL</tt>,
+<tt class="docutils literal">&quot;&quot;</tt> or <tt class="docutils literal">FALSE</tt>.</li>
+</ul>
+</div>
+<div class="section" id="extensions">
+<h3><a class="toc-backref" href="#id23">Extensions</a></h3>
+<p>(These should not break existing programs.)</p>
+<ul class="simple">
+<li>The Algol W source code &quot;hardware representation&quot; is
+case-insensitive Latin-1 text.</li>
+<li>String constants may contain any Latin-1 or IBM1047 printable
+character, not just those listed in Apendix A of <em>Algol W Language
+Description</em>.</li>
+<li>A program block may return an integer. The integer will be returned
+to the operating system as an exit code.</li>
+<li><a class="reference internal" href="#inline-c-code">Inline C code</a>.</li>
+<li>In references to <a class="reference internal" href="#external-procedures">external procedures</a> any identifier may appear in
+the place of the ALGOL or FORTRAN keywords.</li>
+<li>The <a class="reference internal" href="#input-output-system">Input/Output System</a> is relaxed about input record lengths.</li>
+<li>The Input/Output System system's &quot;printer&quot; is reconfigurable. There
+is an extended set of <a class="reference internal" href="#iocontrol-control-codes">IOCONTROL control codes</a> for reconfiguring
+the printer.</li>
+<li>The <a class="reference internal" href="#time-procedure">TIME procedure</a> has additional control codes to allow finer
+measurements.</li>
+<li>Some <strong>MTS Algol W</strong> syntax is allowed:<ul>
+<li><tt class="docutils literal">~</tt> or <tt class="docutils literal">NOT</tt> may be used in place of <tt class="docutils literal">¬</tt>.</li>
+<li>Short comments.
+<em>&quot;Comments may be written in a brief form by using the percent sign,
+``%``, to indicate both the start and the end of a comment. Comments
+which start with percent may also be ended with a semicolon.&quot;</em></li>
+<li>Sequences of strings are concatenated.
+<tt class="docutils literal">&quot;string&quot; &quot;string&quot;</tt> = <tt class="docutils literal">&quot;stringstring&quot;</tt></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#block-comment-directives">Block comment directives</a>.</li>
+</ul>
+</div>
+<div class="section" id="backward-compatibilities">
+<h3><a class="toc-backref" href="#id24">Backward compatibilities</a></h3>
+<p>(These are some things that some Algol W compilers allowed that are not
+part of the language.)</p>
+<ul class="simple">
+<li><a class="reference internal" href="#empty-arrays">Empty arrays</a> (arrays with no elements.)</li>
+<li>The WRITECARD standard procedure (a feature of MTS Algol W.)</li>
+<li>LOGICAL values may appear in &lt;relation&gt; expressions.  TRUE &gt; FALSE.</li>
+<li><a class="reference internal" href="#write-can-write-reference-values">WRITE can write REFERENCE values</a> for debugging purposes. (a feature
+of OS/360 Algol W.)</li>
+</ul>
+</div>
+</div>
+<div class="section" id="language-extensions">
+<h2><a class="toc-backref" href="#id25">LANGUAGE EXTENSIONS</a></h2>
+<p>(These extensions have only been included because they turned out to
+be necessary. The language implemented by <strong>aw2c</strong> is <em>not</em> meant to be
+a superset of Algol W.)</p>
+<div class="section" id="formal-parameter-declarations-for-procedure-parameters">
+<h3><a class="toc-backref" href="#id26">Formal parameter declarations for procedure parameters</a></h3>
+<p><strong>aw2c</strong> requires procedure parameters to have explicitly declared
+formal parameter lists of their own.</p>
+<p>[This is painfully incompatible with <em>The Algol W Language
+Description</em>, but it became necessary because of the way <strong>aw2c</strong> was
+implemented. It could be seen as an improvement to Algol W, but that
+was not the intention.]</p>
+<div class="section" id="syntax">
+<h4><a class="toc-backref" href="#id27">Syntax</a></h4>
+<p>In section 5.3.1 of the <em>Algol W Language Reference</em>, replace the
+&lt;formal parameter segment&gt; and &lt;formal type&gt; rules with these:</p>
+<pre class="literal-block">
+&lt;formal parameter segment&gt; ::=
+      &lt;formal type&gt; &lt;identifier list&gt;
+   |  &lt;formal array parameter&gt;
+   |  &lt;formal procedure parameter&gt;
+
+&lt;formal type&gt; ::=
+      &lt;simple type&gt;
+   |  &lt;simple type&gt; &quot;value&quot;
+   |  &lt;simple type&gt; &quot;result&quot;
+   |  &lt;simple type&gt; &quot;value&quot; &quot;result&quot;
+</pre>
+<p>and add this rule:</p>
+<pre class="literal-block">
+&lt;formal procedure parameter&gt; ::=
+      &lt;simple type&gt; &quot;procedure&quot; &lt;identifier list&gt;
+   |  &quot;procedure&quot; &lt;identifier list&gt;
+   |  &lt;simple type&gt; &quot;procedure&quot; &lt;identifier list&gt; '(' &lt;formal parameter list&gt; ')'
+   |  &lt;&quot;procedure&quot; &lt;identifier list&gt; '(' &lt;formal parameter list&gt; ')'
+</pre>
+</div>
+<div class="section" id="semantics">
+<h4><a class="toc-backref" href="#id28">Semantics</a></h4>
+<p>Note that paragraph 7.3.2.1, &quot;Actual-formal correspondence&quot;, applies
+in turn to the replaced procedure parameters when the body of the
+procedure is expanded.  The paragraph implies that procedure
+parameters have formal parameters of some sort, the syntactic
+extensions above makes them explicit.</p>
+<p><strong>aw2c</strong> requires that actual and formal procedure parameters have
+identical &quot;procedure types.&quot; The <cite>&lt;formal parameter list&gt;</cite> of the
+declaration of the actual parameter must by identical to the <cite>&lt;formal
+parameter list&gt;</cite> of the formal parameter after all identifiers have
+been removed from both.</p>
+<p>The identifiers in the <cite>&lt;formal parameter list&gt;</cite> of a <cite>&lt;formal procedure
+parameter&gt;</cite> merely indicate the positions of parameters, they serve no
+other purpose.</p>
+<p>A <cite>&lt;formal procedure parameter&gt;</cite> without a <cite>&lt;formal parameter list&gt;</cite>
+declares a procedure parameter without parameters, its actual
+parameter may be a <cite>&lt;statement&gt;</cite> or <cite>&lt;expression&gt;</cite>.</p>
+</div>
+<div class="section" id="examples">
+<h4><a class="toc-backref" href="#id29">Examples</a></h4>
+<pre class="literal-block">
+REAL PROCEDURE sum ( INTEGER VALUE first, last;
+                     REAL PROCEDURE f (INTEGER VALUE i) );
+
+REAL PROCEDURE f ( REAL PROCEDURE g, h (REAL a);
+                   REAL ARRAY a, b (*,*) );
+
+REAL PROCEDURE f (REAL PROCEDURE g (INTEGER PROCEDURE h (INTEGER i)));
+
+REAL PROCEDURE f (PROCEDURE statement);
+
+REAL PROCEDURE f (INTEGER PROCEDURE expression);
+</pre>
+</div>
+</div>
+<div class="section" id="id1">
+<span id="empty-arrays"></span><h3><a class="toc-backref" href="#id30">Empty arrays</a></h3>
+<p>If an array has a bound pair where the upper bound is one less than
+the lower bound it is an &quot;empty array&quot;, it contains no elements. Any
+attempt to access an element of such an array is an error.</p>
+<p>(Hendrik Boom says this was a useful undocumented feature of
+the OS/360 Algol W compilers' implementation of Algol W.)</p>
+<div class="section" id="id2">
+<h4><a class="toc-backref" href="#id31">Examples</a></h4>
+<pre class="literal-block">
+real array (0::-1);
+integer array (1::0, 1::2);
+</pre>
+</div>
+</div>
+<div class="section" id="latin-1-ibm1047-character-encoding">
+<h3><a class="toc-backref" href="#id32">Latin-1/IBM1047 Character Encoding</a></h3>
+<p><a class="reference internal" href="#strings">Strings</a> are stored internally in the ISO 8859-1 (Latin-1) character
+set. The <a class="reference internal" href="#input-output-system">Input/Output System</a> reads and writes Latin-1.</p>
+<p>DECODE, CODE and string comparisons transliterate Latin-1 character
+codes into <em>IBM1047</em>, an extended version of EBCDIC that includes all
+the characters of Latin-1. This is to prevent programs that relied on
+EBCDIC codes from breaking.</p>
+<p>See also: <a class="reference internal" href="#character-codes-and-string-order">Character codes and string order</a></p>
+<p>IBM1047:</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">+</th>
+<th class="head">00</th>
+<th class="head">01</th>
+<th class="head">02</th>
+<th class="head">03</th>
+<th class="head">04</th>
+<th class="head">05</th>
+<th class="head">06</th>
+<th class="head">07</th>
+<th class="head">08</th>
+<th class="head">09</th>
+<th class="head">0A</th>
+<th class="head">0B</th>
+<th class="head">0C</th>
+<th class="head">0D</th>
+<th class="head">0E</th>
+<th class="head">0F</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><strong>00</strong></td>
+<td>00</td>
+<td>01</td>
+<td>02</td>
+<td>03</td>
+<td>9C</td>
+<td>09</td>
+<td>86</td>
+<td>7F</td>
+<td>97</td>
+<td>8D</td>
+<td>8E</td>
+<td>0B</td>
+<td>0C</td>
+<td>0D</td>
+<td>0E</td>
+<td>0F</td>
+</tr>
+<tr><td><strong>10</strong></td>
+<td>10</td>
+<td>11</td>
+<td>12</td>
+<td>13</td>
+<td>9D</td>
+<td>85</td>
+<td>08</td>
+<td>87</td>
+<td>18</td>
+<td>19</td>
+<td>92</td>
+<td>8F</td>
+<td>1C</td>
+<td>1D</td>
+<td>1E</td>
+<td>1F</td>
+</tr>
+<tr><td><strong>20</strong></td>
+<td>80</td>
+<td>81</td>
+<td>82</td>
+<td>83</td>
+<td>84</td>
+<td>0A</td>
+<td>17</td>
+<td>1B</td>
+<td>88</td>
+<td>89</td>
+<td>8A</td>
+<td>8B</td>
+<td>8C</td>
+<td>05</td>
+<td>06</td>
+<td>07</td>
+</tr>
+<tr><td><strong>30</strong></td>
+<td>90</td>
+<td>91</td>
+<td>16</td>
+<td>93</td>
+<td>94</td>
+<td>95</td>
+<td>96</td>
+<td>04</td>
+<td>98</td>
+<td>99</td>
+<td>9A</td>
+<td>9B</td>
+<td>14</td>
+<td>15</td>
+<td>9E</td>
+<td>1A</td>
+</tr>
+<tr><td><strong>40</strong></td>
+<td>&nbsp;</td>
+<td>A0</td>
+<td>â</td>
+<td>ä</td>
+<td>à</td>
+<td>á</td>
+<td>ã</td>
+<td>å</td>
+<td>ç</td>
+<td>ñ</td>
+<td>¢</td>
+<td>.</td>
+<td>&lt;</td>
+<td>(</td>
+<td>+</td>
+<td><div class="first last line-block">
+<div class="line"><br /></div>
+</div>
+</td>
+</tr>
+<tr><td><strong>50</strong></td>
+<td>&amp;</td>
+<td>é</td>
+<td>ê</td>
+<td>ë</td>
+<td>è</td>
+<td>í</td>
+<td>î</td>
+<td>ï</td>
+<td>ì</td>
+<td>ß</td>
+<td>!</td>
+<td>$</td>
+<td>*</td>
+<td>)</td>
+<td>;</td>
+<td>^</td>
+</tr>
+<tr><td><strong>60</strong></td>
+<td>-</td>
+<td>/</td>
+<td>Â</td>
+<td>Ä</td>
+<td>À</td>
+<td>Á</td>
+<td>Ã</td>
+<td>Å</td>
+<td>Ç</td>
+<td>Ñ</td>
+<td>¦</td>
+<td>,</td>
+<td>%</td>
+<td>_</td>
+<td>&gt;</td>
+<td>?</td>
+</tr>
+<tr><td><strong>70</strong></td>
+<td>ø</td>
+<td>É</td>
+<td>Ê</td>
+<td>Ë</td>
+<td>È</td>
+<td>Í</td>
+<td>Î</td>
+<td>Ï</td>
+<td>Ì</td>
+<td></td>
+<td>:</td>
+<td>#</td>
+<td>&#64;</td>
+<td>'</td>
+<td>=</td>
+<td>&quot;</td>
+</tr>
+<tr><td><strong>80</strong></td>
+<td>Ø</td>
+<td>a</td>
+<td>b</td>
+<td>c</td>
+<td>d</td>
+<td>e</td>
+<td>f</td>
+<td>g</td>
+<td>h</td>
+<td>i</td>
+<td>«</td>
+<td>»</td>
+<td>ð</td>
+<td>ý</td>
+<td>þ</td>
+<td>±</td>
+</tr>
+<tr><td><strong>90</strong></td>
+<td>°</td>
+<td>j</td>
+<td>k</td>
+<td>l</td>
+<td>m</td>
+<td>n</td>
+<td>o</td>
+<td>p</td>
+<td>q</td>
+<td>r</td>
+<td>ª</td>
+<td>º</td>
+<td>æ</td>
+<td>¸</td>
+<td>Æ</td>
+<td>¤</td>
+</tr>
+<tr><td><strong>A0</strong></td>
+<td>µ</td>
+<td>~</td>
+<td>s</td>
+<td>t</td>
+<td>u</td>
+<td>v</td>
+<td>w</td>
+<td>x</td>
+<td>y</td>
+<td>z</td>
+<td>¡</td>
+<td>¿</td>
+<td>Ð</td>
+<td>[</td>
+<td>Þ</td>
+<td>®</td>
+</tr>
+<tr><td><strong>B0</strong></td>
+<td>¬</td>
+<td>£</td>
+<td>¥</td>
+<td>·</td>
+<td>©</td>
+<td>§</td>
+<td>¶</td>
+<td>¼</td>
+<td>½</td>
+<td>¾</td>
+<td>Ý</td>
+<td>¨</td>
+<td>¯</td>
+<td>]</td>
+<td>´</td>
+<td>×</td>
+</tr>
+<tr><td><strong>C0</strong></td>
+<td>{</td>
+<td>A</td>
+<td>B</td>
+<td>C</td>
+<td>D</td>
+<td>E</td>
+<td>F</td>
+<td>G</td>
+<td>H</td>
+<td>I</td>
+<td>­</td>
+<td>ô</td>
+<td>ö</td>
+<td>ò</td>
+<td>ó</td>
+<td>õ</td>
+</tr>
+<tr><td><strong>D0</strong></td>
+<td>}</td>
+<td>J</td>
+<td>K</td>
+<td>L</td>
+<td>M</td>
+<td>N</td>
+<td>O</td>
+<td>P</td>
+<td>Q</td>
+<td>R</td>
+<td>¹</td>
+<td>û</td>
+<td>ü</td>
+<td>ù</td>
+<td>ú</td>
+<td>ÿ</td>
+</tr>
+<tr><td><strong>E0</strong></td>
+<td></td>
+<td>÷</td>
+<td>S</td>
+<td>T</td>
+<td>U</td>
+<td>V</td>
+<td>W</td>
+<td>X</td>
+<td>Y</td>
+<td>Z</td>
+<td>²</td>
+<td>Ô</td>
+<td>Ö</td>
+<td>Ò</td>
+<td>Ó</td>
+<td>Õ</td>
+</tr>
+<tr><td><strong>F0</strong></td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>³</td>
+<td>Û</td>
+<td>Ü</td>
+<td>Ù</td>
+<td>Ú</td>
+<td>9F</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>The hexadecimal numbers are codes for non-printing Latin-1 characters.</p>
+</div>
+<div class="section" id="block-comment-directives">
+<h3><a class="toc-backref" href="#id33">Block comment directives</a></h3>
+<p>All source code lines between the directives <tt class="docutils literal">&#64;AW2C_TEXT</tt> and
+<tt class="docutils literal">&#64;AW2C_CODE</tt> will be ignored by <strong>aw2c</strong>.  This allows long comments
+containing semicolons to appear in <strong>aw2c</strong> source code, it also allows
+chunks of Algol W code to be commented out while debugging.</p>
+<p>Directives must start in the first column of a line.</p>
+<div class="section" id="example">
+<h4><a class="toc-backref" href="#id34">Example</a></h4>
+<p>A block comment:</p>
+<pre class="literal-block">
+&#64;AW2C_TEXT
+I'm leaving this procedure out for now; I don't need it:
+
+INTEGER PROCEDURE triangle (INTEGER VALUE i);
+BEGIN
+    (i**2 + i) / 2
+END;
+&#64;AW2C_CODE
+</pre>
+</div>
+</div>
+</div>
+<div class="section" id="standard-procedures">
+<h2><a class="toc-backref" href="#id35">STANDARD PROCEDURES</a></h2>
+<p>There are small extensions to some of Algol W's standard procedures,
+and one alteration (real number to base 16 transfer functions).</p>
+<ul>
+<li><p class="first">There is an implied decimal place in the string encoding format of
+BASE10 and LONGBASE10. For example:</p>
+<pre class="literal-block">
+LONGBASE10(123.456789012345) = &quot; +02+123456789012345&quot;
+</pre>
+<p>Such a result can easily be rearranged using substrings. [I think
+this is what was intended. If I've made the wrong assumption,
+please tell me.]</p>
+</li>
+<li><p class="first">If the exponent part of a real number is 3 digits long the BASE10 or
+LONGBASE10 string encoding format becomes:</p>
+<pre class="literal-block">
+±EEE±DDDDDDDDDDDDDDD
+</pre>
+</li>
+<li><p class="first"><span class="target" id="base16-and-longbase16">BASE16 and LONGBASE16</span> return 24 character wide fields in GNU C's
+<tt class="docutils literal">%a</tt> printf format.</p>
+<p>[Algol W programs have no way to read the <em>Algol W Language
+Description</em>'s base 16 format for REAL numbers, nor does any
+existing Unix program I know of, so there didn't seem much point in
+implementing them in the way described.]</p>
+</li>
+<li><p class="first">The <span class="target" id="time-procedure">TIME procedure</span> has additional control codes to allow finer measurements:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="14%" />
+<col width="63%" />
+<col width="23%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head"><p class="first last">code</p>
+</th>
+<th class="head"><p class="first last">result</p>
+</th>
+<th class="head"><p class="first last">units</p>
+</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><p class="first last">10000</p>
+</td>
+<td><p class="first last">elapsed execution time</p>
+</td>
+<td><p class="first last">&quot;clocks&quot;</p>
+</td>
+</tr>
+<tr><td><p class="first last">10001</p>
+</td>
+<td><p class="first last">CLOCKS_PER_SEC</p>
+</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal">CLOCKS_PER_SEC</tt> is the constant defined in the C header
+<tt class="docutils literal">&lt;time.h&gt;</tt>.  <tt class="docutils literal">TIME(10000) / TIME(10001)</tt> will be the elapsed
+execution time in seconds, represented as a REAL. The GNU C manual
+says that <tt class="docutils literal">TIME(10000)</tt> will &quot;wrap around&quot; in roughly 72 minutes
+on a machine with <tt class="docutils literal">CLOCKS_PER_SEC</tt> set to 1000000.</p>
+</li>
+<li><p class="first"><em>Elapsed execution time</em> means the time the program's process has
+used on the CPU.</p>
+</li>
+<li><p class="first">IOCONTROL. There are additional <a class="reference internal" href="#iocontrol-control-codes">IOCONTROL control codes</a>.</p>
+</li>
+</ul>
+<div class="section" id="input-output-system">
+<h3><a class="toc-backref" href="#id36">Input/Output System</a></h3>
+<p>The Input/Output System is an extention of the one described in the
+June 1972 <cite>Algol W Language Description</cite>. The Unix standard output
+stream represents the printer, lines from standard input represent
+card reader input records.</p>
+<p>The Input/Output System is reconfigurable. The initial configuration
+handles whitespace and page breaks in a relaxed way that better suits
+stream I/O, this should not effect most programs.  The Input/Output
+System can be returned to strict <cite>Algol W Language Description</cite>
+behaviour by setting <a class="reference internal" href="#iocontrol-control-codes">IOCONTROL control codes</a> or Unix environment
+variables.</p>
+<ul>
+<li><p class="first">WRITE does not print spaces at the ends of lines or eject the last
+page by default, see the <em>trim lines</em> and <em>eject last page</em>
+IOCONTROL control codes below.</p>
+</li>
+<li><p class="first"><span class="target" id="write-can-write-reference-values">WRITE can write REFERENCE values</span>. REFERENCE values have the syntax:</p>
+<pre class="literal-block">
+'null'
+</pre>
+<p>or:</p>
+<pre class="literal-block">
+&lt;identifier&gt; '.' &lt;integer&gt;
+</pre>
+<p>where <cite>&lt;identifier&gt;</cite> is a record's class and <cite>&lt;integer&gt;</cite> is the
+record's <em>allocation number</em>. Allocation numbers are assigned to
+records from a counter that is incremented every time a record is
+allocated. Predeclared records have negative allocation numbers.
+The variable I_W controls the field width.</p>
+<p>(Hendrik Boom says this was a useful undocumented feature of
+<strong>ALGOLW</strong>'s implementation of Algol W.</p>
+</li>
+<li><p class="first">Negative numbers in I_W or R_W cause output fields to be right
+adjusted.</p>
+</li>
+<li><p class="first">WRITECARD writes strings as individual lines of characters.</p>
+</li>
+<li><p class="first">READ pays no attention to the length of input records.</p>
+</li>
+<li><p class="first">READ allows <tt class="docutils literal">e</tt> to be used in place of <tt class="docutils literal">'</tt> in REAL constants.</p>
+</li>
+<li><p class="first">READCARD reads lines of characters into strings, not fixed-length
+cards. If a line contains more characters than a READCARD actual
+parameter can hold, the excess characters will be ignored. If the
+line is shorter than the string, the string parameter will be padded
+with spaces.</p>
+</li>
+</ul>
+<div class="section" id="iocontrol-control-codes">
+<h4><a class="toc-backref" href="#id37">IOCONTROL control codes</a></h4>
+<p>IOCONTROL has extended control codes, mostly to modify the
+Input/Output System configuration. The configuration can also be set
+by Unix environment variables.</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="36%" />
+<col width="17%" />
+<col width="36%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">code</th>
+<th class="head">meaning</th>
+<th class="head">default</th>
+<th class="head">environment variable</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">4</tt></td>
+<td>hard page breaks = <em>on</em></td>
+<td>off</td>
+<td><tt class="docutils literal">ALW_HARD_PAGE_BREAKS</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">5</tt></td>
+<td>hard page breaks = <em>off</em></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">1dddd</tt></td>
+<td>output page width</td>
+<td>132</td>
+<td><tt class="docutils literal">ALW_PAGE_WIDTH</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">2dddd</tt></td>
+<td>output page height</td>
+<td>60</td>
+<td><tt class="docutils literal">ALW_PAGE_HEIGHT</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">3dddd</tt></td>
+<td>output page estimate</td>
+<td><em>unlimited</em></td>
+<td><tt class="docutils literal">ALW_PAGE_ESTIMATE</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">40001</tt></td>
+<td>reset page and line count</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">40002</tt></td>
+<td>unconditional line break</td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">40004</tt></td>
+<td>pretty page breaks = <em>off</em></td>
+<td>off</td>
+<td><tt class="docutils literal">ALW_PRETTY_PAGE_BREAKS</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">40005</tt></td>
+<td>pretty page_breaks = <em>on</em></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">40006</tt></td>
+<td>strict line breaks = <em>off</em></td>
+<td>off</td>
+<td><tt class="docutils literal">ALW_STRICT_LINE_BREAKS</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">40007</tt></td>
+<td>strict line breaks = <em>on</em></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">40008</tt></td>
+<td>trim lines  = <em>off</em></td>
+<td>on</td>
+<td><tt class="docutils literal">ALW_TRIM_LINES</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">40009</tt></td>
+<td>trim lines = <em>on</em></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">40010</tt></td>
+<td>eject last page = <em>off</em></td>
+<td>off</td>
+<td><tt class="docutils literal">ALW_EJECT_LAST_PAGE</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">40011</tt></td>
+<td>eject last page = <em>on</em></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+<p><tt class="docutils literal">dddd</tt> stands for the digits of a numeric setting, where &quot;9999&quot; means
+<em>unlimited</em>.</p>
+<dl class="docutils">
+<dt><em>Output page height</em></dt>
+<dd>is the number of lines per page.</dd>
+<dt><em>Output page estimate</em></dt>
+<dd>is the number of pages the program may output. &quot;0&quot; means <em>no
+output.</em> [This prevents your computer centre being flooded with
+fan-fold paper, I suppose.]</dd>
+<dt><em>Hard page breaks</em></dt>
+<dd>replace the last line feed of a page with a form feed (^L) or
+write a <em>pretty page break.</em> The correct <cite>Algol W Language
+Description</cite> default is <em>on</em>, but <em>off</em> suits stream output
+better.</dd>
+<dt><em>Unconditional line break</em></dt>
+<dd>write a line break immediately, even if nothing has been writen
+to the line.</dd>
+<dt><em>Pretty page breaks</em></dt>
+<dd>means rule across the page with &quot;~&quot; signs at the end of a page, rather
+than issue a form feed code.</dd>
+<dt><em>Strict line breaks</em></dt>
+<dd>means raise a run-time error if a WRITE field is wider than the
+output page width.</dd>
+<dt><em>Eject last page</em></dt>
+<dd>means perform a page break at the end of the program.  If this is
+<em>off</em> a line break is performed instead. The correct <cite>Algol W
+Language Description</cite> behaviour is to eject the last page, but a
+mere line break suits stream output better.</dd>
+<dt><em>Trim lines</em></dt>
+<dd>means do not print spaces at the end of a line. The last WRITE
+field on a line may contain spaces on its right-hand side, but
+actually writing them to the line does not suit stream I/O - it
+can be very ugly and confusing.</dd>
+</dl>
+</blockquote>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<span id="error-messages"></span><h2><a class="toc-backref" href="#id38">ERROR MESSAGES</a></h2>
+<p><strong>aw2c</strong> compiler and run-time error messages are generally more specific
+than their OS/360 compiler equivalents, except for syntax errors.</p>
+<p>Error messages are preceded by the position of the error in the Algol
+W source file:</p>
+<blockquote>
+&lt;source-file-name&gt;:&lt;line&gt;:&lt;column&gt;:</blockquote>
+<p>(This is format used by <em>gcc</em>. Emacs likes it.)</p>
+<div class="section" id="compile-time-errors">
+<h3><a class="toc-backref" href="#id39">Compile-time errors</a></h3>
+<p>Compile-time errors should only come from <strong>aw2c</strong>.  Any <em>gcc</em> error message
+should be considered to be a bug in the compiler, <strong>aw2c</strong> uses <em>gcc</em> purely
+as an object code generator and linker.</p>
+</div>
+<div class="section" id="run-time-error-messages">
+<h3><a class="toc-backref" href="#id40">Run-time error messages</a></h3>
+<p>Run-time error messages are sent to &quot;stderr&quot;.</p>
+<p>A program created by <strong>aw2c</strong> should be emit a run-time error
+message for every run-time error that the Algol W language allows. If
+you see C assertion errors or core-dumps assume they are caused by
+bugs in the <strong>aw2c</strong> compiler, not by bugs your Algol W program. (But
+all bets are off for Algol W programs that include <a class="reference internal" href="#c-language-source-code">C language source code</a>.)</p>
+<p>[These are subject to change. Use <tt class="docutils literal">grep 'alw_(error|warning)' *.c</tt> in
+the <strong>aw2c</strong> source directory to locate all run-time error messages.]</p>
+<dl class="docutils">
+<dt>Miscellaneous:</dt>
+<dd><ul class="first last simple">
+<li>assertion failure</li>
+<li>FOR step of 0</li>
+<li>CASE range error: selector was %d</li>
+<li>negative shift operand to SHL</li>
+<li>negative shift operand to SHR</li>
+</ul>
+</dd>
+<dt>Records:</dt>
+<dd><ul class="first last simple">
+<li>reference error: tried to find field %s of a NULL reference</li>
+<li>reference error: tried to find field %s of a REFERENCE(%s)</li>
+<li>reference error: %s cannot be made to refer to a '%s' record.</li>
+<li>Cannot allocate this record: Out of memory!</li>
+</ul>
+</dd>
+<dt>Strings:</dt>
+<dd><ul class="first last simple">
+<li>Tried to copy invalid substring (%d|%d).</li>
+<li>Tried to copy substring (%d|%d) of a string of length %d.</li>
+<li>Tried to assign to invalid substring (%d|%d).</li>
+<li>Tried to assign to substring (%d|%d) of a string of length %d.</li>
+<li>Expected this string's length to be %d, it is %d.</li>
+<li>array subscript error: subscript %d of '%s' = %d, outside the range (%d::%d)</li>
+<li>array bounds error: bound %d of '%s' is (%d::%d) here, %d &gt; %d</li>
+</ul>
+</dd>
+<dt>I/O System:</dt>
+<dd><ul class="first last simple">
+<li>Expected an integer between %d and %d in system variable %s.</li>
+<li>Expected a true or false value in system variable %s.</li>
+<li>Expected to read %s on line %d of %s; found %s.</li>
+<li>The page estimate is 0 pages, nothing should be written.</li>
+<li>A WRITE field was too wide for the page here.</li>
+<li>The page estimate, %d pages, has been reached.</li>
+<li>R_FORMAT = &quot;%s&quot;, this is not a valid format code.</li>
+<li>IOCONTROL code %d is undefined.</li>
+</ul>
+</dd>
+<dt>The default &quot;exceptional condition&quot; messages:</dt>
+<dd><ul class="first last simple">
+<li>Floating-point exponent overflow.</li>
+<li>Floating-point division by zero.</li>
+<li>Integer overflow.</li>
+<li>Integer division by zero.</li>
+<li>Negative argument for SQRT or LONGSQRT.</li>
+<li>Argument of EXP or LONGEXP out of domain.</li>
+<li>Argument of LN, LOG, LONGLN or LONGLOG out of domain.</li>
+<li>Argument of SIN, COS, LONGSIN or LONGCOS out of domain.</li>
+<li>Unexpected end of input.</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="interfacing-algol-w-with-c">
+<span id="c-language-source-code"></span><h2><a class="toc-backref" href="#id41">INTERFACING ALGOL W WITH C</a></h2>
+<div class="section" id="identifiers">
+<h3><a class="toc-backref" href="#id42">Identifiers</a></h3>
+<p><strong>aw2c</strong> treats Algol W identifiers as case-insensitive. They are always
+converted to lowercase C identifier. (But see <a class="reference internal" href="#external-procedures">External procedures</a> below.)</p>
+<p>An underscore is secretly appended to Algol W identifiers that are Gnu
+C reserved words, <tt class="docutils literal">argc</tt>, <tt class="docutils literal">argv</tt>, or Algol W predeclared function
+names that clash with C standard library names (<tt class="docutils literal">time</tt>, <tt class="docutils literal">round</tt>
+and <tt class="docutils literal">odd</tt>.) For a full list search for &quot;gnuc_keywords&quot; in
+&quot;codeGen.ml&quot;.</p>
+<div class="section" id="id4">
+<h4><a class="toc-backref" href="#id43">Examples</a></h4>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="53%" />
+<col width="47%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Algol W identifier</th>
+<th class="head">C identifier</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">x15</tt></td>
+<td><tt class="docutils literal">x15</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">NEW_PAGE</tt></td>
+<td><tt class="docutils literal">new_page</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">ElderSibling</tt></td>
+<td><tt class="docutils literal">eldersibling</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">const</tt></td>
+<td><tt class="docutils literal">const_</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">SWITCH</tt></td>
+<td><tt class="docutils literal">switch_</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">argc</tt></td>
+<td><tt class="docutils literal">argc_</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">time</tt></td>
+<td><tt class="docutils literal">time_</tt></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</div>
+<div class="section" id="sacred-identifiers">
+<h4><a class="toc-backref" href="#id44">Sacred identifiers</a></h4>
+<p>The procedures and variables of <strong>aw2c</strong>'s run-time library begin with
+the prefix <tt class="docutils literal">alw_</tt>; temporary variables inserted by <strong>aw2c</strong>'s code
+generator start with underscores. Avoid using such identifiers
+whenever possible.</p>
+</div>
+</div>
+<div class="section" id="source-code-locations">
+<h3><a class="toc-backref" href="#id45">Source code locations</a></h3>
+<p>The C type <tt class="docutils literal">alw_loc</tt> represents locations in the original Algol W source code.
+<tt class="docutils literal">alw_loc</tt> values are passed to run-time library functions that can
+raise run-time errors. In inline C code <tt class="docutils literal">alw_loc</tt> arguments should
+always by passed the macro <tt class="docutils literal">alw_HERE</tt>.</p>
+</div>
+<div class="section" id="simple-types">
+<h3><a class="toc-backref" href="#id46">Simple Types</a></h3>
+<p>The C type equivalents of the Algol W simple types:</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="28%" />
+<col width="46%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">simple type</th>
+<th class="head">C type</th>
+<th class="head">preconditions</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">INTEGER</tt></td>
+<td><tt class="docutils literal">int</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">REAL</tt></td>
+<td><tt class="docutils literal">double</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">LONG REAL</tt></td>
+<td><tt class="docutils literal">double</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">COMPLEX</tt></td>
+<td><tt class="docutils literal">_Complex double</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">LONG COMPLEX</tt></td>
+<td><tt class="docutils literal">_Complex double</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">LOGICAL</tt></td>
+<td><tt class="docutils literal">int</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">BITS</tt></td>
+<td><tt class="docutils literal">unsigned int</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">STRING(1)</tt></td>
+<td><tt class="docutils literal">alw_chr</tt></td>
+<td>&nbsp;</td>
+</tr>
+<tr><td><tt class="docutils literal">STRING(n)</tt></td>
+<td><tt class="docutils literal">alw_str</tt></td>
+<td>x != NULL</td>
+</tr>
+<tr><td><tt class="docutils literal"><span class="pre">REFERENCE(...)</span></tt></td>
+<td><tt class="docutils literal">void *</tt></td>
+<td>x == NULL or points to a record</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>The LOGICAL FALSE value is 0, all other values are TRUE, as in C.</p>
+<p>The NULL reference is represented by <tt class="docutils literal">(void *)0</tt>. (C's NULL macro is
+not available to inline C code unless <tt class="docutils literal">stdlib.h</tt> is imported.)</p>
+</div>
+<div class="section" id="strings">
+<h3><a class="toc-backref" href="#id47">Strings</a></h3>
+<p>A2WC represents STRING(1) as <tt class="docutils literal">unsigned char</tt>:</p>
+<pre class="literal-block">
+typedef unsigned char alw_chr;
+</pre>
+<p>Strings longer that one character are represented by pointers to
+mutable character arrays:</p>
+<pre class="literal-block">
+typedef alw_chr *alw_str;
+</pre>
+<p>The type of strings longer that one character is referred to as
+&quot;STRING(n)&quot; in the manual.</p>
+<p>STRING(n) variables are typically declared like this: <tt class="docutils literal">alw_chr x[n];</tt></p>
+<p>The <strong>aw2c</strong> run-time library contains string manipulation functions,
+these have the prefix <tt class="docutils literal">alw_str_</tt>.  Some of these functions have <tt class="docutils literal">_c</tt>,
+<tt class="docutils literal">_sc</tt>, <tt class="docutils literal">_cs</tt> and <tt class="docutils literal">_cc</tt> suffixes, these are versions that take
+<tt class="docutils literal">alw_chr</tt> arguments.</p>
+<div class="section" id="allocating-copying-and-returning-strings">
+<h4><a class="toc-backref" href="#id48">Allocating, copying and returning strings</a></h4>
+<p>This fills a string array with spaces:</p>
+<pre class="literal-block">
+void alw_str_init (alw_str dst, int dstlen);
+</pre>
+<p>These allocate a copy of an existing string, padded to the correct
+length with spaces:</p>
+<pre class="literal-block">
+alw_str alw_str_new   (const alw_str src, int srclen, int dstlen);
+alw_str alw_str_new_c (const alw_chr src, int dstlen);
+</pre>
+<p>They <em>must</em> be used on strings that are about to be returned from
+procedures. The <tt class="docutils literal">src</tt> argument may be a C string.</p>
+<p>These copy one string into another, in place. They are for performing
+assignments to STRING(n) variables:</p>
+<pre class="literal-block">
+alw_str alw_str_cpy    (alw_str dst, int dstlen, const alw_str src, int srclen);
+alw_chr alw_str_cpy_sc (alw_str dst, int dstlen, alw_chr src);
+</pre>
+</div>
+<div class="section" id="substrings">
+<h4><a class="toc-backref" href="#id49">Substrings</a></h4>
+<p>Substrings are pointers into STRING(n) character arrays.</p>
+<p>This function returns a pointer to a substring:</p>
+<pre class="literal-block">
+alw_str alw_str_sub (alw_loc loc, const alw_str src, int srclen, int index, int length);
+</pre>
+<p>There is a runtime error if the substring is not completely in the
+bounds of the string.  <tt class="docutils literal">alw_str_sub</tt> is used to find both STRING(1)
+and STRING(n) substrings. The result of the call <tt class="docutils literal">alw_str_sub(loc, src,
+n, m, 1)</tt> should treated as a pointer to <tt class="docutils literal">alw_chr</tt>.</p>
+</div>
+<div class="section" id="character-codes-and-string-order">
+<h4><a class="toc-backref" href="#id50">Character codes and string order</a></h4>
+<p>Characters are encoded in Latin-1. However, Algol W's standard string
+functions transliterate character codes into IBM1047 EBCDIC. CODE accepts
+EBCDIC codes, DECODE returns EBCDIC codes, and string comparisons are
+done in EBCDIC order. See <a class="reference internal" href="#latin-1-ibm1047-character-encoding">Latin-1/IBM1047 Character Encoding</a></p>
+<p>Programs that use strings as packed arrays of bytes should define
+their own un-transliterated byte-access procedures. See the example
+<tt class="docutils literal">raw_decode</tt> in the <a class="reference internal" href="#external-procedures">External procedures</a> section below.</p>
+<p>These are Algol W's standard EBCDIC code/decode functions:</p>
+<pre class="literal-block">
+alw_chr code (int ebcdic);
+
+int decode (alw_chr string1);
+</pre>
+<p>These are the string comparison functions:</p>
+<pre class="literal-block">
+int alw_str_cmp ( const alw_str str1, int str1len,
+                  const alw_str str2, int str2len );
+
+int alw_str_cmp_sc ( const alw_str str1, int str1len,
+                     alw_chr s2 );
+
+int alw_str_cmp_cs ( alw_chr s1,
+                     const alw_str str2, int str2len );
+
+int alw_str_cmp_cc (alw_chr s1, alw_chr s2);
+</pre>
+<p>The transliteration tables are:</p>
+<pre class="literal-block">
+alw_chr alw_latin1_to_ebcdic[256];
+alw_chr alw_ebcdic_to_latin1[256];
+</pre>
+</div>
+</div>
+<div class="section" id="arrays">
+<h3><a class="toc-backref" href="#id51">Arrays</a></h3>
+<p>Algol W arrays are translated into C functions that return pointers
+to array elements:</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="52%" />
+<col width="48%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Algol W array</th>
+<th class="head">C function</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">T ARRAY a <span class="pre">(l0::h0)</span></tt></td>
+<td><tt class="docutils literal">t *a(alw_loc, int)</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">T ARRAY a <span class="pre">(l0::h0,l1::h1)</span></tt></td>
+<td><tt class="docutils literal">t *a(alw_loc, int, int)</tt></td>
+</tr>
+<tr><td><em>etc.</em></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>(where <tt class="docutils literal">T</tt> is an Algol W simple type and <tt class="docutils literal">t</tt> its C equivalent.)</p>
+<p>Array functions can raise &quot;Subscript out of range&quot; run-time errors.</p>
+<p>The inline C version of the array assignment <tt class="docutils literal">a(1,2) := b(3)</tt> should
+be <tt class="docutils literal">*a(alw_HERE, 1, 2) = *b(alw_HERE, 3)</tt>.</p>
+<p>The actual C array that stores the elements of an array variable <tt class="docutils literal">a</tt>
+will be called <tt class="docutils literal">_array_a</tt>. But use the array element pointer functions
+unless you are feeling really keen.</p>
+</div>
+<div class="section" id="records">
+<h3><a class="toc-backref" href="#id52">Records</a></h3>
+<p>A record designator is translated into a C function that takes a
+default value argument for each field and returns a pointer to a newly
+created record structure.</p>
+<p>A record field becomes a function that takes a pointer to a record and
+returns a pointer to the field's value.:</p>
+<pre class="literal-block">
+RECORD r (T0 f0, T1 f1,...);
+</pre>
+<p>creates C functions with these prototypes:</p>
+<pre class="literal-block">
+void *r (t0, t1, ...);
+t0 *f0 (alw_loc, void *);
+t1 *f1 (alw_loc, void *);
+...
+</pre>
+<p>(where <tt class="docutils literal">T</tt> is an Algol W simple type and <tt class="docutils literal">t</tt> its C equivalent.)</p>
+<p>Field functions can raise run-time reference type errors.</p>
+<p>References are represented by <tt class="docutils literal">void *</tt> pointers. Reference pointers
+must either be NULL or be pointers returned by a record designator
+function: RECORD structures contain hidden fields that determine their
+class at run-time.</p>
+<p>This macro accesses the name of a reference's class:</p>
+<pre class="literal-block">
+const char *alw_class(void *reference);
+</pre>
+</div>
+<div class="section" id="formal-parameters-to-procedures">
+<h3><a class="toc-backref" href="#id53">Formal parameters to procedures</a></h3>
+<p>The equivalents of Algol W formal parameters (except STRING(n) parameters):</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">formal parameter</th>
+<th class="head">C function argument</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">T VALUE x</tt></td>
+<td><tt class="docutils literal">t x</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">T RESULT x</tt></td>
+<td><tt class="docutils literal">t *x</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">T VALUE RESULT x</tt></td>
+<td><tt class="docutils literal">t *x</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">T x</tt></td>
+<td><tt class="docutils literal">t <span class="pre">*(*x)(void)</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal">T PROCEDURE x</tt></td>
+<td><tt class="docutils literal">t x(void)</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">PROCEDURE x</tt></td>
+<td><tt class="docutils literal">void x(void)</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">T ARRAY x (*)</tt></td>
+<td><tt class="docutils literal">t <span class="pre">*(*x)(alw_loc,</span> int)</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">T ARRAY x <span class="pre">(*,*)</span></tt></td>
+<td><tt class="docutils literal">t <span class="pre">*(*x)(alw_loc,</span> int, int)</tt></td>
+</tr>
+<tr><td><em>etc.</em></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>(where <tt class="docutils literal">T</tt> is an Algol W simple type and <tt class="docutils literal">t</tt> its C equivalent.)</p>
+<p>RESULT parameters become pointers to values, Name and ARRAY parameters
+become functions that return pointers to values.</p>
+<p>All STRING(n) VALUE/RESULT parameters are represented by <tt class="docutils literal">alw_str</tt>,
+i.e. pointers to character arrays:</p>
+<blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="44%" />
+<col width="56%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">formal parameter</th>
+<th class="head">C function argument</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">STRING(n) VALUE x</tt></td>
+<td><tt class="docutils literal">alw_str x</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">STRING(n) RESULT x</tt></td>
+<td><tt class="docutils literal">alw_str x</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">STRING(n) VALUE RESULT x</tt></td>
+<td><tt class="docutils literal">alw_str x</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">STRING(n) x</tt></td>
+<td><tt class="docutils literal">alw_str <span class="pre">(*x)(void)</span></tt></td>
+</tr>
+<tr><td><tt class="docutils literal">STRING(n) PROCEDURE x</tt></td>
+<td><tt class="docutils literal">alw_str x(void)</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">STRING(n) ARRAY x (*)</tt></td>
+<td><tt class="docutils literal">alw_str <span class="pre">(*x)(alw_loc,</span> int)</tt></td>
+</tr>
+<tr><td><tt class="docutils literal">STRING(n) ARRAY x <span class="pre">(*,*)</span></tt></td>
+<td><tt class="docutils literal">alw_str <span class="pre">(*x)(alw_loc,</span> int, int)</tt></td>
+</tr>
+<tr><td><em>etc.</em></td>
+<td>&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>When a procedure is called from within Algol W code, RESULT parameters
+will point to copies of their actual parameters. The copies are
+assigned back to the actual parameters after the procedure
+returns. This copying is done at the point-of-call, so when the same
+function is called from within C code its RESULT parameters will point
+directly to their actual parameters.</p>
+</div>
+<div class="section" id="inline-c-code">
+<h3><a class="toc-backref" href="#id54">Inline C code</a></h3>
+<p><strong>aw2c</strong> allows inline C code. Inline C is dropped into <strong>aw2c</strong>'s C
+code output wherever it appear in the Algol
+W source. (Whether the inline C is correct is left for <em>gcc</em> to decide.)</p>
+<p>There are additional syntactic rules for inline C code. &lt;C code&gt; is
+the only new syntactic entity:</p>
+<pre class="literal-block">
+&lt;C code&gt; ::= '{' &lt;C-like text&gt; '}'
+
+&lt;C-like text&gt; ::= &lt;C-like text&gt; &lt;C string&gt;
+               |  &lt;C-like text&gt; &lt;C comment&gt;
+               |  &lt;C-like text&gt; '{' &lt;C-like text&gt; '}'
+               |  &lt;C-like text&gt; &lt;character&gt;
+               |  &lt;empty&gt;
+</pre>
+<p>The first character after the '{' will always be in column 1 of the C
+code output. (This lets C directives come out right.)</p>
+<p>Inline blocks of C statements:</p>
+<pre class="literal-block">
+&lt;statement&gt; ::= &lt;C code&gt;
+</pre>
+<p>Inline C expressions:</p>
+<pre class="literal-block">
+&lt;T expression&gt; ::= '(' &lt;simple type&gt; ')' &lt;C code&gt;
+</pre>
+<p>The &lt;C code&gt; contains the C expression, the &lt;simple type&gt; its Algol W
+type (<strong>aw2c</strong> cannot infer this).</p>
+<p>A C declaration block:</p>
+<pre class="literal-block">
+&lt;declaration&gt; ::= '*' &lt;C code&gt;
+</pre>
+<p>There may be any number of C declarations in the &lt;C code&gt; block.  The
+declarations will be visible inside other C code blocks, but not visible
+to Algol W code.  C functions can be made visible to Algol W by declaring
+them as <a class="reference internal" href="#external-procedures">external procedures</a>.</p>
+<p>A program may optionally start with a C declaration block, which may
+include <tt class="docutils literal">#include</tt> directives:</p>
+<pre class="literal-block">
+&lt;program&gt; ::= '*' &lt;C code&gt; ';' &lt;program&gt;
+</pre>
+<p>Here is tiny example:</p>
+<pre class="literal-block">
+*{
+#include &lt;stdio.h&gt;
+#define USE_TWO
+};
+begin
+   *{int i;}
+   integer j;
+   j := 1;
+   {i = 0xff;};
+   {#ifdef USE_TWO};
+      j := 2;
+   {#else};
+      j := (integer){i % 5};
+   {#endif};
+   { printf(&quot;%03d,%03d\n&quot;, i, j); /* so, what do those look like? */ }
+end.
+----stdout
+001,002
+----end
+</pre>
+<p>Function procedures must end with expressions, Algol W type-checking
+requires this. If you want a function procedure to return from within
+a C statement, supply a dummy expression. For example:</p>
+<pre class="literal-block">
+INTEGER PROCEDURE power_of_two (INTEGER VALUE i);
+BEGIN
+   { return 1 &lt;&lt; i; };
+   0
+END;
+</pre>
+</div>
+<div class="section" id="external-procedures">
+<h3><a class="toc-backref" href="#id55">External procedures</a></h3>
+<p>An &quot;external procedure&quot; is any procedure defined outside of a
+program's Algol W source.  (See &quot;5.3.2.4 External references&quot;.) An <strong>aw2c</strong>
+external procedure can be a separately compiled procedure, a C
+function defined inside &lt;C code&gt; or a C macro.</p>
+<p>All external procedures must use the C calling conventions outlined
+above.  (Including Fortran subroutines. See the <em>gcc</em> Fortran manuals
+for details.)</p>
+<p>The syntax of external references has been changed to this:</p>
+<pre class="literal-block">
+&lt;external reference&gt; ::= &lt;identifier&gt; &lt;string&gt;
+</pre>
+<p>&lt;identifier&gt; is:</p>
+<ul class="simple">
+<li><tt class="docutils literal">auto</tt>, for a Gnu C <a class="reference external" href="http://gcc.gnu.org/onlinedocs/gcc/Nested-Functions.html">nested functions</a> declared in the same Algol W block.</li>
+<li><tt class="docutils literal">macro</tt>, for a C macro;</li>
+<li>any other identifier is for a separately compiled or non-nested procedure
+(<tt class="docutils literal">algol</tt>, <tt class="docutils literal">fortran</tt>, or <tt class="docutils literal">C</tt> are good choices for this identifier.)</li>
+</ul>
+<p>&lt;string&gt; is:</p>
+<ul class="simple">
+<li>a C <tt class="docutils literal">#define</tt> statement for a &quot;macro&quot; procedure declaration;</li>
+<li>empty, if the external procedure has the same identifier as the one
+used in the procedure declaration;</li>
+<li>any valid C identifier, use this for external procedure names that
+contain uppercase characters or leading underscores.</li>
+</ul>
+<p>The file &quot;alw.h&quot; contains prototypes for <strong>aw2c</strong>'s run-time functions,
+this can be included into source files for separately compiled
+external C functions.</p>
+<p>Examples:</p>
+<pre class="literal-block">
+procedure dater (integer value key, pr; string(12) result date);
+   c_plus_plus &quot;get_date&quot;;
+   % Here we assume that &quot;get_date&quot; will be linked into the program
+     later, and note that it will probably be a C++ function. %
+
+integer procedure raw_decode (string(1) value c);
+    macro &quot;#define raw_decode(c) ((int)c)&quot;;
+
+begin
+   integer procedure rnd(integer value low, high);
+      auto &quot;&quot;;
+
+   *{ auto int rnd (int low, int high)
+      {
+         assert(low &lt;= high);
+         return low + random(high - low);
+      }
+   };
+   ...
+end
+
+*{
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;assert.h&gt;
+alw_str octal (int i)
+  {
+    char buffer[25];
+    sprintf(buffer, &quot;%24o&quot;, i);
+    assert(strlen(buffer) &lt;= 24);
+    return alw_str_new(buffer, strlen(buffer), 24);
+  }
+};
+begin
+   string(24) procedure octal (integer value x); C &quot;&quot;;
+   write(octal(12345))
+end.
+</pre>
+</div>
+<div class="section" id="procedure-call-tracing-code">
+<h3><a class="toc-backref" href="#id56">Procedure call tracing code</a></h3>
+<p>The <strong>-trace</strong> option asks <strong>aw2c</strong> to insert hooks for tracing or
+profiling procedure calls. The programmer must provide his own
+definitions for these hooks.</p>
+<p>The programmer must provide these C functions:</p>
+<pre class="literal-block">
+void alw_trace_procedure_called  (alw_loc call_loc, const char *procedure_name);
+
+void alw_trace_procedure_entered (alw_loc procedure_loc, const char *procedure_name);
+
+void alw_trace_procedure_exited  (alw_loc call_loc, const char *procedure_name);
+</pre>
+<ul class="simple">
+<li><tt class="docutils literal">alw_trace_procedure_called</tt> is called before a procedure is called;</li>
+<li><tt class="docutils literal">alw_trace_procedure_called</tt> is called after a procedure is called, from within the procedure;</li>
+<li><tt class="docutils literal">alw_trace_procedure_entered</tt> is called after the procedure has been returned from.</li>
+</ul>
+<p><tt class="docutils literal">call_loc</tt> will be the location of the procedure call. <tt class="docutils literal">procedure_loc</tt>
+is the location of the procedure's definition. <tt class="docutils literal">alw_trace_procedure_exited</tt>
+will not be called if the procedure is exited via a <tt class="docutils literal">GOTO</tt> statement.</p>
+<p>[I'm not sure how adequate this set of hooks is. ]</p>
+</div>
+</div>
+<div class="section" id="the-test-suite">
+<h2><a class="toc-backref" href="#id57">THE TEST SUITE</a></h2>
+<p>The script &quot;testprograms.ml&quot; in the <strong>aw2c</strong> source compiles runs a whole
+directory of Algol W programs, checking them against their test suite
+data.  &quot;testprograms.ml&quot; is used to check <strong>aw2c</strong>'s big wonky test suite,
+which can be found in the directory &quot;Tests&quot;.</p>
+<p><strong>aw2c</strong> ignores everything in a source file after the program's final
+full-stop. Test suite data is placed after that full-stop.  The format
+is:</p>
+<div class="line-block">
+<div class="line"><tt class="docutils literal"><span class="pre">----stdin</span></tt></div>
+<div class="line-block">
+<div class="line">(Text to place on the standard input stream.)</div>
+</div>
+<div class="line"><tt class="docutils literal"><span class="pre">----compile</span></tt></div>
+<div class="line-block">
+<div class="line">(Expected output from the <strong>aw2c</strong> or <em>gcc</em> compilers.)</div>
+</div>
+<div class="line"><tt class="docutils literal"><span class="pre">----stdout</span></tt></div>
+<div class="line-block">
+<div class="line">(Expected output from the program on the standard output stream.)</div>
+</div>
+<div class="line"><tt class="docutils literal"><span class="pre">----stderr</span></tt></div>
+<div class="line-block">
+<div class="line">(Expected output from the program to the standard error stream.)</div>
+</div>
+<div class="line"><tt class="docutils literal"><span class="pre">----exitcode</span></tt></div>
+<div class="line-block">
+<div class="line">(The program's expected exit code.)</div>
+</div>
+<div class="line"><tt class="docutils literal"><span class="pre">----end</span></tt></div>
+</div>
+<p>Any deviation from the text in the expected output sections fails the
+program.</p>
+<p>These sections must appear in order, but any section is optional.
+The default for an empty section is to expect no output, except for
+the <tt class="docutils literal">exitcode</tt> section, it defaults to 0.</p>
+</div>
+<div class="section" id="id5">
+<h2><a class="toc-backref" href="#id58">Copyrights</a></h2>
+<p><strong>Intention:</strong> <strong>aw2c</strong> is to be open source; <strong>aw2c</strong>'s run-time library may
+be compiled into any program; the fish is <em>mine</em>.</p>
+<p>The <strong>aw2c</strong> test suite contains <tt class="docutils literal">parser.alw</tt>, a parser generator by
+Hendrik Boom, it remains copyright to its author.  Otherwise,
+Copyright 2008 by Glyn Webster.</p>
+<p><strong>aw2c</strong> is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public and Lesser GNU General
+Public licenses as published by the Free Software Foundation, either
+version 3 of the License, or (at your option) any later version.</p>
+<p>aw2c is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public
+License along with aw2c.  If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+<p>The aw2c-fish logo is not covered by the GNU General Public Licences,
+it is simply copyright to Glyn Webster, 2008.</p>
+<img align="right" alt="glyn.png" class="align-right" src="glyn.png" />
+</div>
+</div>
+</div>
+</body>
+</html>

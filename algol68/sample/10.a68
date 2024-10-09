@@ -1,0 +1,10 @@
+
+'begin' # 8.10. scope error #
+    'int'n; read(n);
+    'begin'
+	'proc'('int')'int'f=('int'i)'int':(i=0|1|i*f(i-1));
+	'proc'g=('int'i)'int':(i=0|1|i*g(i-1));
+	print(g(n));print(f(n))
+    'end'
+'end'
+

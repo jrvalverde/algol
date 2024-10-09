@@ -1,0 +1,53 @@
+'begin' # 8.18. a package to implement compound lists #
+  'mode''atom'='union'('int','ref''list'),
+        'list'='struct'('atom'item,'ref''list'rest);
+  'proc'size=('ref''list'h)'int':
+	'if'h:=:'nil'
+	'then' 0
+	'else' size(rest'of'h)+(item'of'h|('int'):1,('ref''list'k):size(k))
+	'fi';
+  'proc'agree=('atom'a,b)'bool':
+	'case'a'in'
+	    ('int'i):(b|('int'j):i=j|'false'),
+	    ('ref''list'h1):(b|('ref''list'h2):eqn(h1,h2)|'false')
+	'esac';
+  'proc'eqn=('ref''list'h1,h2)'bool':
+  	'if'h1:=:'nil''then'h2:=:'nil'
+	'elif'h2:=:'nil''then''false'
+	'elif'agree(item'of'h1,item'of'h2)'then'eqn(rest'of'h1,rest'of'h2)
+	'else''false'
+	'fi';
+  'proc'delete=('ref''list'h,'atom'a)'ref''list':
+	'if'h:=:'nil''then''nil'
+	'elif'agree(item'of'h,a)'then'delete(rest'of'h,a)
+	'else'rest'of'h:=delete(rest'of'h,a);
+	    'case'item'of'h'in'
+		('ref''list'h1):item'of'h:=delete(h1,a)
+	    'esac';
+	    h
+	'fi';
+  'proc'out=('ref''list'h)'void':
+	'if'h:=:'nil''then'print(" ~ ")
+	'else'print("(");
+		(item'of'h|('int'i):print((blank,i)),('ref''list'h):out(h));
+		print("|");out(rest'of'h);print(")")
+	'fi';
+  'proc'copy=('ref''list'h)'ref''list':
+	'if'h:=:'nil''then''nil'
+	'else''heap''list':=((item'of'h|('int'i):i,('ref''list'h):copy(h)),
+			     copy(rest'of'h))
+	'fi';
+
+  'atom'one:=1, two:=2, zero:=0;
+  'list'l1,l2,l3,l4,l5,l6,l7;'list'head:=(one,l1);
+  l1:=(l2,l3); l2:=(two,l4); l3:=(one,l5); l4:=(l6,'nil');
+  l5:=(l7,'nil'); l6:=(one,'nil'); l7:=(one,'nil');
+       out(head); print((newline,"        size=",size(head),newline));
+  'ref''list'd1=delete(copy(head),one);
+       out(d1); print((newline,"        size=",size(d1),newline));
+  'ref''list'd2=delete(copy(head),two);
+       out(d2); print((newline,"        size=",size(d2),newline));
+  'ref''list'd3=delete(delete(head,l2),one);
+       out(d3); print((newline,"        size=",size(d3),newline))
+'end'
+

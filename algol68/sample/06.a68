@@ -1,0 +1,17 @@
+
+'begin' # 8.6. sample program for united modes #
+    'mode''rc'='union'('real','compl');
+    'proc'qe=('real'a,b,c)[]'rc':
+	#quadratic equation with real coefficients#
+	'if''real'd:=b^2-4*a*c;d>0
+	    'then'd:=sqrt(d)/2/a;(-b/2/a+d,-b/2/a-d)
+	'elif'd=0
+	    'then'-b/2/a
+	'else'd:=sqrt(-d)/2/a;'real're=-b/2/a;(re'i'd,re'i'-d)
+	'fi';
+    'while'
+	'real'a,b,c;print((newline,"the coefficients, please : "));
+	read((a,b,c)); a/=0
+    'do' print(qe(a,b,c))'od'
+'end'
+

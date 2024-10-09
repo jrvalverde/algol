@@ -1,0 +1,16 @@
+
+'begin' # 8.3. summation procedure #
+    'proc'sum=('int'n,'proc'('int')'real'p)'real':
+	'begin''real's:=0;
+	    'for'i'to'n'do's+:=p(i)'od';s
+	'end';
+    print((sum(10,('int'j)'real':sin(2*pi*j/10)),newline,
+           sum(10,('int'j)'real':cos(2*pi*j/10))));
+    print((sum(60,('int'j)'real':sin(2*pi*j/120))/60,newline,
+           sum(50,('int'j)'real':sin(2*pi*j/100))/50,newline,
+           sum(40,('int'j)'real':sin(2*pi*j/80))/40,newline,
+           sum(30,('int'j)'real':sin(2*pi*j/60))/30,newline,
+           sum(20,('int'j)'real':sin(2*pi*j/40))/20,newline,
+           sum(60,('int'j)'real':cos(2*pi*j/120))))
+'end'
+

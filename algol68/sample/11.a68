@@ -1,0 +1,16 @@
+
+'begin'  # 8.11. magic quadrangle #
+    'proc'Q=('int'n)'void':
+	('int'm=2*n+1;[0:m-1,0:m-1]'int'A;
+	 'int'x:=n,y:=m,i:=0;
+	 'to'm'do'x-:=1;y-:=2;
+	     'to'm'do'A[(x+:=1)%*m,(y+:=1)%*m]:=i+:=1'od''od';
+	 print((newline,"The rank: ",m,newline));
+	 'for'k'to'm'do''for'j'to'm'do'
+		print(((A[j-1,k-1]<10|"  "|" "),A[j-1,k-1]))'od';
+		print(newline)
+	'od'
+	);
+    Q(1);Q(3)
+'end'
+

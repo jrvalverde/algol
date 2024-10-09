@@ -1,0 +1,13 @@
+'begin' # 8.19. Euler summation #
+    'proc'euler=('proc'('int')'real'f,'real'eps,'int'tim)'real':
+	'begin''int'n:=1,t;'real'mn,ds:=eps;[1:16]'real'm;
+	  'real'sum:=(m[1]:=f(1))/2;
+	  'for'i'from'2'while'(t:=('abs'ds<eps|t+1|1))<=tim'do'
+	    mn:=f(i);
+	    'for'k'to'n'do'mn:=((ds:=mn)+m[k])/2;m[k]:=ds'od';
+	    sum+:=(ds:=('abs'mn<'abs'm[n]'and'n<16|n+:=1;m[n]:=mn;mn/2|mn))
+	  'od';
+	  sum
+	'end';
+    print(4*euler(('int'i)'real':('odd'i|1/(2*i-1)|-1/(2*i-1)),1e-6,2))
+'end'

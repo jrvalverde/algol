@@ -1,0 +1,63 @@
+.TH marst 1 "December 2000"
+.SH NAME
+marst \- Algol 60 to C Translator
+.SH SYNOPSIS
+.B marst
+[
+.B "options"
+]
+[
+.B "<input-file>"
+]
+.SH DESCRIPTION
+MARST is Algol 60 to C translator, based on the standard described in
+``Modified Report on the Algorithmic Language Algol 60''. (This document
+is an official IFIP standard. It is *not* a part of the MARST package.)
+.br
+If <stdin> is used as <input-file> the input has to be provides twice,
+because the translator reads the input twice.
+.br
+The output from the translator can be compiled to a native binary with
+the command
+.br
+.I "gcc -o <binary-filename> <output-filename> -lalgol -lm"
+.br
+and can be run by executing <binary-filename>.
+
+Please refer to the marst.info documentation for more about the MARST
+translator.
+.SH OPTIONS
+.TP
+.B "-d, --debug"
+Run translator in debug mode.
+.TP
+.B "-e nnn, --errormax nnn"
+Maximal error allowance (0 <= nnn <= 255); default: -e 0.
+.TP
+.B "-h, --help"
+Display help information and exit.
+.TP
+.B "-l nnn, --linewidth nnn"
+Desirable output line width (50 <= nnn <= 255); default: -l 72.
+.TP
+.B "-o filename, --output filename"
+Send output C code to filename.
+.TP
+.B "-t, --notimestamp"
+Suppress time stamp in output C code.
+.TP
+.B "-v, --version"
+Display translator version and exit.
+.TP
+.B "-w, --nowarn"
+Suppress all warning messages.
+.SH FILES
+ .../include/algol.h - C include file.
+.br
+ .../lib/libalgol.a - C library file.
+.SH SEE ALSO
+macvt(1), cc(1)
+.SH BUGS
+Please, report bugs to <bug-marst@gnu.org>
+.SH AUTHORS
+Andrew Makhorin <mao@mai2.rcnet.ru>, <mao@gnu.org>

@@ -1,0 +1,258 @@
+Basic block profiling finished on Fri Apr 23 22:30:32 2010
+
+File /u/jr/work/Tools/cmp.d, 36 basic blocks 
+
+    Block # 1: executed 1 time(s) address= 0x8048c74 function= main line= 13 file= cmp.c
+    Block # 2: executed 0 time(s) address= 0x8048cd1 function= main line= 24 file= cmp.c
+    Block # 3: executed 1 time(s) address= 0x8048cf4 function= main line= 28 file= cmp.c
+    Block # 4: executed 0 time(s) address= 0x8048d03 function= main line= 28 file= cmp.c
+    Block # 5: executed 1 time(s) address= 0x8048d10 function= main line= 29 file= cmp.c
+    Block # 6: executed 0 time(s) address= 0x8048d27 function= main line= 29 file= cmp.c
+    Block # 7: executed 1 time(s) address= 0x8048d30 function= main line= 31 file= cmp.c
+    Block # 8: executed 1 time(s) address= 0x8048d52 function= main line= 36 file= cmp.c
+    Block # 9: executed 0 time(s) address= 0x8048d78 function= main line= 33 file= cmp.c
+    Block #10: executed 0 time(s) address= 0x8048d90 function= main line= 41 file= cmp.c
+    Block #11: executed 0 time(s) address= 0x8048d9f function= main line= 42 file= cmp.c
+    Block #12: executed 0 time(s) address= 0x8048db8 function= main line= 43 file= cmp.c
+    Block #13: executed 0 time(s) address= 0x8048dc7 function= main line= 44 file= cmp.c
+    Block #14: executed 0 time(s) address= 0x8048de0 function= main line= 46 file= cmp.c
+    Block #15: executed 0 time(s) address= 0x8048e00 function= main line= 51 file= cmp.c
+    Block #16: executed 0 time(s) address= 0x8048e0f function= main line= 52 file= cmp.c
+    Block #17: executed 0 time(s) address= 0x8048e30 function= main line= 55 file= cmp.c
+    Block #18: executed 0 time(s) address= 0x8048e58 function= main line= 57 file= cmp.c
+    Block #19: executed 0 time(s) address= 0x8048e80 function= main line= 60 file= cmp.c
+    Block #20: executed 0 time(s) address= 0x8048ea8 function= main line= 62 file= cmp.c
+    Block #21: executed 0 time(s) address= 0x8048ed0 function= main line= 66 file= cmp.c
+    Block #22: executed 0 time(s) address= 0x8048f2a function= main line= 69 file= cmp.c
+    Block #23: executed 0 time(s) address= 0x8048f40 function= main line= 71 file= cmp.c
+    Block #24: executed 0 time(s) address= 0x8048f52 function= main line= 72 file= cmp.c
+    Block #25: executed 0 time(s) address= 0x8048f61 function= main line= 72 file= cmp.c
+    Block #26: executed 0 time(s) address= 0x8048f70 function= main line= 73 file= cmp.c
+    Block #27: executed 0 time(s) address= 0x8048f80 function= main line= 74 file= cmp.c
+    Block #28: executed 0 time(s) address= 0x8048fb8 function= main line= 74 file= cmp.c
+    Block #29: executed 0 time(s) address= 0x8048fcc function= main line= 74 file= cmp.c
+    Block #30: executed 0 time(s) address= 0x8048fd8 function= main line= 75 file= cmp.c
+    Block #31: executed 0 time(s) address= 0x8048ff0 function= main line= 76 file= cmp.c
+    Block #32: executed 0 time(s) address= 0x8048fff function= main line= 77 file= cmp.c
+    Block #33: executed 0 time(s) address= 0x8049028 function= main line= 80 file= cmp.c
+    Block #34: executed 0 time(s) address= 0x8049068 function= main line= 82 file= cmp.c
+    Block #35: executed 0 time(s) address= 0x8049088 function= main line= 84 file= cmp.c
+    Block #36: executed 0 time(s) address= 0x80490a0 function= main line= 85 file= cmp.c
+
+
+
+Basic block profiling finished on Fri Apr 23 22:30:32 2010
+
+File /u/jr/work/Tools/cmp.d, 36 basic blocks 
+
+    Block # 1: executed 1 time(s) address= 0x8048c74 function= main line= 13 file= cmp.c
+    Block # 2: executed 0 time(s) address= 0x8048cd1 function= main line= 24 file= cmp.c
+    Block # 3: executed 1 time(s) address= 0x8048cf4 function= main line= 28 file= cmp.c
+    Block # 4: executed 0 time(s) address= 0x8048d03 function= main line= 28 file= cmp.c
+    Block # 5: executed 1 time(s) address= 0x8048d10 function= main line= 29 file= cmp.c
+    Block # 6: executed 0 time(s) address= 0x8048d27 function= main line= 29 file= cmp.c
+    Block # 7: executed 1 time(s) address= 0x8048d30 function= main line= 31 file= cmp.c
+    Block # 8: executed 1 time(s) address= 0x8048d52 function= main line= 36 file= cmp.c
+    Block # 9: executed 0 time(s) address= 0x8048d78 function= main line= 33 file= cmp.c
+    Block #10: executed 0 time(s) address= 0x8048d90 function= main line= 41 file= cmp.c
+    Block #11: executed 0 time(s) address= 0x8048d9f function= main line= 42 file= cmp.c
+    Block #12: executed 0 time(s) address= 0x8048db8 function= main line= 43 file= cmp.c
+    Block #13: executed 0 time(s) address= 0x8048dc7 function= main line= 44 file= cmp.c
+    Block #14: executed 0 time(s) address= 0x8048de0 function= main line= 46 file= cmp.c
+    Block #15: executed 0 time(s) address= 0x8048e00 function= main line= 51 file= cmp.c
+    Block #16: executed 0 time(s) address= 0x8048e0f function= main line= 52 file= cmp.c
+    Block #17: executed 0 time(s) address= 0x8048e30 function= main line= 55 file= cmp.c
+    Block #18: executed 0 time(s) address= 0x8048e58 function= main line= 57 file= cmp.c
+    Block #19: executed 0 time(s) address= 0x8048e80 function= main line= 60 file= cmp.c
+    Block #20: executed 0 time(s) address= 0x8048ea8 function= main line= 62 file= cmp.c
+    Block #21: executed 0 time(s) address= 0x8048ed0 function= main line= 66 file= cmp.c
+    Block #22: executed 0 time(s) address= 0x8048f2a function= main line= 69 file= cmp.c
+    Block #23: executed 0 time(s) address= 0x8048f40 function= main line= 71 file= cmp.c
+    Block #24: executed 0 time(s) address= 0x8048f52 function= main line= 72 file= cmp.c
+    Block #25: executed 0 time(s) address= 0x8048f61 function= main line= 72 file= cmp.c
+    Block #26: executed 0 time(s) address= 0x8048f70 function= main line= 73 file= cmp.c
+    Block #27: executed 0 time(s) address= 0x8048f80 function= main line= 74 file= cmp.c
+    Block #28: executed 0 time(s) address= 0x8048fb8 function= main line= 74 file= cmp.c
+    Block #29: executed 0 time(s) address= 0x8048fcc function= main line= 74 file= cmp.c
+    Block #30: executed 0 time(s) address= 0x8048fd8 function= main line= 75 file= cmp.c
+    Block #31: executed 0 time(s) address= 0x8048ff0 function= main line= 76 file= cmp.c
+    Block #32: executed 0 time(s) address= 0x8048fff function= main line= 77 file= cmp.c
+    Block #33: executed 0 time(s) address= 0x8049028 function= main line= 80 file= cmp.c
+    Block #34: executed 0 time(s) address= 0x8049068 function= main line= 82 file= cmp.c
+    Block #35: executed 0 time(s) address= 0x8049088 function= main line= 84 file= cmp.c
+    Block #36: executed 0 time(s) address= 0x80490a0 function= main line= 85 file= cmp.c
+
+
+
+Basic block profiling finished on Fri Apr 23 22:30:40 2010
+
+File /u/jr/work/Tools/cmp.d, 36 basic blocks 
+
+    Block # 1: executed 1 time(s) address= 0x8048c74 function= main line= 13 file= cmp.c
+    Block # 2: executed 0 time(s) address= 0x8048cd1 function= main line= 24 file= cmp.c
+    Block # 3: executed 1 time(s) address= 0x8048cf4 function= main line= 28 file= cmp.c
+    Block # 4: executed 0 time(s) address= 0x8048d03 function= main line= 28 file= cmp.c
+    Block # 5: executed 1 time(s) address= 0x8048d10 function= main line= 29 file= cmp.c
+    Block # 6: executed 0 time(s) address= 0x8048d27 function= main line= 29 file= cmp.c
+    Block # 7: executed 1 time(s) address= 0x8048d30 function= main line= 31 file= cmp.c
+    Block # 8: executed 1 time(s) address= 0x8048d52 function= main line= 36 file= cmp.c
+    Block # 9: executed 0 time(s) address= 0x8048d78 function= main line= 33 file= cmp.c
+    Block #10: executed 0 time(s) address= 0x8048d90 function= main line= 41 file= cmp.c
+    Block #11: executed 0 time(s) address= 0x8048d9f function= main line= 42 file= cmp.c
+    Block #12: executed 0 time(s) address= 0x8048db8 function= main line= 43 file= cmp.c
+    Block #13: executed 0 time(s) address= 0x8048dc7 function= main line= 44 file= cmp.c
+    Block #14: executed 0 time(s) address= 0x8048de0 function= main line= 46 file= cmp.c
+    Block #15: executed 0 time(s) address= 0x8048e00 function= main line= 51 file= cmp.c
+    Block #16: executed 0 time(s) address= 0x8048e0f function= main line= 52 file= cmp.c
+    Block #17: executed 0 time(s) address= 0x8048e30 function= main line= 55 file= cmp.c
+    Block #18: executed 0 time(s) address= 0x8048e58 function= main line= 57 file= cmp.c
+    Block #19: executed 0 time(s) address= 0x8048e80 function= main line= 60 file= cmp.c
+    Block #20: executed 0 time(s) address= 0x8048ea8 function= main line= 62 file= cmp.c
+    Block #21: executed 0 time(s) address= 0x8048ed0 function= main line= 66 file= cmp.c
+    Block #22: executed 0 time(s) address= 0x8048f2a function= main line= 69 file= cmp.c
+    Block #23: executed 0 time(s) address= 0x8048f40 function= main line= 71 file= cmp.c
+    Block #24: executed 0 time(s) address= 0x8048f52 function= main line= 72 file= cmp.c
+    Block #25: executed 0 time(s) address= 0x8048f61 function= main line= 72 file= cmp.c
+    Block #26: executed 0 time(s) address= 0x8048f70 function= main line= 73 file= cmp.c
+    Block #27: executed 0 time(s) address= 0x8048f80 function= main line= 74 file= cmp.c
+    Block #28: executed 0 time(s) address= 0x8048fb8 function= main line= 74 file= cmp.c
+    Block #29: executed 0 time(s) address= 0x8048fcc function= main line= 74 file= cmp.c
+    Block #30: executed 0 time(s) address= 0x8048fd8 function= main line= 75 file= cmp.c
+    Block #31: executed 0 time(s) address= 0x8048ff0 function= main line= 76 file= cmp.c
+    Block #32: executed 0 time(s) address= 0x8048fff function= main line= 77 file= cmp.c
+    Block #33: executed 0 time(s) address= 0x8049028 function= main line= 80 file= cmp.c
+    Block #34: executed 0 time(s) address= 0x8049068 function= main line= 82 file= cmp.c
+    Block #35: executed 0 time(s) address= 0x8049088 function= main line= 84 file= cmp.c
+    Block #36: executed 0 time(s) address= 0x80490a0 function= main line= 85 file= cmp.c
+
+
+
+Basic block profiling finished on Fri Apr 23 22:30:40 2010
+
+File /u/jr/work/Tools/cmp.d, 36 basic blocks 
+
+    Block # 1: executed 1 time(s) address= 0x8048c74 function= main line= 13 file= cmp.c
+    Block # 2: executed 0 time(s) address= 0x8048cd1 function= main line= 24 file= cmp.c
+    Block # 3: executed 1 time(s) address= 0x8048cf4 function= main line= 28 file= cmp.c
+    Block # 4: executed 0 time(s) address= 0x8048d03 function= main line= 28 file= cmp.c
+    Block # 5: executed 1 time(s) address= 0x8048d10 function= main line= 29 file= cmp.c
+    Block # 6: executed 0 time(s) address= 0x8048d27 function= main line= 29 file= cmp.c
+    Block # 7: executed 1 time(s) address= 0x8048d30 function= main line= 31 file= cmp.c
+    Block # 8: executed 1 time(s) address= 0x8048d52 function= main line= 36 file= cmp.c
+    Block # 9: executed 0 time(s) address= 0x8048d78 function= main line= 33 file= cmp.c
+    Block #10: executed 0 time(s) address= 0x8048d90 function= main line= 41 file= cmp.c
+    Block #11: executed 0 time(s) address= 0x8048d9f function= main line= 42 file= cmp.c
+    Block #12: executed 0 time(s) address= 0x8048db8 function= main line= 43 file= cmp.c
+    Block #13: executed 0 time(s) address= 0x8048dc7 function= main line= 44 file= cmp.c
+    Block #14: executed 0 time(s) address= 0x8048de0 function= main line= 46 file= cmp.c
+    Block #15: executed 0 time(s) address= 0x8048e00 function= main line= 51 file= cmp.c
+    Block #16: executed 0 time(s) address= 0x8048e0f function= main line= 52 file= cmp.c
+    Block #17: executed 0 time(s) address= 0x8048e30 function= main line= 55 file= cmp.c
+    Block #18: executed 0 time(s) address= 0x8048e58 function= main line= 57 file= cmp.c
+    Block #19: executed 0 time(s) address= 0x8048e80 function= main line= 60 file= cmp.c
+    Block #20: executed 0 time(s) address= 0x8048ea8 function= main line= 62 file= cmp.c
+    Block #21: executed 0 time(s) address= 0x8048ed0 function= main line= 66 file= cmp.c
+    Block #22: executed 0 time(s) address= 0x8048f2a function= main line= 69 file= cmp.c
+    Block #23: executed 0 time(s) address= 0x8048f40 function= main line= 71 file= cmp.c
+    Block #24: executed 0 time(s) address= 0x8048f52 function= main line= 72 file= cmp.c
+    Block #25: executed 0 time(s) address= 0x8048f61 function= main line= 72 file= cmp.c
+    Block #26: executed 0 time(s) address= 0x8048f70 function= main line= 73 file= cmp.c
+    Block #27: executed 0 time(s) address= 0x8048f80 function= main line= 74 file= cmp.c
+    Block #28: executed 0 time(s) address= 0x8048fb8 function= main line= 74 file= cmp.c
+    Block #29: executed 0 time(s) address= 0x8048fcc function= main line= 74 file= cmp.c
+    Block #30: executed 0 time(s) address= 0x8048fd8 function= main line= 75 file= cmp.c
+    Block #31: executed 0 time(s) address= 0x8048ff0 function= main line= 76 file= cmp.c
+    Block #32: executed 0 time(s) address= 0x8048fff function= main line= 77 file= cmp.c
+    Block #33: executed 0 time(s) address= 0x8049028 function= main line= 80 file= cmp.c
+    Block #34: executed 0 time(s) address= 0x8049068 function= main line= 82 file= cmp.c
+    Block #35: executed 0 time(s) address= 0x8049088 function= main line= 84 file= cmp.c
+    Block #36: executed 0 time(s) address= 0x80490a0 function= main line= 85 file= cmp.c
+
+
+
+Basic block profiling finished on Fri Apr 23 22:30:49 2010
+
+File /u/jr/work/Tools/cmp.d, 36 basic blocks 
+
+    Block # 1: executed 1 time(s) address= 0x8048c74 function= main line= 13 file= cmp.c
+    Block # 2: executed 0 time(s) address= 0x8048cd1 function= main line= 24 file= cmp.c
+    Block # 3: executed 1 time(s) address= 0x8048cf4 function= main line= 28 file= cmp.c
+    Block # 4: executed 0 time(s) address= 0x8048d03 function= main line= 28 file= cmp.c
+    Block # 5: executed 1 time(s) address= 0x8048d10 function= main line= 29 file= cmp.c
+    Block # 6: executed 0 time(s) address= 0x8048d27 function= main line= 29 file= cmp.c
+    Block # 7: executed 1 time(s) address= 0x8048d30 function= main line= 31 file= cmp.c
+    Block # 8: executed 1 time(s) address= 0x8048d52 function= main line= 36 file= cmp.c
+    Block # 9: executed 0 time(s) address= 0x8048d78 function= main line= 33 file= cmp.c
+    Block #10: executed 0 time(s) address= 0x8048d90 function= main line= 41 file= cmp.c
+    Block #11: executed 0 time(s) address= 0x8048d9f function= main line= 42 file= cmp.c
+    Block #12: executed 0 time(s) address= 0x8048db8 function= main line= 43 file= cmp.c
+    Block #13: executed 0 time(s) address= 0x8048dc7 function= main line= 44 file= cmp.c
+    Block #14: executed 0 time(s) address= 0x8048de0 function= main line= 46 file= cmp.c
+    Block #15: executed 0 time(s) address= 0x8048e00 function= main line= 51 file= cmp.c
+    Block #16: executed 0 time(s) address= 0x8048e0f function= main line= 52 file= cmp.c
+    Block #17: executed 0 time(s) address= 0x8048e30 function= main line= 55 file= cmp.c
+    Block #18: executed 0 time(s) address= 0x8048e58 function= main line= 57 file= cmp.c
+    Block #19: executed 0 time(s) address= 0x8048e80 function= main line= 60 file= cmp.c
+    Block #20: executed 0 time(s) address= 0x8048ea8 function= main line= 62 file= cmp.c
+    Block #21: executed 0 time(s) address= 0x8048ed0 function= main line= 66 file= cmp.c
+    Block #22: executed 0 time(s) address= 0x8048f2a function= main line= 69 file= cmp.c
+    Block #23: executed 0 time(s) address= 0x8048f40 function= main line= 71 file= cmp.c
+    Block #24: executed 0 time(s) address= 0x8048f52 function= main line= 72 file= cmp.c
+    Block #25: executed 0 time(s) address= 0x8048f61 function= main line= 72 file= cmp.c
+    Block #26: executed 0 time(s) address= 0x8048f70 function= main line= 73 file= cmp.c
+    Block #27: executed 0 time(s) address= 0x8048f80 function= main line= 74 file= cmp.c
+    Block #28: executed 0 time(s) address= 0x8048fb8 function= main line= 74 file= cmp.c
+    Block #29: executed 0 time(s) address= 0x8048fcc function= main line= 74 file= cmp.c
+    Block #30: executed 0 time(s) address= 0x8048fd8 function= main line= 75 file= cmp.c
+    Block #31: executed 0 time(s) address= 0x8048ff0 function= main line= 76 file= cmp.c
+    Block #32: executed 0 time(s) address= 0x8048fff function= main line= 77 file= cmp.c
+    Block #33: executed 0 time(s) address= 0x8049028 function= main line= 80 file= cmp.c
+    Block #34: executed 0 time(s) address= 0x8049068 function= main line= 82 file= cmp.c
+    Block #35: executed 0 time(s) address= 0x8049088 function= main line= 84 file= cmp.c
+    Block #36: executed 0 time(s) address= 0x80490a0 function= main line= 85 file= cmp.c
+
+
+
+Basic block profiling finished on Fri Apr 23 22:30:49 2010
+
+File /u/jr/work/Tools/cmp.d, 36 basic blocks 
+
+    Block # 1: executed 1 time(s) address= 0x8048c74 function= main line= 13 file= cmp.c
+    Block # 2: executed 0 time(s) address= 0x8048cd1 function= main line= 24 file= cmp.c
+    Block # 3: executed 1 time(s) address= 0x8048cf4 function= main line= 28 file= cmp.c
+    Block # 4: executed 0 time(s) address= 0x8048d03 function= main line= 28 file= cmp.c
+    Block # 5: executed 1 time(s) address= 0x8048d10 function= main line= 29 file= cmp.c
+    Block # 6: executed 0 time(s) address= 0x8048d27 function= main line= 29 file= cmp.c
+    Block # 7: executed 1 time(s) address= 0x8048d30 function= main line= 31 file= cmp.c
+    Block # 8: executed 1 time(s) address= 0x8048d52 function= main line= 36 file= cmp.c
+    Block # 9: executed 0 time(s) address= 0x8048d78 function= main line= 33 file= cmp.c
+    Block #10: executed 0 time(s) address= 0x8048d90 function= main line= 41 file= cmp.c
+    Block #11: executed 0 time(s) address= 0x8048d9f function= main line= 42 file= cmp.c
+    Block #12: executed 0 time(s) address= 0x8048db8 function= main line= 43 file= cmp.c
+    Block #13: executed 0 time(s) address= 0x8048dc7 function= main line= 44 file= cmp.c
+    Block #14: executed 0 time(s) address= 0x8048de0 function= main line= 46 file= cmp.c
+    Block #15: executed 0 time(s) address= 0x8048e00 function= main line= 51 file= cmp.c
+    Block #16: executed 0 time(s) address= 0x8048e0f function= main line= 52 file= cmp.c
+    Block #17: executed 0 time(s) address= 0x8048e30 function= main line= 55 file= cmp.c
+    Block #18: executed 0 time(s) address= 0x8048e58 function= main line= 57 file= cmp.c
+    Block #19: executed 0 time(s) address= 0x8048e80 function= main line= 60 file= cmp.c
+    Block #20: executed 0 time(s) address= 0x8048ea8 function= main line= 62 file= cmp.c
+    Block #21: executed 0 time(s) address= 0x8048ed0 function= main line= 66 file= cmp.c
+    Block #22: executed 0 time(s) address= 0x8048f2a function= main line= 69 file= cmp.c
+    Block #23: executed 0 time(s) address= 0x8048f40 function= main line= 71 file= cmp.c
+    Block #24: executed 0 time(s) address= 0x8048f52 function= main line= 72 file= cmp.c
+    Block #25: executed 0 time(s) address= 0x8048f61 function= main line= 72 file= cmp.c
+    Block #26: executed 0 time(s) address= 0x8048f70 function= main line= 73 file= cmp.c
+    Block #27: executed 0 time(s) address= 0x8048f80 function= main line= 74 file= cmp.c
+    Block #28: executed 0 time(s) address= 0x8048fb8 function= main line= 74 file= cmp.c
+    Block #29: executed 0 time(s) address= 0x8048fcc function= main line= 74 file= cmp.c
+    Block #30: executed 0 time(s) address= 0x8048fd8 function= main line= 75 file= cmp.c
+    Block #31: executed 0 time(s) address= 0x8048ff0 function= main line= 76 file= cmp.c
+    Block #32: executed 0 time(s) address= 0x8048fff function= main line= 77 file= cmp.c
+    Block #33: executed 0 time(s) address= 0x8049028 function= main line= 80 file= cmp.c
+    Block #34: executed 0 time(s) address= 0x8049068 function= main line= 82 file= cmp.c
+    Block #35: executed 0 time(s) address= 0x8049088 function= main line= 84 file= cmp.c
+    Block #36: executed 0 time(s) address= 0x80490a0 function= main line= 85 file= cmp.c
+
+
+

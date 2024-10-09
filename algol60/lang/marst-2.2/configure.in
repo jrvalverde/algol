@@ -1,0 +1,12 @@
+dnl /* configure.in */
+
+dnl Process this file with autoconf to produce a configure script.
+
+AC_INIT(marst.c)
+
+AC_PROG_INSTALL
+AC_PROG_CC
+
+AC_OUTPUT(Makefile)
+
+dnl /* eof */

@@ -1,0 +1,12 @@
+
+
+'begin' # 8.2. greatest common divisor #
+  'proc'gcd=('int'a,b)'int':
+     ( b=0 |'abs'a | gcd(b,a'mod'b) );
+  'while'
+     'int'a,b; print((newline, "two integers please : "));
+      read((a,b)); a>0'or'b>0'do'
+	print((blank*15,"gcd of ",a,"and ",b,"is ",gcd(a,b)))
+  'od'
+'end'
+

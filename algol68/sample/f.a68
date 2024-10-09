@@ -1,0 +1,83 @@
+( #
+.nf
+    Strassen's O(n^log2(7)) matrix multiplication algorithm
+    L.Allison  wacsvax  UWA  26 June 1984
+    Dept. Computer Science, Monash University, Australia #
+
+'op' * = ([,] 'int' a,b) [,]'int':
+ 'if' 'int' all=1 'upb' a; all = 1 'lwb' a 'then' # 1x1 #
+   a[1,1]*b[1,1]
+ 'else' # nxn #
+   'int' half = all % 2;                      # i.e. all div 2 #
+
+   [,]'int' a11=a[1:half,1:half],             # i.e. top left quarter of a #
+	  a12=a[1:half,half+1:all],         # top right #
+	  a21=a[half+1:all,1:half],         # etc. #
+	  a22=a[half+1:all,half+1:all],
+
+	  b11=b[1:half,1:half],
+	  b12=b[1:half,half+1:all],
+	  b21=b[half+1:all,1:half],
+	  b22=b[half+1:all,half+1:all];
+
+   'loc'[1:all,1:all]'int' c;                   # c will become a*b #
+   'ref'[,]'int' c11=c[1:half,1:half],
+	     c12=c[1:half,half+1:all],
+	     c21=c[half+1:all,1:half],
+	     c22=c[half+1:all,half+1:all];
+
+   [,]'int' m1=(a12-a22)*(b21+b22),           # NB. only 7 [,]*[,] #
+          m2=(a11+a22)*(b11+b22),
+          m3=(a11-a21)*(b11+b12),
+          m4=(a11+a12)*b22,
+          m5=a11*(b12-b22),
+          m6=a22*(b21-b11),
+          m7=(a21+a22)*b11;
+
+   c11:=m1+m2-m4+m6;
+   c12:=m4+m5;
+   c21:=m6+m7;
+   c22:=m2-m3+m5-m7;
+
+   c                                        # i.e. return c #
+ 'fi';
+
+
+'op' + = ([,]'int' a,b)[,]'int':
+ ( [1:1 'upb' a, 1:2 'upb' a]'int' c;
+   'for' i 'to' 1 'upb' a 'do'
+      'for' j 'to' 2 'upb' a 'do'
+	 c[i,j]:=a[i,j]+b[i,j]
+      'od'
+   'od';
+   c
+ );
+
+'op' - = ([,]'int' a,b)[,]'int':
+ ( [1:1 'upb' a, 1:2 'upb' a]'int' c;
+   'for' i 'to' 1 'upb' a 'do'
+      'for' j 'to' 2 'upb' a 'do'
+         c[i,j]:=a[i,j]-b[i,j]
+      'od'
+   'od';
+   c
+ );
+
+'proc' show = ([,]'int' a)'void':
+ ( print(newline);
+   'for' i 'to' 1 'upb' a 'do'
+      'for' j 'to' 2 'upb' a 'do'
+         print( a[i,j] )
+      'od';
+      print(newline)
+   'od';
+   print(newline)
+ );
+
+
+[,]'int' a=((1,2,3,4),(5,6,7,8),(9,10,11,12),(13,14,15,16)),  # a little test #
+       b=((17,18,19,20),(21,22,23,24),(25,26,27,28),(29,30,31,32));
+
+show(a); show(b); show(a*b)
+)
+

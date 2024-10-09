@@ -1,0 +1,51 @@
+'begin' # Algol-68 primes numbers, functional style   27/6/85 #
+      # L.Allison Computer Science, University of Western Australia #
+      #           Computer Science, Monash University, Australia #
+
+   'proc' error = ('string' s)'void':
+      'begin' print(( newline, " error:", s, newline));
+            'goto' stop
+      'end';
+   
+   'mode' 'list' = 'ref' 'node';
+   'mode' 'node' = 'struct'('int' h, 'list' t);
+
+   'proc' cons = ('int' n, 'list' l)'list':
+      'heap' 'node' := (n,l);
+
+   'proc' hd = ('list' l)'int':
+      'if' l :=: 'nil' 'then' error(" hd nil"); 'skip'  'else' h 'of' l 'fi';
+
+   'proc' tl = ('list' l)'list':
+      'if' l :=: 'nil' 'then' error(" tl nil"); 'skip'  'else' t 'of' l 'fi';
+
+   'proc' show = ('list' l)'void':
+      'if' l :/=: 'nil' 'then' print((" ",hd(l))); show(tl(l)) 'fi';
+
+   'proc' to = ('int' n)'list':
+      'begin' 'proc' f = ('int' m,n)'list':
+               'if' m>n 'then' 'nil' 'else' cons(m,f(m+1,n))'fi';
+	
+	    f(1,n)
+      'end';
+
+   'proc' filter = ('proc'('int')'bool' p, 'list' l)'list':
+      'if' l :=: 'nil' 'then' 'nil'
+      'elif' p(hd(l)) 'then' cons(hd(l), filter(p,tl(l)))
+      'else' filter(p, tl(l))
+      'fi';
+
+   'proc' sieve = ('list' l)'list':
+      'if' l :=: 'nil' 'then' 'nil'
+      'else' 'proc' notmultiple = ('int' n)'bool':
+              n %* (hd(l)) /= 0;
+
+	   cons( hd(l), sieve( filter(notmultiple,tl(l)) ))
+      'fi';
+
+   'proc' primes = ('int' n)'list':
+      sieve(tl(to(n)));
+
+   show( primes(100) ) 
+'end'
+

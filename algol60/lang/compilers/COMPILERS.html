@@ -1,0 +1,547 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.61 [en] (Win95; I) [Netscape]">
+   <title>Compilers &amp; Interpreters</title>
+</head>
+<body text="#000000" bgcolor="#CCCCCC" link="#0000EE" vlink="#551A8B" alink="#FF0000"><script type="text/javascript" src="http://hb.lycos.com/hb.js"></script>
+<script type="text/javascript" src="http://ratings.lycos.com/ratings/lycosRating.js.php"></script>
+<script type="text/javascript"><!--//--><![CDATA[//><!--
+var cm_role = "live";
+var cm_host = "angelfire.lycos.com";
+var cm_taxid = "/memberembedded";
+var angelfire_member_name = "ar/CompiladoresUCSE";
+var angelfire_member_page = "ar/CompiladoresUCSE/COMPILERS.html";
+var angelfire_ratings_hash = "1272056418:cf81d70caad52f2cbd15a13325826e9f";
+
+var lycos_ad_category = {"dmoz":"society\/relationships","ontarget":"&CAT=family%20and%20lifestyles&L2CAT=relationships","find_what":"how to websites"};
+
+var lycos_ad_remote_addr = "83.43.239.65";
+var lycos_ad_www_server = "www.angelfire.lycos.com";
+var edit_site_url = "www.angelfire.lycos.com/landing/landing.tmpl?utm_source=house&utm_medium=landingpage&utm_campaign=toolbarlink";
+var lycos_ad_track_small = "http://www.angelfire.com/doc/images/track/ot_smallframe.gif?rand=998271";
+var lycos_ad_track_served = "http://www.angelfire.com/doc/images/track/ot_adserved.gif?rand=998271";
+//--><!]]></script>
+<script type="text/javascript" src="http://scripts.lycos.com/catman/init.js"></script>
+<script type="text/javascript" src="http://www.angelfire.com/sys/ad/code-start.js"></script>
+<script type="text/javascript" src="http://www.angelfire.com/sys/ad/code-middle.js"></script>
+<script type="text/javascript" src="http://www.angelfire.com/sys/ad/code-end.js"></script>
+<noscript>
+<img src="http://www.angelfire.com/doc/images/track/ot_noscript.gif?rand=998271" alt="" width="1" height="1" />
+ <!-- BEGIN STANDARD TAG - 728 x 90 - Lycos - Angelfire Fallthrough - DO NOT MODIFY -->
+ <iframe frameborder="0" marginwidth="0" marginheight="0" scrolling="no" width="728" height="90" src="http://ad.yieldmanager.com/st?ad_type=iframe&ad_size=728x90&section=280303"></iframe>
+ <!-- END TAG -->
+</noscript>
+
+
+<div align=right><a NAME="Index"></a><font face="Arial,Helvetica"><font size=-2>Visit
+the <a href="http://www.angelfire.com/ar/svcf/SLICING.html">Program Slicing</a>
+page</font></font></div>
+
+<center>
+<hr SIZE=4 WIDTH="100%"></center>
+
+<table BORDER COLS=1 WIDTH="100%" BGCOLOR="#3366FF" >
+<tr>
+<td>
+<center><b><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=+3>Compilers
+&amp; Interpreters</font></font></font></b>
+<br><font face="Arial,Helvetica"><font color="#FFFFFF"><font size=-2>Unofficial
+page of the course "Compiladores e Int&eacute;rpretes" (Compilers &amp;
+Interpreters Construction)
+<a href="http://www.ucse.edu.ar">UCSE</a> (Argentina).</font></font></font>
+<br><font face="Arial,Helvetica"><font color="#FFFFFF"><b><font size=-2>Last
+Actualized&nbsp; 07/04/2000 - </font></b><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/COMPILADORES.html">Versi&oacute;n
+en Espa&ntilde;ol</a></font></font></font></center>
+</td>
+</tr>
+</table>
+
+<hr SIZE=4 WIDTH="100%">
+<table BORDER COLS=2 WIDTH="100%" BGCOLOR="#FFFFFF" >
+<tr>
+<td>
+<center>
+<h4>
+<font face="Arial,Helvetica">INDEX</font></h4></center>
+
+<li>
+<font face="Arial,Helvetica"><a href="#Trabajos Finales">Course's Final
+Works</a> <a href="#1995">1995</a>,
+<a href="#1996">1996</a>, <a href="#1997">1997</a>,
+<a href="#1998">1998</a>,<a href="#1999">1999</a></font></li>
+
+<li>
+<b><font face="Arial,Helvetica"><a href="#Software para la construcción de">Compiler
+construction software</a></font></b></li>
+
+<li>
+<b><font face="Arial,Helvetica"><a href="#Gramáticas yacc-keables">"yacc-keables"
+grammars for Ada, C, Pascal, etc...</a></font></b></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="#Links to Compiler Construction">Links
+to Compiler Construction Courses</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="#Enlaces (Links) relacionados con Compiladores">Links
+related to Compilers Construction</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="#Links to sites that points to this">Links
+to sites that points to this one</a>.&nbsp;</font></li>
+</td>
+
+<td>
+<center><b><i><font face="Arial,Helvetica"><font size=-1>What's <blink><font color="#FF0000">new</font></blink>
+in this page</font></font></i></b>
+<p><font face="Arial,Helvetica"><font size=-1>* New section: <a href="#Links to sites that points to this">Links
+to sites that points to this one</a>.&nbsp;</font></font></center>
+
+<p><font face="Arial,Helvetica"><font size=-1>Since 23/01/2000:</font></font>
+<center><font face="Arial,Helvetica"><font size=-1>* <b><a href="#Gramáticas en BNF">New,
+comlete, EBNF COBOL grammar!!</a></b>.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>* <a href="#Gramáticas en BNF">BNF
+HTML 3.2 grammar !!</a></font></font>
+<br><font face="Arial,Helvetica">* <font size=-1><a href="#Gramáticas yacc-keables">ALGOL
+60 yacc-keable grammar !!</a></font></font>
+<br><font face="Arial,Helvetica"><font size=-1>* New section: <a href="#Links to Compiler Construction">Links
+to Compiler Construction Courses</a></font></font></center>
+
+<p><font face="Arial,Helvetica"><font size=-1>Comming soon:</font></font>
+<center><font face="Arial,Helvetica"><font size=-1>* A grammar editor &amp;
+transformer</font></font></center>
+</td>
+</tr>
+</table>
+
+<p>
+<hr SIZE=4 WIDTH="100%">
+<br><a NAME="Trabajos Finales"></a><b><font face="Arial,Helvetica">Course's
+Final Works</font></b>
+<p><a NAME="1995"></a><b><font face="Arial,Helvetica">1995</font></b>
+<ul>
+<li>
+<font face="Arial,Helvetica"><b>SmallTalk to Delphi Translator</b>.<i>
+Jimenez, Julian, et al.</i></font></li>
+</ul>
+<a NAME="1996"></a><b><font face="Arial,Helvetica">1996</font></b>
+<ul>
+<li>
+<font face="Arial,Helvetica"><b>LBOP </b>- A multitarget (PC &amp; Macintosh)
+compiler optimizer. <i>Biazutti, Ola &amp; Petersen</i>.</font></li>
+</ul>
+<a NAME="1997"></a><b><font face="Arial,Helvetica">1997</font></b>
+<ul>
+<li>
+<font face="Arial,Helvetica"><b>Kakuy </b>- Chapin (or&nbsp; Nassi-Schneiderman)
+diagrams from ANSI C programs. <i>Colman, Villalba &amp; Vittar</i>.</font></li>
+
+<li>
+<font face="Arial,Helvetica"><b>InspectorC </b>- A tool that generates
+white box test cases and information (like ciclomatic complexity, call
+tree, variable usage, etc.) from ANSI C programs. <i>Arga&ntilde;ar&aacute;z,
+Cavadini &amp; Tomasini</i>.</font></li>
+</ul>
+<a NAME="1998"></a><b><font face="Arial,Helvetica">1998</font></b>
+<ul>
+<li>
+<font face="Arial,Helvetica"><b>Grammar Editor. </b>Gola, Hern&aacute;ndez
+&amp; Paiola.</font></li>
+
+<li>
+<font face="Arial,Helvetica"><b>Software Metrics for Java programs. </b>Jim&eacute;nez
+&amp; Teseyra.</font></li>
+
+<li>
+<font face="Arial,Helvetica"><b>CFGs and Dominator Trees Generator for
+multiple languages</b> (C, Pascal, BASIC &amp; Modula 2). Kurrle</font></li>
+
+<li>
+<font face="Arial,Helvetica"><b>Pascal to POV translator</b>.</font></li>
+
+<li>
+<b><font face="Arial,Helvetica">Pascal to <a href="#1996">LBOP</a>'s cuads
+translator.</font></b></li>
+</ul>
+<a NAME="1999"></a><b><font face="Arial,Helvetica">1999</font></b>
+<ul>
+<li>
+<b><font face="Arial,Helvetica">Turbo Pascal to Intel 8051 and Microchip
+PIC assemblers compiler.</font></b></li>
+</ul>
+<font face="Arial,Helvetica"><font size=-1>If you want more information
+about any of these works please mail to <a href="mailto:compiladoresucse@hotmail.com">compiladoresucse@hotmail.com</a></font></font>
+<br>&nbsp;
+<div align=right><font face="Arial,Helvetica"><font size=-2><a href="#Index">Back
+to Index</a></font></font></div>
+
+<hr SIZE=4 WIDTH="100%">
+<br><a NAME="Software para la construcción de"></a><b><font face="Arial,Helvetica">Compiler
+Construction Software</font></b>
+<br>&nbsp;
+<li>
+<font face="Arial,Helvetica">Lexers &amp; Parsers Generators:</font></li>
+
+<ul>
+<li>
+<font face="Arial,Helvetica">Lex y Yacc (C, <a href="http://www.musikwissenschaft.uni-mainz.de/~ag/tply/tply.html">Turbo
+Pascal y FPK</a>)</font></li>
+
+<li>
+<font face="Arial,Helvetica">Flex-Bison (<a href="ftp://sunsite.unc.edu/pub/Linux/">Linux
+</a>-
+<a href="ftp://prep.ai.mit.edu/pub/gnu">DOS</a>)</font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.siber.com/btyacc/">BTYacc</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="../ftp.cs.berkeley.edu/ucb/4bsd/byacc.tar.z">BYacc</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.thinkage.on.ca/shareware/yay/files.html">YAY</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.cix.co.uk/~phil-stearns/">Parser
+Generator</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.first.gmd.de/cocktail/">COCKTAIL</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.cs.colorado.edu/~eliuser/">ELI</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.first.gmd.de/gentle/">GENTLE</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.ANTLR.org/pccts133.html">PCCTS</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://cs.ru.ac.za/homes/cspt/cocor.htm">COCO(R)</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.math.tu-dresden.de/wir/depot4/Depot4.html">Depot4</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.cs.vu.nl/~ceriel/LLgen.html">LLGEN</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.comlab.ox.ac.uk/archive/redo/precc.html">PRECC</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.dcs.rhbnc.ac.uk/research/languages/rdp.shtml">RDP</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.sand-stone.com/prod02.htm">VISUALPARSE++</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.parsifalsoft.com/">AnaGram</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.iit.edu/~tc/toolsfor.htm">TCLL1</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.research.philips.com/generalinfo/special/elegant/elegant.html">Elegant</a>&nbsp;
+(link provided by David Riemens)</font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.cocolsoft.com.au">Cogencee</a>&nbsp;
+(link provided by Peter Evans)</font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.programmar.com">ProGrammar
+</a>(ink
+provided by&nbsp; Norm Wilson)</font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www2.informatik.unibw-muenchen.de/People/lothar/jaccie.html">JACCIE</a></font></li>
+</ul>
+<font face="Arial,Helvetica"><font size=-1>A more complete list of tools
+for compiler writers is available at </font><a href="http://www.first.gmd.de/cogent/catalog/index.html">Catalog
+of Compiler Construction Tools</a></font>
+<p><font face="Arial,Helvetica"><font size=-1>If any link is out of date,
+please <a href="mailto:compiladoresucse@hotmail.com.ar">mail me</a>.</font></font>
+<div align=right><font face="Arial,Helvetica"><font size=-2><a href="#Index">Back
+to Index</a></font></font></div>
+
+<hr SIZE=4 WIDTH="100%">
+<br><a NAME="Gramáticas yacc-keables"></a><b><font face="Arial,Helvetica">"Yacc-keable"
+Grammars</font></b>
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER WIDTH="59%" >
+<tr>
+<td>
+<center><b><font face="Arial,Helvetica">Language</font></b></center>
+</td>
+
+<td>
+<center><b><font face="Arial,Helvetica">File</font></b></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Ada</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/ADA.zip">ADA.zip</a>
+(14 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">ALGOL 60</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/ALGOL60.zip">ALGOL60.zip</a>
+(3 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">C</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/C.zip">C.zip</a>
+(22 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">C++</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/CPP.zip">Cpp.zip</a>
+(26 Kb)&nbsp;</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">COBOL</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/COBOL.zip">COBOL.zip</a>
+(20kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Pascal</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/PASCAL.zip">Pascal.zip</a>
+(15 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Java</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/JAVA.zip">Java.zip</a>
+(14 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Matlab</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/MATLAB.zip">Matlab.zip</a>
+(3 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Grail</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/GRAIL.zip">Grail.zip</a>
+(3 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Delphi</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/DELPHI.zip">Delphi.zip</a>
+(5 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Yacc</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/YACC.zip">Yacc.zip</a>
+(6 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">ftp</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/FTP.zip">ftp.zip</a>
+(8 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Modula-2</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="mailto:compiladoresucse@hotmail.com">compiladoresucse@hotmail.com</a></font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">Oberon</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="mailto:compiladoresucse@hotmail.com">compiladoresucse@hotmail.com</a></font></font></center>
+</td>
+</tr>
+</table></center>
+
+<p><a NAME="Gramáticas en BNF"></a><b><font face="Arial,Helvetica">BNF
+Grammars</font></b>
+<br>&nbsp;
+<center><table BORDER COLS=2 WIDTH="59%" >
+<tr>
+<td><font face="Arial,Helvetica">HTML 3.2</font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/HTML.zip">html.zip</a>
+(8 Kb)</font></font></center>
+</td>
+</tr>
+
+<tr>
+<td><font face="Arial,Helvetica">COBOL <b><blink><font color="#FF0000"><font size=-2>New!</font></font></blink></b></font></td>
+
+<td>
+<center><font face="Arial,Helvetica"><font size=-1><a href="http://www.angelfire.com/ar/CompiladoresUCSE/images/cobol2.zip">cobol2.zip</a>
+(51 kb)</font></font></center>
+</td>
+</tr>
+</table></center>
+
+<p><font face="Arial,Helvetica"><font size=-1>If you have problems to download
+any file please <a href="mailto:compiladoresucse@hotmail.com.ar">mail me</a>.</font></font>
+<br><font face="Arial,Helvetica"><font size=-1>You will need <a href="http://www.winzip.com">WinZip</a>
+(or some compatible aplication) to extract the files.</font></font>
+<br>&nbsp;
+<div align=right><font face="Arial,Helvetica"><font size=-2><a href="#Index">Back
+to Index</a></font></font></div>
+
+<hr SIZE=4 WIDTH="100%">
+<br><a NAME="Enlaces (Links) relacionados con Compiladores"></a><b><font face="Arial,Helvetica">Links
+related to Compilers Construction</font></b>
+<ul>
+<li>
+<font face="Arial,Helvetica"><a href="http://www.first.gmd.de/cogent/catalog/index.html">Catalog
+of Compiler Construction Tools</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.idiom.com/free-compilers/">Catalog
+of Free Compilers and Interpreters</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://iecc.com/compilers/index.html">The
+comp.compilers newsgroup page</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.nullstone.com/htmls/connections.htm">The
+Compiler Connection</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.eg3.com/softd/compiler.htm">Software
+development: compiler internet resources</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.uman.com/">The MicroMan</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.cs.cmu.edu/afs/cs.cmu.edu/user/mleone/web/language-people.html">Researchers
+in Programming Languages and Compilers</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.lpac.ac.uk/SEL-HPC/Articles/GeneratedHtml/UserHome.comp.html">Compilers
+&amp; interpreters researchers online</a></font></li>
+
+<li>
+<font face="Arial,Helvetica"><a href="http://www.cs.rhbnc.ac.uk/research/languages/lookahead_backtrack.shtml">Parser
+generators with backtrack or extended lookahead capability</a></font></li>
+</ul>
+<b><font face="Arial,Helvetica">Others</font></b>
+<ul>
+<li>
+<font face="Arial,Helvetica"><a href="http://ahoy.cs.washington.edu:6060/">Ahoy!
+The Homepage Finder</a></font></li>
+</ul>
+
+<div align=right><font face="Arial,Helvetica"><font size=-2><a href="#Index">Back
+to Index</a></font></font></div>
+
+<div align=right>
+<hr SIZE=4 WIDTH="100%"></div>
+<a NAME="Links to Compiler Construction"></a><b><font face="Arial,Helvetica">Links
+to Compiler Construction Courses</font></b>
+<p><font face="Arial,Helvetica"><a href="http://www.cs.rice.edu/~keith/512/index.html">http://www.cs.rice.edu/~keith/512/index.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.rice.edu/~keith/412/lastyear/index.html">http://www.cs.rice.edu/~keith/412/lastyear/index.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://webdia.cem.itesm.mx/ac/aesparza/aula/compiladores2.html">http://webdia.cem.itesm.mx/ac/aesparza/aula/compiladores2.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.umd.edu/class/fall97/cmsc430-f97-0101/">http://www.cs.umd.edu/class/fall97/cmsc430-f97-0101/</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.wisc.edu/~cs701-2/">http://www.cs.wisc.edu/~cs701-2/</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.purdue.edu/homes/ayg/CS352/material.html">http://www.cs.purdue.edu/homes/ayg/CS352/material.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.cuhk.hk/~kwng/3120.lectures.html">http://www.cs.cuhk.hk/~kwng/3120.lectures.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://ceylon.lcs.mit.edu/6035/index.htm">http://ceylon.lcs.mit.edu/6035/index.htm</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.nyu.edu/cs/dept_info/course_home_pages/spr97/GS20.3130/">http://www.cs.nyu.edu/cs/dept_info/course_home_pages/spr97/GS20.3130/</a></font>
+<br><font face="Arial,Helvetica"><a href="http://ceylon.lcs.mit.edu/6035/lectures8-9/index.htm">http://ceylon.lcs.mit.edu/6035/lectures8-9/index.htm</a></font>
+<br><font face="Arial,Helvetica"><a href="http://cs.wwc.edu/~aabyan/464/">http://cs.wwc.edu/~aabyan/464/</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.eecs.uic.edu./~solworth/eecs566.html">http://www.eecs.uic.edu./~solworth/eecs566.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.colostate.edu/~gupta/intro.html">http://www.cs.colostate.edu/~gupta/intro.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://cs.millersv.edu/newcurr/435.html">http://cs.millersv.edu/newcurr/435.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.isi.edu/~pedro/Misc/CSCI565/lectures">http://www.isi.edu/~pedro/Misc/CSCI565/lectures</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.math.grin.edu/~rebelsky/Courses/CS362/98F/Handouts/syllabus.html">http://www.math.grin.edu/~rebelsky/Courses/CS362/98F/Handouts/syllabus.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.ucla.edu/classes/spring99/cs132/syllabus.html">http://www.cs.ucla.edu/classes/spring99/cs132/syllabus.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.rutgers.edu/~ryder/415/lectures/index.html">http://www.cs.rutgers.edu/~ryder/415/lectures/index.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.rutgers.edu/~ryder/515/index.html">http://www.cs.rutgers.edu/~ryder/515/index.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cs.pitt.edu/~soffa/cs2210/lecture.html">http://www.cs.pitt.edu/~soffa/cs2210/lecture.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cas.mcmaster.ca/~cs4tb3/">http://www.cas.mcmaster.ca/~cs4tb3/</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.math.tau.ac.il/~sagiv/courses/winter-compiler-construction.html">http://www.math.tau.ac.il/~sagiv/courses/winter-compiler-construction.html</a></font>
+<div align=right><font face="Arial,Helvetica">&nbsp;<font size=-2><a href="#Index">Back
+to Index</a></font></font></div>
+
+<hr SIZE=4 WIDTH="100%">
+<br><a NAME="Links to sites that points to this"></a><b><font face="Arial,Helvetica">Links
+to sites that points to this one.</font></b>
+<p><font face="Arial,Helvetica">In Spanish</font>
+<br><font face="Arial,Helvetica"><a href="http://mango.uninorte.edu.co/compiladores/servicios/servi.html">http://mango.uninorte.edu.co/compiladores/servicios/servi.html</a></font>
+<p><font face="Arial,Helvetica">In English:</font>
+<br><font face="Arial,Helvetica"><a href="http://www.halcyon.com/www2/ast/swdev.htm">http://www.halcyon.com/www2/ast/swdev.htm</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.skypoint.com/members/escargo/marks.html">http://www.skypoint.com/members/escargo/marks.html</a></font>
+<br><font face="Arial,Helvetica"><a href="http://203.252.134.109/bookmark/oriental.htm">http://203.252.134.109/bookmark/oriental.htm</a></font>
+<br><font face="Arial,Helvetica"><a href="http://www.cis.ohio-state.edu/~zuo/favorites.htm">http://www.cis.ohio-state.edu/~zuo/favorites.htm</a></font>
+<br><font face="Arial,Helvetica"><a href="http://alpha1.obuda.kando.hu/~legradi/bookie.html">http://alpha1.obuda.kando.hu/~legradi/bookie.html</a></font>
+<div align=right><font face="Arial,Helvetica"><font size=-2><a href="#Index">Back
+to Index</a></font></font></div>
+
+<hr SIZE=4 NOSHADE WIDTH="100%"><font face="Arial,Helvetica"><font size=-2>Webslave
+Salvador Cavadini</font></font>
+<br><font face="Arial,Helvetica"><font size=-2>You are our guest&nbsp;<!--PRINCIPIO CiberStats--><script 
+  type="text/javascript" language="JavaScript">
+  <!--
+       document.write("<img src=\"http://gigs.infase.es/cgi-bin/hit.cgi?user=compilers");
+       document.write("&referer=",escape(document.referrer));
+       document.write("\" border=0 alt=\"Ciberstats\">");
+  // -->
+  </script>
+<noscript><a href="http://gigs.infase.es/cgi-bin/status.cgi?compilers"><img SRC="hit.cgi" ALT="CiberStats" BORDER=0 height=22 width=77></a></noscript><!--FIN CiberStats-->
+since April 19 of 1999.</font></font>
+</body>
+</html>

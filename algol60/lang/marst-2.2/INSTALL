@@ -1,0 +1,92 @@
+The 'configure' shell script attempts to guess correct values for
+various system-dependent variables used during compilation, and creates
+'Makefile'. It also creates a file 'config.status' that you can run in
+the future to recreate the current configuration.
+
+To compile this package:
+
+1. Configure the package for your system.
+
+Normally, you just 'cd' to the directory containing the package's source
+code and type './configure'. If you are using 'csh' on an old version of
+System V, you might need to type 'sh configure' instead to prevent 'csh'
+from trying execute 'configure' itself.
+
+Running 'configure' takes about a minute. While it is running, it prints
+some messages that tell what it is doing. If you don't want to see the
+messages, run 'configure' with its standard output redirected to
+'dev/null'; for example, './configure >/dev/null'.
+
+To compile the package in a different directory from the one containing
+the source code, you must use a version of 'make' that supports 'VPATH'
+variable, such as GNU 'make'. 'cd' to the directory where you want the
+object files and executables to go and run the 'configure' script.
+'configure' automatically checks for the source code in the directory
+that 'configure' is in and in '..'. If for some reason 'configure' is
+not in the source code directory that you are configuring, then it will
+report that it can't find the source code. In that case, run 'configure'
+with the option '--srcdir=DIR', where DIR is the directory that contains
+the source code.
+
+By default, 'make install' will install the package's files in
+'usr/local/bin', 'usr/local/lib', etc. You can specify an installation
+prefix other than '/usr/local' by giving 'configure' the option
+'--prefix=PATH'. Alternately, you can do so by consistently giving a
+value for the 'prefix' variable when you run 'make', e.g.,
+
+        make prefix=/usr/gnu
+        make prefix=/usr/gnu install
+
+You can specify separate installation prefixes for architecture-specific
+files and architecture-independent files. If you give 'configure' the
+option '--exec-prefix=PATH' or set the 'make' variable 'exec_prefix' to
+PATH, the package will use PATH as the prefix for installing programs
+and libraries. Data files and documentation will still use the regular
+prefix. Normally, all files are installed using the same prefix.
+
+'configure' ignores any other arguments that you give it.
+
+On systems that require unusual options for compilation or linking the
+package's 'configure' script does not know about, you can give
+'configure' initial values for variables by setting them in the
+environment. In Bourne-compatible shells, you can do that on the command
+line like this:
+
+        CC='gcc -traditional' LIBS=-lposix ./configure
+
+Here are the 'make' variables that you might want to override with
+environment variables when running 'configure'.
+
+For these variables, any value given in the environment overrides the
+value that 'configure' would choose:
+
+Variable CC:            C compiler program. The default is 'cc'.
+
+Variable INSTALL:       Program to use to install files. The default
+                        value is 'install' if you have it, otherwise
+                        'cp'.
+
+For these variables, any value given in the environment is added to
+the value that 'configure' chooses:
+
+Variable DEFS:          Configuration options, in the form
+                        '-Dfoo -Dbar ...'.
+
+Variable LIBS:          Libraries to link with, in the form
+                        '-lfoo -lbar ...'.
+
+2. Type 'make' to compile the package. If you want, you can override the
+'make' variables CFLAGS and LDFLAGS like this:
+
+        make CFLAGS=-O2 LDFLAGS=-s
+
+3. Type 'make install' to install programs, libraries, data files, and
+documentation.
+
+4. You can remove the program binaries and object files from the source
+directory by typing 'make clean'. To remove all files that 'configure'
+created ('Makefile', 'config.status', etc.), type 'make distclean'.
+
+The file 'configure.in' is used to create 'configure' by a program
+called 'autoconf'. You only need it if you want to remake 'configure'
+using a newer version of 'autoconf'.

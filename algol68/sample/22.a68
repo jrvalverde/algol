@@ -1,0 +1,33 @@
+'begin''co' Towers of Hanoi 'co'
+    'int'n;'while'print("number of discs (2..7): "); read(n); n<2'or'n>7'do'
+	print(("only these numbers, please",newline))
+    'od';
+    'int'n1=n+1; [n1]'string'discs;
+    'for'i'from'0'to'n'do'discs[n1-i]:=" "*(8-i)+"*"*i+"|"+"*"*i+" "*(8-i)'od';
+    'mode''tower'='struct'([n]'int'disc,'int'n);
+    [3]'tower'towers;
+    'ref'[]'int'a=disc'of'towers[1], b=disc'of'towers[2], c=disc'of'towers[3];
+    'ref''int' na=n'of'towers[1],   nb=n'of'towers[2],   nc=n'of'towers[3];
+    a:=   ([]'int'( 1, 2, 3, 4, 5, 6, 7))[:n];
+    b:=c:=([]'int'(n1,n1,n1,n1,n1,n1,n1))[:n];
+    na:=n; nb:=nc:=0;
+    'proc'move=('int'from,to)'void': # move the topmost disc #
+        ('ref''int'nfrom=n'of'towers[from],nto=n'of'towers[to];
+	 'ref''int'dfrom=(disc'of'towers[from])[nfrom];
+	 nto+:=1; (disc'of'towers[to])[nto]:=dfrom; dfrom:=n1; nfrom-:=1
+	);
+    'proc'print line=('int'n)'void':# prints line i #
+	(print((discs[a[n]],discs[b[n]],discs[c[n]],newline)));
+    'proc'print discs='void':
+	(
+	 print(newline);
+	 'for'i'to'n'do'print line(n+1-i)'od';
+	 print(("-"*51,newline,newline))
+	);
+    'proc'Hanoi=('int'from,to,via,'int'n)'void':
+	(n >= 1 |
+	   Hanoi(from,via,to,n-1); move(from,to); print discs;
+	   Hanoi(via,to,from,n-1)
+	);
+    print discs; Hanoi(1,2,3,n)
+'end'

@@ -1,0 +1,20 @@
+'begin'
+   'mode''point'='struct'('real'x,y);
+   'mode''polygon'='struct'('int'colour,[3]'point'vertices);
+   'proc'draw=('polygon'p)'void':
+      'begin' print(("polygon: -->color=",colour'of'p,newline,"vertices:"));
+          []'point'pp=vertices'of'p;
+          'for'i'to''upb'pp'do' 
+                  'point'o=pp[i];
+                  print(("(",x'of'o,y'of'o,")"))
+          'od';
+          print(newline)
+       'end';
+    'polygon'pink triangle=(0,((0,0),(.5,1),(1,0))),
+             black square =(1,((0,0),(0,1),(1,1),(1,0)));
+    draw(pink triangle); draw(black square);
+    'polygon'shape; shape:=pink triangle;
+    draw(shape);
+    vertices'of'shape:=(vertices'of'black square)[:3];
+    draw(shape)
+'end'

@@ -1,0 +1,76 @@
+"procedure" find gradients at nodes(x,y,grad,lbx,ubx);
+  "value" lbx,ubx;   "integer" lbx,ubx;
+  "array" x,y,grad;
+"comment" x and y are arrays with subscripts from lbx
+   to ubx giving the abscissae and ordinates respect-
+   ively of the data points.  these should be in
+   ascending order of abscissae, with no two abscissae
+   equal.  the arrays must contain at least four
+   points.
+   grad is an array having the same subscripts as x
+   and y into which will be placed the calculated
+   gradients of the required cubics at each of the
+   data points.
+   lbx and ubx are integers giving the minimum and
+   maximum values respectively of the subscripts of
+   the arrays x, y, and grad;
+"begin"
+  "integer" i,iless2,iless1,iplus1,iplus2;
+  "real" x0,x1,x2,x3,x4,y2,prod1,prod2,num,denom,g,
+     coeff2,xdiff,xprod,weight;
+  "for" i:= lbx "step" 1 "until" ubx "do"
+  "begin"
+"comment" special treatment is needed at end point;
+     iless1:= "if" i>lbx "then" i-1 "else" i+3;
+     iplus1:= "if" i<ubx "then" i+1 "else" i-3;
+     x2:= x[i];    y2:= y[i];
+     x1:= x[iless1]-x2;    x3:= x[iplus1]-x2;
+"comment" first fit a quadratic through x1,x2,x3;
+     prod1:= (y[iless1]-y2)*x3;
+     prod2:= (y[iplus1]-y2)*x1;
+     denom:= x1*x3*(x[iless1]-x[iplus1]);
+     g:= (x1*prod2-x3*prod1)/denom;
+     coeff2:= (prod1-prod2)/denom;
+"comment" if x0 exists, find its contribution to the
+   cubic adjustment;
+    "if" i"le"lbx+1 "then" num:= denom:= 0.0 "else"
+    "begin"
+       iless2:= i-2;    x0:= x[iless2]-x2;
+       xdiff:= x[iless2]-x[iless1];
+       xprod:= x0*xdiff*(x[iless2]-x[iplus1]);
+       weight:= xprod/(xdiff*xdiff);
+       num:= weight*(y[iless2]-y2-x0*(g+x0*coeff2));
+       denom:= weight*xprod
+    "end";
+"comment" if x4 exists, find its contribution to the
+   cubic adjustment;
+    "if" i<ubx-1 "then"
+    "begin"
+       iplus2:= i+2;    x4:= x[iplus2]-x2;
+       xdiff:= x[iplus2]-x[iplus1];
+       xprod:= x4*xdiff*(x[iplus2]-x[iless1]);
+       weight:= xprod/(xdiff*xdiff);
+       num:= num+weight*(y[iplus2]-y2-x4*(g+x4*coeff2));
+       denom:= denom+weight*xprod
+    "end";
+     grad[i]:= g+num*x1*x3/denom
+  "end"
+"end" of procedure find gradients at nodes;
+"procedure" coeffs(x,y,grad,i,c0,c1,c2,c3);
+  "value" i;   "integer" i;
+  "real" c0,c1,c2,c3;
+  "array" x,y,grad;
+"comment" this procedure calculates the coefficients
+   of the cubic (in the range x[i] to x[i+1]) which
+   has values y[i], y[i 1] and gradients grad[i],
+   grad[i+1] at x[i], x[i+1] respectively.
+   the cubic takes the form
+     c0 + c1*(x-x[i]) + c2*(x-x[i])'2 + c3*(x-x[i])'3;
+"begin"
+  "real" h,dy;
+  c0:= y[i];
+  h:= x[i+1]-x[i];    dy:= y[i+1]-c0;
+  c1:= grad[i];
+  c2:= (3.0*dy-h*(2.0*c1+grad[i+1]))/(h*h);
+  c3:= (h*(c1+grad[i+1])-2.0*dy)/h'3
+"end" of procedure coeffs;

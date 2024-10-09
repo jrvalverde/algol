@@ -1,0 +1,785 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html>
+<head>
+   <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=iso-8859-1">
+   <meta name="GENERATOR" content="Mozilla/4.79 [es] (X11; U; Linux 2.4.20 i686) [Netscape]">
+   <meta name="CREATED" content="20030414;11095200">
+   <meta name="CHANGEDBY" content="Jose Valverde">
+   <meta name="CHANGED" content="20030414;11193500">
+</head>
+<body LANG="es-ES">
+
+<center>
+<h1>
+Algol 60</h1></center>
+
+<center>
+<h2>
+Basic symbols</h2></center>
+
+<h3>
+English alphabet (upper and lowercase)</h3>
+
+<center><table BORDER CELLSPACING=2 CELLPADDING=2 COLS=13 WIDTH="100%" >
+<tr>
+<td>
+<center>a</center>
+</td>
+
+<td>
+<center>b</center>
+</td>
+
+<td>
+<center>c</center>
+</td>
+
+<td>
+<center>d</center>
+</td>
+
+<td>
+<center>e</center>
+</td>
+
+<td>
+<center>f</center>
+</td>
+
+<td>
+<center>g</center>
+</td>
+
+<td>
+<center>h</center>
+</td>
+
+<td>
+<center>i</center>
+</td>
+
+<td>
+<center>j</center>
+</td>
+
+<td>
+<center>k</center>
+</td>
+
+<td>
+<center>l</center>
+</td>
+
+<td>
+<center>m</center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center>n</center>
+</td>
+
+<td>
+<center>o</center>
+</td>
+
+<td>
+<center>p</center>
+</td>
+
+<td>
+<center>q</center>
+</td>
+
+<td>
+<center>r</center>
+</td>
+
+<td>
+<center>s</center>
+</td>
+
+<td>
+<center>t</center>
+</td>
+
+<td>
+<center>u</center>
+</td>
+
+<td>
+<center>v</center>
+</td>
+
+<td>
+<center>w</center>
+</td>
+
+<td>
+<center>x</center>
+</td>
+
+<td>
+<center>y</center>
+</td>
+
+<td>
+<center>z</center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center>A</center>
+</td>
+
+<td>
+<center>B</center>
+</td>
+
+<td>
+<center>C</center>
+</td>
+
+<td>
+<center>D</center>
+</td>
+
+<td>
+<center>E</center>
+</td>
+
+<td>
+<center>F</center>
+</td>
+
+<td>
+<center>G</center>
+</td>
+
+<td>
+<center>H</center>
+</td>
+
+<td>
+<center>I</center>
+</td>
+
+<td>
+<center>J</center>
+</td>
+
+<td>
+<center>K</center>
+</td>
+
+<td>
+<center>L</center>
+</td>
+
+<td>
+<center>M</center>
+</td>
+</tr>
+
+<tr>
+<td>
+<center>N</center>
+</td>
+
+<td>
+<center>O</center>
+</td>
+
+<td>
+<center>P</center>
+</td>
+
+<td>
+<center>Q</center>
+</td>
+
+<td>
+<center>R</center>
+</td>
+
+<td>
+<center>S</center>
+</td>
+
+<td>
+<center>T</center>
+</td>
+
+<td>
+<center>U</center>
+</td>
+
+<td>
+<center>V</center>
+</td>
+
+<td>
+<center>W</center>
+</td>
+
+<td>
+<center>X</center>
+</td>
+
+<td>
+<center>Y</center>
+</td>
+
+<td>
+<center>Z</center>
+</td>
+</tr>
+</table></center>
+
+<h3>
+Digits</h3>
+
+<center><table BORDER CELLSPACING=2 CELLPADDING=2 COLS=10 WIDTH="100%" >
+<tr>
+<td>
+<center>0</center>
+</td>
+
+<td>
+<center>1</center>
+</td>
+
+<td>
+<center>2</center>
+</td>
+
+<td>
+<center>3</center>
+</td>
+
+<td>
+<center>4</center>
+</td>
+
+<td>
+<center>5</center>
+</td>
+
+<td>
+<center>6</center>
+</td>
+
+<td>
+<center>7</center>
+</td>
+
+<td>
+<center>8</center>
+</td>
+
+<td>
+<center>9</center>
+</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<br>&nbsp;
+<h3>
+Special characters</h3>
+
+<table BORDER COLS=6 NOSAVE >
+<caption>
+<center><b>Arithmetic operators</b></center>
+</caption>
+
+<tr>
+<td>
+<center>+</center>
+</td>
+
+<td>
+<center>-</center>
+</td>
+
+<td>
+<center>&times;</center>
+</td>
+
+<td>
+<center>/</center>
+</td>
+
+<td>
+<center>&divide;</center>
+</td>
+
+<td>
+<center><img SRC="power.gif" ALT="^" ></center>
+</td>
+</tr>
+</table>
+
+<br>&nbsp;
+<center><table BORDER COLS=6 NOSAVE >
+<caption>
+<center><b>Relational operators</b></center>
+</caption>
+
+<tr>
+<td>
+<center>&lt;</center>
+</td>
+
+<td>
+<center><img SRC="ge.gif" ALT=">=" ></center>
+</td>
+
+<td>
+<center>=</center>
+</td>
+
+<td>
+<center><img SRC="le.gif" ALT="<=" ></center>
+</td>
+
+<td>
+<center>></center>
+</td>
+
+<td>
+<center><img SRC="ne.gif" ALT="=/=" ></center>
+</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER COLS=5 NOSAVE >
+<caption>
+<center><b>Logical operators</b></center>
+</caption>
+
+<tr>
+<td>
+<center><img SRC="equiv.gif" ALT="EQUIVALENCE" ></center>
+</td>
+
+<td>
+<center><img SRC="impl.gif" ALT="IMPLICATION" ></center>
+</td>
+
+<td>
+<center><img SRC="and.gif" ALT="AND" ></center>
+</td>
+
+<td>
+<center><img SRC="or.gif" ALT="OR" ></center>
+</td>
+
+<td>
+<center>&not;</center>
+</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER COLS=7 NOSAVE >
+<caption>
+<center><b>Separators</b></center>
+</caption>
+
+<tr>
+<td>
+<center>,</center>
+</td>
+
+<td>
+<center>.</center>
+</td>
+
+<td>
+<center><sub>10</sub></center>
+</td>
+
+<td>
+<center>:</center>
+</td>
+
+<td>
+<center>;</center>
+</td>
+
+<td>
+<center>:=</center>
+</td>
+
+<td>
+<center><img SRC="blank.gif" ALT="BLANK" ></center>
+</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER COLS=6 NOSAVE >
+<caption><b>Brackets</b></caption>
+
+<tr>
+<td>
+<center>(</center>
+</td>
+
+<td>
+<center>)</center>
+</td>
+
+<td>
+<center>[</center>
+</td>
+
+<td>
+<center>]</center>
+</td>
+
+<td>
+<center>`</center>
+</td>
+
+<td>
+<center>'</center>
+</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<center>
+<h2>
+Algol keywords</h2></center>
+
+<table BORDER COLS=6 NOSAVE >
+<tr>
+<td><b><u>true</u></b></td>
+
+<td><b><u>false</u></b></td>
+
+<td><b><u>array</u></b></td>
+
+<td><b><u>begin</u></b></td>
+
+<td><b><u>boolean</u></b></td>
+
+<td><b><u>comment</u></b></td>
+</tr>
+
+<tr>
+<td><b><u>do</u></b></td>
+
+<td><b><u>else</u></b></td>
+
+<td><b><u>end</u></b></td>
+
+<td><b><u>for</u></b></td>
+
+<td><b><u>go to</u></b></td>
+
+<td><b><u>if</u></b></td>
+</tr>
+
+<tr>
+<td><b><u>integer</u></b></td>
+
+<td><b><u>label</u></b></td>
+
+<td><b><u>own</u></b></td>
+
+<td><b><u>procedure</u></b></td>
+
+<td><b><u>real</u></b></td>
+
+<td><b><u>step</u></b></td>
+</tr>
+
+<tr>
+<td><b><u>string</u></b></td>
+
+<td><b><u>switch</u></b></td>
+
+<td><b><u>then</u></b></td>
+
+<td><b><u>until</u></b></td>
+
+<td><b><u>value</u></b></td>
+
+<td><b><u>while</u></b></td>
+</tr>
+</table>
+
+<br>&nbsp;
+<center>
+<h2>
+Identifiers</h2></center>
+Arbitrary sequences of letters and digits.
+<br>The first symbol must be a letter.
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER COLS=2 NOSAVE >
+<caption><b>Variables</b></caption>
+
+<tr>
+<td>Simple</td>
+
+<td>variableName</td>
+</tr>
+
+<tr>
+<td>Subindexed</td>
+
+<td>variableName[i, j]</td>
+</tr>
+</table></center>
+
+<br>&nbsp;
+<center>
+<h2>
+Numbers</h2></center>
+
+<center><table BORDER COLS=2 NOSAVE >
+<tr>
+<td>Integer</td>
+
+<td>12345</td>
+</tr>
+
+<tr>
+<td>Real</td>
+
+<td>with decimal point '.' or exponent '<sub>10</sub>'</td>
+</tr>
+</table></center>
+
+<p>There must be at least one digit after the decimal point.
+<br>For very big or tiny real numbers an exponent with base 10 is used.
+The exponent must be entireand purely numeric.
+<br>Every variable type must be expressed before using it.
+<br>Types may be mixed in a single arithmetic expression.
+<br>Examples:
+<br>&nbsp;&nbsp;&nbsp; +35&nbsp;&nbsp;&nbsp; 35&nbsp;&nbsp;&nbsp; -35
+<br>&nbsp;&nbsp;&nbsp; +3.5&nbsp;&nbsp;&nbsp; .35&nbsp;&nbsp;&nbsp; -35.0
+<br>&nbsp;&nbsp;&nbsp; 3.5<sub>10</sub>-3&nbsp;&nbsp;&nbsp; -.35<sub>10</sub>5
+<br>&nbsp;
+<br>&nbsp;
+<center>
+<h2>
+Booleans</h2></center>
+May have either of two values, <b><u>true</u></b> or <b><u>false</u></b>.
+<br>&nbsp;
+<center>
+<h2>
+Standard functions</h2></center>
+
+<center><table BORDER WIDTH="100%" NOSAVE >
+<tr>
+<td>abs(u)</td>
+
+<td>absolute value of u: |u|</td>
+</tr>
+
+<tr>
+<td>sign(u)</td>
+
+<td>+1 if u > 0
+<br>0 if u = 0
+<br>-1 if u &lt; 0</td>
+</tr>
+
+<tr>
+<td>entier(u)</td>
+
+<td>the biggest integer&nbsp;<img SRC="le.gif" ALT="<=" > u</td>
+</tr>
+
+<tr>
+<td>sqrt(u)</td>
+
+<td>square root of u</td>
+</tr>
+
+<tr>
+<td>exp(u)</td>
+
+<td>exponential of u (e raised to u)</td>
+</tr>
+
+<tr>
+<td>ln(u)</td>
+
+<td>natural logarithm of u</td>
+</tr>
+
+<tr>
+<td>sin(u)</td>
+
+<td>sine of u (radians)</td>
+</tr>
+
+<tr>
+<td>cos(u)</td>
+
+<td>cosine of u (radians)</td>
+</tr>
+
+<tr>
+<td>arctan(u)</td>
+
+<td>arctangent of u (u between -PI/2 and +PI/2)</td>
+</tr>
+</table></center>
+
+<p>Reals are automatically rounded as rounded(x) = entier(x + 0.5)
+<br>&nbsp;
+<center>
+<h2>
+Operators</h2></center>
+
+<center><table BORDER WIDTH="100%" NOSAVE >
+<tr>
+<td>1</td>
+
+<td>Exponentiation</td>
+
+<td><img SRC="power.gif" ALT="^" ></td>
+</tr>
+
+<tr>
+<td>2</td>
+
+<td>multiplication, division, integer division</td>
+
+<td>&times;, /, &divide;</td>
+</tr>
+
+<tr>
+<td>3</td>
+
+<td>addition, substraction</td>
+
+<td>+, -</td>
+</tr>
+</table></center>
+
+<p>In integer division, the quotient is rounded to the integer immediately
+below.
+<br>Expressions are evaluated from left to right according to parentheses
+()
+<br>a / b is ALWAYS real
+<br>a &divide; b requires a and b to be integers
+<br>&nbsp;
+<br>&nbsp;
+<center><table BORDER WIDTH="100%" NOSAVE >
+<caption>Exponentiation a&nbsp;<img SRC="power.gif" ALT="^" > b</caption>
+
+<tr>
+<td>b</td>
+
+<td>a</td>
+
+<td>&nbsp;</td>
+</tr>
+
+<tr>
+<td>integer > 0</td>
+
+<td>&nbsp;</td>
+
+<td>a &times; a &times; a ... (b times)</td>
+</tr>
+
+<tr>
+<td>integer = 0</td>
+
+<td>non zero</td>
+
+<td>1</td>
+</tr>
+
+<tr>
+<td>integer &lt; 0</td>
+
+<td>non zero</td>
+
+<td>1 / (a &times; a &times; a...) (b times)</td>
+</tr>
+
+<tr>
+<td>real</td>
+
+<td>> 0</td>
+
+<td>exp(b &times; ln(a))</td>
+</tr>
+
+<tr>
+<td>real > 0</td>
+
+<td>0</td>
+
+<td>0</td>
+</tr>
+</table></center>
+
+<p>Arithmetic expressions may contain numbers, variables and functions.
+<br>Variables must have received a value prior to being used.
+<br>&nbsp;
+<center>
+<h2>
+Assignment statement</h2></center>
+The rule to assign a value to a variable is
+<br>&nbsp;
+<center><table BORDER NOSAVE >
+<tr>
+<td>left hand</td>
+
+<td>:=</td>
+
+<td>right hand</td>
+</tr>
+
+<tr>
+<td>simple variable
+<br>indexed variable</td>
+
+<td>:=</td>
+
+<td>arithmetic expression
+<br>conditional expression
+<br>boolean expression
+<br>assignment</td>
+</tr>
+</table></center>
+
+<p>In case of multiple assignment, all variables in the left hand side
+must be of the same type.
+<br>Subindexes in all indexed variables in the left hand are computed with
+the current values from left to right.
+<br>The right hand side is evaluated.
+<br>Its value is assigned to variables in the left side.
+<center>
+<h2>
+</h2></center>
+
+<center>
+<h2>
+Compound statements</h2></center>
+State that certain statements must be considered jointly. Statement parentheses
+are used to enclose the statements:
+<br><b><u>begin</u></b> ... <b><u>end;</u></b>
+<br>May be nested.
+<br>Statements preceding an <b><u>end</u></b> don't need an ending ;
+<br>&nbsp;
+</body>
+</html>

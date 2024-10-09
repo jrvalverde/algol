@@ -1,0 +1,83 @@
+BEGIN # sort-tree merging,
+   L. Allison 7/4/86 Dept. Computer Science, Monash University, Australia
+   see: L. Allison. Some Applications of Continuations.
+                    Computer Journal 31(1) 9-11 1988 #
+
+   MODE TREE = REF NODE;
+   MODE NODE = STRUCT(INT e, TREE l, r);
+
+   PROC insert = (INT e, REF TREE t)VOID:
+      # NB inserts in t as a side effect #
+      IF TREE(t) IS NIL THEN t := HEAP NODE := (e, TREE(NIL), TREE(NIL))
+      ELIF e < e OF t THEN insert(e, l OF t)
+      ELIF e > e OF t THEN insert(e, r OF t)
+      FI;
+
+   PROC show = (TREE t)VOID:
+      IF t ISNT NIL THEN print("("); show(l OF t); print(e OF t);
+			 show(r OF t); print(")")
+      FI;
+
+   PROC merge = (TREE s, t)VOID:
+   BEGIN
+      MODE SCANNER = PROC(INT, SCANNER)VOID;
+
+      PROC traverse = (INT switch, TREE t, SCANNER continue, alternative)VOID:
+	 IF t IS NIL THEN continue(switch, alternative)
+	 ELSE PROC goright = (INT sw, SCANNER alt)VOID:
+		    trav(sw, t, continue, alt);
+
+	      traverse(switch, l OF t, goright, alternative)
+	 FI;
+
+      PROC trav = (INT switch, TREE t, SCANNER continue, alternative)VOID:
+	 # traverse the root node and right sub-tree of t  only. #
+	 IF t IS NIL THEN continue(switch, alternative)
+	 ELIF e OF t  <=  switch THEN
+	       print(e OF t);
+	       traverse( switch, r OF t, continue, alternative)
+	 ELSE  # e OF t > switch #
+	       PROC defer = (INT sw, SCANNER alt)VOID:
+		     trav(sw, t, continue, alt);
+
+	       alternative(e OF t, defer)
+	 FI;
+
+      PROC m =  (TREE s, t, SCANNER scans, scant)VOID:
+	 IF TREE(l OF s) ISNT NIL THEN
+	    PROC travright = (INT sw, SCANNER alt)VOID:
+		  trav(sw, s, scans, alt);
+
+	    m(l OF s, t, travright, scant)
+         ELIF TREE(l OF t) ISNT NIL THEN
+	    m(t, s, scant, scans)
+	 ELSE # l OF s  IS  l OF t  IS  NIL, so now have their smallest elts  #
+            PROC scanstree = (INT sw, SCANNER alt)VOID:
+	          trav( sw, s, scans, alt);
+	    PROC scanttree = (INT sw, SCANNER alt)VOID:
+	          trav( sw, t, scant, alt);
+
+	    IF (e OF s) <= (e OF t) THEN scanstree( e OF t, scanttree)
+				    ELSE scanttree( e OF s, scanstree)
+	 FI FI;
+
+      SCANNER halt = (INT sw, SCANNER a)VOID: print((" the end", newline));
+      SCANNER fin  = (INT sw, SCANNER a)VOID:
+	 (print( " finish: "); a(max int, halt));
+
+      IF   s IS NIL THEN traverse( max int, t, halt, halt)
+      ELIF t IS NIL THEN traverse( max int, s, halt, halt)
+      ELSE m(s, t, fin, fin)
+      FI
+   END #merge#;
+
+   LOC TREE s:=TREE(NIL), t:=TREE(NIL);
+   LOC INT n;
+
+   WHILE read(n); n>=0 DO insert(n, s) OD;
+   show(s); print(newline);
+   WHILE read(n); n>=0 DO insert(n, t) OD;
+   show(t); print(newline);
+
+   merge(s, t)
+END

@@ -1,0 +1,16 @@
+'begin'
+  'proc'ferment=('string'fruit)'string':
+     'if'  fruit="hops"   'then' "beer"
+     'elif'fruit="apples" 'then' "cider"
+     'elif'fruit="orange" 'then' "countreau"
+     'else' "try and see"
+     'fi';
+   'proc'backwards=([]'int'a)[]'int':
+     'begin'
+        ['upb'a]'int'r;
+        'for'i'to''upb'r'do'r[i]:=a['upb'a+1-i]'od';
+        r
+     'end';
+   print((ferment("hops"),newline,ferment("grape"),newline,
+              backwards((1,2,3)),newline,backwards((-5,-4,-3,-2,-1,0))))
+'end'

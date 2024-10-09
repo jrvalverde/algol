@@ -1,0 +1,17 @@
+
+'begin' # generating permutations #
+    'int' n; read(n);
+    'proc'perm=('ref'[]'int'a)'void':
+	('int'n='upb'a;
+	 'if'n=1'then' printperm
+	 'else''to'n'do'
+	     perm(a[:n-1]);
+	    'int'a1=a[1];a[:n-1]:=a[2:];a[n]:=a1'od'
+	 'fi'
+	);
+    'proc'printperm='void':
+	('for'i'to'n'do'print(t[i])'od';print(newline));
+    [n]'int't;'for'i'to'n'do't[i]:=i'od';
+    perm(t)
+'end'
+

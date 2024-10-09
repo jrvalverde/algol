@@ -1,0 +1,8 @@
+'begin' #recursive factorial#
+  'proc' fact= ('int'n)'int':(n<=0|1|n*fact(n-1));
+  'int'n;
+  'while' print((newline,"factorial of: ")); read(n); n>=0 'do'
+      print(fact(n))
+  'od'
+'end'
+

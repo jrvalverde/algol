@@ -1,0 +1,10 @@
+
+'begin' # 8.8. procedure with itself as parameter #
+    'mode''p'='proc'('p')'int';
+    'proc'fact=('p'f)'int':
+	(i=0|1|'int'j=i;i-:=1; j*f(f));
+    'proc'q=('int'n)'int':(i:=n;fact(fact));
+    'int'i;
+    'for'i'to'10'do'print((q(i),newline))'od'
+'end'
+

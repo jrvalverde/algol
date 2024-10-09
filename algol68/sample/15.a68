@@ -1,0 +1,9 @@
+'begin' # 8.15. a recursive procedure #
+  'proc'p=('int'n,'proc''int't)'int':
+	('int'm=n-1;
+	 'proc'B='int':(m>0|p(m,t)+p(m-1,t)|t);
+	 'if'm>0'then'p(m,B)+p(m-1,B)'else't'fi'
+	);
+   'for'i'to'4'do'print((p(i,'int':1),newline))'od'
+'end'
+

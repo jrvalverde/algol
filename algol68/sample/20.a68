@@ -1,0 +1,56 @@
+
+
+'begin' # 8.20. formula manipulation #
+  'mode''E'='struct'('rF'L,'int'op,'rF'R);
+  'mode''F'='union'('real','char','E');
+  'mode''rF'='ref''F';
+  'F'zero:=0.0, one:=1.0;
+  'op'==('rF'a,'int'b)'bool':
+     'case'a'in'('real'x):'abs'(x-b)<1e-5'out''false''esac';
+  'op'+=('rF'a,b)'rF':
+     'if'a=0'then'b'elif'b=0'then'a'else''heap''F':='E'((a,1,b))'fi';
+  'op'-=('rF'a,b)'rF':
+     'if'b=0'then'a'else''heap''F':='E'((a,2,b))'fi';
+  'op'*=('rF'a,b)'rF':
+     'if'a=0'or'b=0'then'zero'elif'a=1'then'b'elif'b=1'then'a'else'
+	'heap''F':='E'((a,3,b))'fi';
+  'op'/=('rF'a,b)'rF':
+     'if'a=0'then'zero'elif'b=1'then'a'else''heap''F':='E'((a,4,b))'fi';
+  'prio'==4,+=6,-=6,*=7,/=7;
+  'proc'der=('rF'f)'rF':
+     'case'f'in'
+	('real'):zero,
+	('char'):one,
+	('E'e  ):
+	    'case''rF'Le=L'of'e,Re=R'of'e;'rF'dLe=der(Le),dRe=der(Re);
+		op'of'e'in'
+		dLe+dRe,dLe-dRe,Le*dRe+dLe*Re,(dLe-f*dRe)/Re
+	    'esac'
+     'esac';
+  'proc'value=('rF'f,'real'x)'real':
+     'case'f'in'
+	('real'y):y,
+	('char'):x,
+	('E'e  ):
+	    'case''real'L=value(L'of'e,x),R=value(R'of'e,x);
+		op'of'e'in'
+		L+R,L-R,L*R,L/R
+	    'esac'
+     'esac';
+  'proc'write=('rF'f)'void':
+    'case'f'in' ('union'('real','char')y):print(y),
+	        ('E'e):(print("(");write(L'of'e);
+			print((op'of'e|"+","-","*","/"));
+			write(R'of'e);print(")"))
+    'esac';
+  'F'x:="x";
+  'proc'F=('real'x)'rF':'heap''F':=x;
+  'proc'do=('rF'f)'void':
+    ('rF'df=der(f); 
+      print((newline,newline)); write(f); print(("=",value(f,1)));
+      print(newline); write(df); print(("=",value(df,1)))
+    );
+  do((one-x)/(one+x)); do((one+x)*(one-x)); do(x*x*x+x*x+x+one);
+  do((x*x+F(2.0)*x+F(4.0))/(x*x-F(2.0)*x+F(4.0)))
+'end'
+

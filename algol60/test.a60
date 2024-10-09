@@ -1,0 +1,8 @@
+'begin'
+'real' a;
+    'if' 1 'notequal' 2 'or' 3 'notgreater' 4 'and' 5 'notless' 6 'then'
+    'begin'
+    	a := 10;
+	outreal(1, a)
+    'end'
+'end'

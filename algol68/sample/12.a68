@@ -1,0 +1,23 @@
+
+'begin' # 8.12. alphabetic ordering #
+    'mode''stack'='struct'('ref''stack'left,'string'word,'ref''stack'right);
+    'ref''stack'roof:='nil';
+    'proc'in=('string'a,'ref''ref''stack'b)'void':
+	'if''ref''stack'(b):=:'nil'
+	'then'b:='heap''stack':=('nil',a,'nil')
+	'else'in(a,'if'a<word'of'b'then'left'of'b'else'right'of'b'fi')
+	'fi';
+    'proc'out=('ref''stack'a)'void':
+	'if'a:/=:'nil''then'
+	    out(left'of'a);
+	    print((newline,word'of'a));
+	    out(right'of'a)
+	'fi';
+    'co'input'co'
+    in("a",roof);in("dog",roof);in("cat",roof);in("rabbit",roof);
+    in("duck",roof);in("horse",roof);in("pig",roof);in("cow",roof);
+    in("bear",roof);in("lion",roof);
+    'co'output'co'
+    out(roof)
+'end'
+

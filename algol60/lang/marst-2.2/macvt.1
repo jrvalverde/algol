@@ -1,0 +1,58 @@
+.TH macvt 1 "December 2000"
+.SH NAME
+macvt \- Algol 60 converter utility
+.SH SYNOPSIS
+.B macvt
+[
+.B "options"
+]
+[
+.B "<input-file>"
+]
+.SH DESCRIPTION
+MACVT is a part of the MARST package. It is a handy utility to convert
+old-styled Algol 60 programs to MARST representation.
+.br
+For example, it converts
+.br
+.I "'if' a 'greater' b 'and' c 'equal' d 'then'"
+.br
+to
+.br
+.I "if a > b & c = d then"
+.br
+But it can do much more.
+.SH OPTIONS
+.TP
+.B "-c, --classic"
+Old (classic) representation used (default).
+.TP
+.B "-f, --free-coding"
+Free representation used (excluding operators).
+.TP
+.B "-h, --help"
+Display help information and exit.
+.TP
+.B "-i, --ignore-case"
+Convert to lower case.
+.TP
+.B "-m, --more-free"
+Free representation used (including operators).
+.TP
+.B "-o filename, --output filename"
+Send converted Algol 60 program to filename.
+.TP
+.B "-s, --old-sc"
+Recognize ., as semicolon.
+.TP
+.B "-t, --old-ten"
+Recognize single apostrophe as ten symbol.
+.TP
+.B "-v, --version"
+Display converter version and exit.
+.SH SEE ALSO
+marst(1)
+.SH BUGS
+Please, report bugs to <bug-marst@gnu.org>
+.SH AUTHORS
+Andrew Makhorin <mao@mai2.rcnet.ru>, <mao@gnu.org>

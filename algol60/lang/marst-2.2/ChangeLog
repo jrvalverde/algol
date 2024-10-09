@@ -1,0 +1,57 @@
+Mon Jan 22 12:00:00 2001 Andrew Makhorin <mao@mai2.rcnet.ru>
+
+        * Version 2.2 released.
+
+        * marst.c
+        Serious bug was fixed due to bug report provided by Paulo
+        Barreto <paulo.barreto@terra.com.br>.
+
+        The error occured because of incorrect passing a formal
+        parameter called by name to other procedure. The MARST
+        translator *incorrectly* treated a procedure statement like
+        foo(..., bar, ...), where `bar' is a formal parameter called
+        by name, as if it would be foo(..., (bar), ...), i.e. as if
+        the value of `bar' would be passed, not the name. Therefore
+        assignment to the corresponding formal parameter inside the
+        procedure `foo' was impossible. In order to fix this bug a
+        program fragment was added to the `actual_parameter' routine.
+
+        * ex/a232.alg, ex/tennent.alg
+        These two additional examples were added to the package. Due
+        to the first example program a serious bug (see notice above)
+        was found in MARST 2.1.
+
+Fri Dec 01 12:00:00 2000 Andrew Makhorin <mao@mai2.rcnet.ru>
+
+        * Version 2.1 released.
+
+        * macvt.c
+        Minor bug was fixed due to bug report provided by Bernhard
+        Treutwein <Bernhard.Treutwein@Verwaltung.Uni-Muenchen.DE>
+        (because of this bug the macvt converter incorrectly processed
+        --ignore-case command line option)
+
+        GNU MARST User's Guide is included into the distribution in
+        texinfo (source), info, ps, pdf, and html formats.
+
+Tue Aug 01 12:00:00 2000 Andrew Makhorin <mao@mai2.rcnet.ru>
+
+        * Version 2.0 released.
+
+        * marst.c
+        Parsing implemented in the translator was fully re-programmed
+        to continue translation in spite of syntax and semantic errors.
+        In version 1.0 the translator had got an inborn defect (not a
+        bug): it stopped on the first error found.
+
+        * macvt.c
+        Minor changes were made.
+
+        * configure.in
+        * Makefile.in
+        Minor changes were made due to patches provided by Alexandre
+        Oliva <oliva@lsd.ic.unicamp.br>.
+
+Tue Jul 18 12:00:00 2000 Andrew Makhorin <mao@mai2.rcnet.ru>
+
+        * Version 1.0 released under GNU Coding Standards.

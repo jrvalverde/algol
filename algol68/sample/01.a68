@@ -1,0 +1,8 @@
+
+'begin' # 8.1. procedure variable #
+  'proc'('int')'int'myproc;
+  myproc := ('int'i)'int':i+1;
+  print(myproc(10));
+  myproc := ('int'j)'int':j-1;
+  print(myproc(10))
+'end'

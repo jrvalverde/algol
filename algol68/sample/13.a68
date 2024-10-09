@@ -1,0 +1,35 @@
+
+
+'begin' # 8.13. meteorologist #
+  print("Please type in the date as mm/dd/yy  ? ");
+  'int'month,day,year; read((month,space,day,space,year)); 
+  'if'month<1'or'month>12'or'day<1'or'day>31'then'
+	print((newline,"Sorry, wrong date")); stop
+  'fi';
+  print((newline,newline));
+  'string'f:="The weather tomorrow will be ";
+  'int'n='upb'f+1;
+  f+:='if'random<.5'then'"warm"'else'"cold"'fi'+"er than usual.";
+  f:=f+'repr'10 #newline# +
+       'if'random<.5'then'"No precipitation"
+       'else''if'f[n:n+3]="warm"'then'
+	      (month<3|"Some flurries"|:month<10|"Light rain"|"Wet snow")
+       'else'(month<5'or'9<month|"Snow"|"Rain")
+       'fi''fi'
+      +" can be expected.";
+  []'string'wind=("north","west","south","east");
+  'int'i='entier'(4*random+1);'real'a=random;
+  'string'g='if'a<.4'then'"Light"
+	    'else''if'a<.8'then'"Moderate"
+	    'else'"Heavy"'fi''fi'
+	    +" winds from the "+wind[i]+".";
+  print(("Forecast made at ",
+	 'case'month'in'
+		"Jan","Feb","March","April","May","June","July","Aug",
+		"Sept","Oct","Nov"
+	 'out'  "Dec"
+	 'esac',
+	 " ",day,", 19",year,newline));
+  print((newline,f,newline,g,newline))
+'end'
+

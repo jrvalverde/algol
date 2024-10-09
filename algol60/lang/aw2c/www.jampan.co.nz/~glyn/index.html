@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/transitional.dtd">
+<html>
+
+<head profile="http://www.w3.org/2005/10/profile">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>
+h1 { 
+  padding: 0.2em;
+  background:#6BE6FF;
+}
+</style>
+<title>aw2c Algol W Compiler</title>
+<link rel="icon" 
+      type="image/png" 
+      href="aw2c-fish-favicon.png">
+</head>
+
+<body>
+<h1><img src="aw2c-fish.png" align="right" alt="DO NOT TAP ON GLASS" title="DO NOT TAP ON GLASS">aw2c</h1>
+
+<p><b>aw2c</b> is a new compiler for the Algol W language. It is a
+complete implementation of the language described in the 
+<em><a href="algolw.pdf">Algol W Language Description, June 1972</a></em>.
+<em>aw2c</em> should be able to compile code intended for the OS/360
+Algol W compilers with little or no modification. See
+the <a href="aw2c.html"><em>aw2c</em> manual</a> for more
+details.</p>
+
+<p><b>Algol W</b> is a successor to Algol 60 closely based on <em>A
+Contribution to the Development of ALGOL</em> by Niklaus Wirth and
+C. A. R. Hoare. It includes dynamically allocated records, string
+handling, complex numbers and a standard I/O system.
+A copy of
+the <i>Algol W Language Description</i> can be found on Karl Kleine's
+<a href=http://www.fh-jena.de/~kleine/history/history.html>Historic
+Documents in Computer Science</a> page.
+Dabcanboulet's <a href="http://everything2.com/title/Algol%2520W"><em>Algol W @ Everything2</em></a> page
+contains an excellent history and tutorial. </p>
+
+<p><b>aw2c</b> correctly
+compiles Tony
+Marsland's computer chess player <a href="http://webdocs.cs.ualberta.ca/~tony/Public/Awit-Wita-ComputerChess/"><em>Awit</em></a> and Hendrik
+Boom's <em><a href="http://mtn-host.prjek.net/projects/a68h/">A68H</a></em>
+Algol 68 compiler.</p>
+
+<h2>Source</h2>
+
+<p> The main
+requirements are a Unix environment, <a href="http://gcc.gnu.org/">Gnu
+C</a>, <a href="http://www.python.org/">Python</a>, <a
+href="http://caml.inria.fr/ocaml/index.en.html">OCaml</a> and the <a
+href="http://www.hpl.hp.com/personal/Hans_Boehm/gc/">Boehm-Demers-Weiser
+garbage collector</a>.  In Debian or Ubuntu &quot;<tt>apt-get install gcc ocaml-nox python libgc-dev</tt>&quot; is enough. 
+For details read <a href="INSTALL">INSTALL</a>.</p>
+
+<p>Tar file: <a href="aw2c.tar.gz"><tt><b>aw2c.tar.gz</b></tt></a>, for details read <a href="INSTALL">INSTALL</a>.</p>
+
+<!-- 
+<p><a href="http://darcs.net/">Darcs</a> repository: <b><tt>darcs get
+http://www.jampan.co.nz/~glyn/repo/aw2c</tt></b></p>
+<p><a href="revisions.txt">Revision</a>: &quot;<tt>ela:/home/glyn/Aw2c/aw2c - Mon Apr 27 14:25:27 NZST 2009  glyn</tt>&quot;</p>
+-->
+<p>Revision: &quot;<tt>ela:/home/glyn/Aw2c/aw2c - Mon Apr 27 14:25:27 NZST 2009  glyn</tt>&quot;</p>
+
+<h2>Thank You</h2>
+
+<p>Thank you to: Hendrick
+Boom, Tony Marsland and Carey Bloodworth for a great deal of
+expert advice, encouragement and testing; the
+authors of the <em>Algol W Language Description</em> for creating such
+an unambiguous work; and Julian Melville, for this web
+hosting. </p>
+
+<div>
+<a href="http://www.hootingyard.org/"><img src="implausible.png" border="0" align="right"></a>
+<h2><a name="#by-the-way">By the Way</a></h2>
+<p>If you have found this software useful or enlightening, please consider donating to
+the <a href="http://www.hootingyard.org/">Hooting Yard radio show</a> or buying one of
+<a href="http://www.hootingyard.org/archives/763">Frank Key's books</a>.
+Frank Key keeps me sane, somehow.</p>
+</div>
+
+<h2>Copyright</h2>
+
+<p><em>aw2c</em> is open source but its run-time library may be compiled
+into any program. The <em>aw2c</em> test suite contains
+<em>parse.alw</em>, a parser generator by Hendrik Boom, it remains
+copyright to its author.  Otherwise,
+<b>Copyright 2008 by Glyn Webster</b>.</p>
+
+<p><em>aw2c</em> is free software:
+you can redistribute it and/or modify it under the terms of the
+<a href="http://www.gnu.org/licenses/">GNU General Public License</a> and
+<em>Lesser GNU General Public License</em> as published by the Free
+Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+
+<img src="glyn.png" align="right">
+
+</body>
+</html>

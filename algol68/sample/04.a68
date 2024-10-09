@@ -1,0 +1,9 @@
+
+'begin' # 8.4. drawing #
+    'real'c=2*pi;'proc'f=('real'x)'real':exp(-x)*sin(c*x);
+    'real'd=.0625,s=32;'int'h=34,lim=30;
+    'for'i'from'0'to'lim'do'
+	'real'y=f(d*i);
+	 print((blank*('round'(s*y)+h),"*",newline))
+    'od'
+'end'
